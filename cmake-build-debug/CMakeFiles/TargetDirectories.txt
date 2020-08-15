@@ -1,0 +1,3 @@
+C:/Users/Agus/Documents/Proyectos/iuaProject/cmake-build-debug/CMakeFiles/iuaProject.dir
+C:/Users/Agus/Documents/Proyectos/iuaProject/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Agus/Documents/Proyectos/iuaProject/cmake-build-debug/CMakeFiles/rebuild_cache.dir
