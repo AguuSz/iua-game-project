@@ -1,7 +1,7 @@
 //
 // Created by Agus on 28/8/2020.
 //
-#include "classes/Engine.h"
+#include "Engine.h"
 
 void Engine::input() {
     if (Keyboard::isKeyPressed(Keyboard::Escape)) {
@@ -20,4 +20,5 @@ void Engine::input() {
     } else {
         jake.stopRight();
     }
+
 }
