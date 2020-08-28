@@ -79,29 +79,89 @@ include CMakeFiles/iuaProject.dir/flags.make
 CMakeFiles/iuaProject.dir/main.cpp.obj: CMakeFiles/iuaProject.dir/flags.make
 CMakeFiles/iuaProject.dir/main.cpp.obj: ../main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Agus\Documents\Proyectos\iuaProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/iuaProject.dir/main.cpp.obj"
-	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\iuaProject.dir\main.cpp.obj -c C:\Users\Agus\Documents\Proyectos\iuaProject\main.cpp
+	C:\msys64\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\iuaProject.dir\main.cpp.obj -c C:\Users\Agus\Documents\Proyectos\iuaProject\main.cpp
 
 CMakeFiles/iuaProject.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/iuaProject.dir/main.cpp.i"
-	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Agus\Documents\Proyectos\iuaProject\main.cpp > CMakeFiles\iuaProject.dir\main.cpp.i
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Agus\Documents\Proyectos\iuaProject\main.cpp > CMakeFiles\iuaProject.dir\main.cpp.i
 
 CMakeFiles/iuaProject.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/iuaProject.dir/main.cpp.s"
-	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Agus\Documents\Proyectos\iuaProject\main.cpp -o CMakeFiles\iuaProject.dir\main.cpp.s
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Agus\Documents\Proyectos\iuaProject\main.cpp -o CMakeFiles\iuaProject.dir\main.cpp.s
+
+CMakeFiles/iuaProject.dir/classes/Engine.cpp.obj: CMakeFiles/iuaProject.dir/flags.make
+CMakeFiles/iuaProject.dir/classes/Engine.cpp.obj: ../classes/Engine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Agus\Documents\Proyectos\iuaProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/iuaProject.dir/classes/Engine.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\iuaProject.dir\classes\Engine.cpp.obj -c C:\Users\Agus\Documents\Proyectos\iuaProject\classes\Engine.cpp
+
+CMakeFiles/iuaProject.dir/classes/Engine.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/iuaProject.dir/classes/Engine.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Agus\Documents\Proyectos\iuaProject\classes\Engine.cpp > CMakeFiles\iuaProject.dir\classes\Engine.cpp.i
+
+CMakeFiles/iuaProject.dir/classes/Engine.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/iuaProject.dir/classes/Engine.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Agus\Documents\Proyectos\iuaProject\classes\Engine.cpp -o CMakeFiles\iuaProject.dir\classes\Engine.cpp.s
+
+CMakeFiles/iuaProject.dir/classes/Jake.cpp.obj: CMakeFiles/iuaProject.dir/flags.make
+CMakeFiles/iuaProject.dir/classes/Jake.cpp.obj: ../classes/Jake.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Agus\Documents\Proyectos\iuaProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/iuaProject.dir/classes/Jake.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\iuaProject.dir\classes\Jake.cpp.obj -c C:\Users\Agus\Documents\Proyectos\iuaProject\classes\Jake.cpp
+
+CMakeFiles/iuaProject.dir/classes/Jake.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/iuaProject.dir/classes/Jake.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Agus\Documents\Proyectos\iuaProject\classes\Jake.cpp > CMakeFiles\iuaProject.dir\classes\Jake.cpp.i
+
+CMakeFiles/iuaProject.dir/classes/Jake.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/iuaProject.dir/classes/Jake.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Agus\Documents\Proyectos\iuaProject\classes\Jake.cpp -o CMakeFiles\iuaProject.dir\classes\Jake.cpp.s
+
+CMakeFiles/iuaProject.dir/classes/Maggie.cpp.obj: CMakeFiles/iuaProject.dir/flags.make
+CMakeFiles/iuaProject.dir/classes/Maggie.cpp.obj: ../classes/Maggie.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Agus\Documents\Proyectos\iuaProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/iuaProject.dir/classes/Maggie.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\iuaProject.dir\classes\Maggie.cpp.obj -c C:\Users\Agus\Documents\Proyectos\iuaProject\classes\Maggie.cpp
+
+CMakeFiles/iuaProject.dir/classes/Maggie.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/iuaProject.dir/classes/Maggie.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Agus\Documents\Proyectos\iuaProject\classes\Maggie.cpp > CMakeFiles\iuaProject.dir\classes\Maggie.cpp.i
+
+CMakeFiles/iuaProject.dir/classes/Maggie.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/iuaProject.dir/classes/Maggie.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Agus\Documents\Proyectos\iuaProject\classes\Maggie.cpp -o CMakeFiles\iuaProject.dir\classes\Maggie.cpp.s
+
+CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.obj: CMakeFiles/iuaProject.dir/flags.make
+CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.obj: ../classes/EnemyMob.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Agus\Documents\Proyectos\iuaProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\iuaProject.dir\classes\EnemyMob.cpp.obj -c C:\Users\Agus\Documents\Proyectos\iuaProject\classes\EnemyMob.cpp
+
+CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Agus\Documents\Proyectos\iuaProject\classes\EnemyMob.cpp > CMakeFiles\iuaProject.dir\classes\EnemyMob.cpp.i
+
+CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Agus\Documents\Proyectos\iuaProject\classes\EnemyMob.cpp -o CMakeFiles\iuaProject.dir\classes\EnemyMob.cpp.s
 
 # Object files for target iuaProject
 iuaProject_OBJECTS = \
-"CMakeFiles/iuaProject.dir/main.cpp.obj"
+"CMakeFiles/iuaProject.dir/main.cpp.obj" \
+"CMakeFiles/iuaProject.dir/classes/Engine.cpp.obj" \
+"CMakeFiles/iuaProject.dir/classes/Jake.cpp.obj" \
+"CMakeFiles/iuaProject.dir/classes/Maggie.cpp.obj" \
+"CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.obj"
 
 # External object files for target iuaProject
 iuaProject_EXTERNAL_OBJECTS =
 
 iuaProject.exe: CMakeFiles/iuaProject.dir/main.cpp.obj
+iuaProject.exe: CMakeFiles/iuaProject.dir/classes/Engine.cpp.obj
+iuaProject.exe: CMakeFiles/iuaProject.dir/classes/Jake.cpp.obj
+iuaProject.exe: CMakeFiles/iuaProject.dir/classes/Maggie.cpp.obj
+iuaProject.exe: CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.obj
 iuaProject.exe: CMakeFiles/iuaProject.dir/build.make
 iuaProject.exe: CMakeFiles/iuaProject.dir/linklibs.rsp
 iuaProject.exe: CMakeFiles/iuaProject.dir/objects1.rsp
 iuaProject.exe: CMakeFiles/iuaProject.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Agus\Documents\Proyectos\iuaProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable iuaProject.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Agus\Documents\Proyectos\iuaProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable iuaProject.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\iuaProject.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -1,8 +1,10 @@
-#include <iostream>
-#include <string>
-using namespace std;
+
+#include "classes/Engine.h"
 
 int main() {
-    cout << "Hello, World!" << endl;
+    Engine engine;
+
+    engine.start();
+
     return 0;
 }

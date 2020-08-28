@@ -142,6 +142,114 @@ iuaProject/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\iuaProject.dir\build.make CMakeFiles/iuaProject.dir/build
 .PHONY : iuaProject/fast
 
+classes/EnemyMob.obj: classes/EnemyMob.cpp.obj
+
+.PHONY : classes/EnemyMob.obj
+
+# target to build an object file
+classes/EnemyMob.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iuaProject.dir\build.make CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.obj
+.PHONY : classes/EnemyMob.cpp.obj
+
+classes/EnemyMob.i: classes/EnemyMob.cpp.i
+
+.PHONY : classes/EnemyMob.i
+
+# target to preprocess a source file
+classes/EnemyMob.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iuaProject.dir\build.make CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.i
+.PHONY : classes/EnemyMob.cpp.i
+
+classes/EnemyMob.s: classes/EnemyMob.cpp.s
+
+.PHONY : classes/EnemyMob.s
+
+# target to generate assembly for a file
+classes/EnemyMob.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iuaProject.dir\build.make CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.s
+.PHONY : classes/EnemyMob.cpp.s
+
+classes/Engine.obj: classes/Engine.cpp.obj
+
+.PHONY : classes/Engine.obj
+
+# target to build an object file
+classes/Engine.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iuaProject.dir\build.make CMakeFiles/iuaProject.dir/classes/Engine.cpp.obj
+.PHONY : classes/Engine.cpp.obj
+
+classes/Engine.i: classes/Engine.cpp.i
+
+.PHONY : classes/Engine.i
+
+# target to preprocess a source file
+classes/Engine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iuaProject.dir\build.make CMakeFiles/iuaProject.dir/classes/Engine.cpp.i
+.PHONY : classes/Engine.cpp.i
+
+classes/Engine.s: classes/Engine.cpp.s
+
+.PHONY : classes/Engine.s
+
+# target to generate assembly for a file
+classes/Engine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iuaProject.dir\build.make CMakeFiles/iuaProject.dir/classes/Engine.cpp.s
+.PHONY : classes/Engine.cpp.s
+
+classes/Jake.obj: classes/Jake.cpp.obj
+
+.PHONY : classes/Jake.obj
+
+# target to build an object file
+classes/Jake.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iuaProject.dir\build.make CMakeFiles/iuaProject.dir/classes/Jake.cpp.obj
+.PHONY : classes/Jake.cpp.obj
+
+classes/Jake.i: classes/Jake.cpp.i
+
+.PHONY : classes/Jake.i
+
+# target to preprocess a source file
+classes/Jake.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iuaProject.dir\build.make CMakeFiles/iuaProject.dir/classes/Jake.cpp.i
+.PHONY : classes/Jake.cpp.i
+
+classes/Jake.s: classes/Jake.cpp.s
+
+.PHONY : classes/Jake.s
+
+# target to generate assembly for a file
+classes/Jake.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iuaProject.dir\build.make CMakeFiles/iuaProject.dir/classes/Jake.cpp.s
+.PHONY : classes/Jake.cpp.s
+
+classes/Maggie.obj: classes/Maggie.cpp.obj
+
+.PHONY : classes/Maggie.obj
+
+# target to build an object file
+classes/Maggie.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iuaProject.dir\build.make CMakeFiles/iuaProject.dir/classes/Maggie.cpp.obj
+.PHONY : classes/Maggie.cpp.obj
+
+classes/Maggie.i: classes/Maggie.cpp.i
+
+.PHONY : classes/Maggie.i
+
+# target to preprocess a source file
+classes/Maggie.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iuaProject.dir\build.make CMakeFiles/iuaProject.dir/classes/Maggie.cpp.i
+.PHONY : classes/Maggie.cpp.i
+
+classes/Maggie.s: classes/Maggie.cpp.s
+
+.PHONY : classes/Maggie.s
+
+# target to generate assembly for a file
+classes/Maggie.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\iuaProject.dir\build.make CMakeFiles/iuaProject.dir/classes/Maggie.cpp.s
+.PHONY : classes/Maggie.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -178,6 +286,18 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... iuaProject
+	@echo ... classes/EnemyMob.obj
+	@echo ... classes/EnemyMob.i
+	@echo ... classes/EnemyMob.s
+	@echo ... classes/Engine.obj
+	@echo ... classes/Engine.i
+	@echo ... classes/Engine.s
+	@echo ... classes/Jake.obj
+	@echo ... classes/Jake.i
+	@echo ... classes/Jake.s
+	@echo ... classes/Maggie.obj
+	@echo ... classes/Maggie.i
+	@echo ... classes/Maggie.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

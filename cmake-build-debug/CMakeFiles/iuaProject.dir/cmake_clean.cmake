@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.obj"
+  "CMakeFiles/iuaProject.dir/classes/Engine.cpp.obj"
+  "CMakeFiles/iuaProject.dir/classes/Jake.cpp.obj"
+  "CMakeFiles/iuaProject.dir/classes/Maggie.cpp.obj"
   "CMakeFiles/iuaProject.dir/main.cpp.obj"
   "iuaProject.exe"
   "iuaProject.exe.manifest"

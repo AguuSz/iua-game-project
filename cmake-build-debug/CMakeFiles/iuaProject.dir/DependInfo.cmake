@@ -4,6 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "C:/Users/Agus/Documents/Proyectos/iuaProject/classes/EnemyMob.cpp" "C:/Users/Agus/Documents/Proyectos/iuaProject/cmake-build-debug/CMakeFiles/iuaProject.dir/classes/EnemyMob.cpp.obj"
+  "C:/Users/Agus/Documents/Proyectos/iuaProject/classes/Engine.cpp" "C:/Users/Agus/Documents/Proyectos/iuaProject/cmake-build-debug/CMakeFiles/iuaProject.dir/classes/Engine.cpp.obj"
+  "C:/Users/Agus/Documents/Proyectos/iuaProject/classes/Jake.cpp" "C:/Users/Agus/Documents/Proyectos/iuaProject/cmake-build-debug/CMakeFiles/iuaProject.dir/classes/Jake.cpp.obj"
+  "C:/Users/Agus/Documents/Proyectos/iuaProject/classes/Maggie.cpp" "C:/Users/Agus/Documents/Proyectos/iuaProject/cmake-build-debug/CMakeFiles/iuaProject.dir/classes/Maggie.cpp.obj"
   "C:/Users/Agus/Documents/Proyectos/iuaProject/main.cpp" "C:/Users/Agus/Documents/Proyectos/iuaProject/cmake-build-debug/CMakeFiles/iuaProject.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
