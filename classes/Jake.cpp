@@ -8,7 +8,7 @@
 Jake::Jake() {
 
     // Velocidad a la que se va a mover
-    movementSpeed = 20;
+    movementSpeed = 200;
 
     // Carga la textura con el sprite
     texture.loadFromFile("../assets/bob.png");
