@@ -17,6 +17,8 @@ Engine::Engine() {
 
     window.setFramerateLimit(144);
 
+    window.setFramerateLimit(60);
+
     // Carga la textura del fondo en una textura
     bkgTexture.loadFromFile("../assets/background1.jpg");
 
