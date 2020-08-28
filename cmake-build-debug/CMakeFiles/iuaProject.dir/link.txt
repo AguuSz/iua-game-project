@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2020.2\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\iuaProject.dir/objects.a
-C:\msys64\mingw64\bin\ar.exe cr CMakeFiles\iuaProject.dir/objects.a @CMakeFiles\iuaProject.dir\objects1.rsp
-C:\msys64\mingw64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\iuaProject.dir/objects.a -Wl,--no-whole-archive  -o iuaProject.exe -Wl,--out-implib,libiuaProject.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\iuaProject.dir\linklibs.rsp
