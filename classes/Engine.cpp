@@ -15,6 +15,8 @@ Engine::Engine() {
                   "IUA Game project",
                   Style::Default);
 
+    window.setFramerateLimit(144);
+
     // Carga la textura del fondo en una textura
     bkgTexture.loadFromFile("../assets/background1.jpg");
 

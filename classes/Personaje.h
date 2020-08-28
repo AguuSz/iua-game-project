@@ -3,15 +3,18 @@
 //
 
 #include <SFML/Graphics.hpp>
+
 using namespace sf;
 
-class Jake {
+class Personaje {
 private:
     Vector2f position;
 
     Sprite sprite;
 
     Texture texture;
+
+    bool esHombre; // true = hombre ; false = mujer
 
     bool leftKeyPressed;
     bool rightKeyPressed;
@@ -20,7 +23,7 @@ private:
 
 public:
     // Constructor
-    Jake();
+    Personaje();
 
     // Mandar el sprite a cualquier funcion que lo llame
     Sprite getSprite();
@@ -35,4 +38,12 @@ public:
     void stopRight();
 
     void update(float elapsedTime);
+
+    void setGenero(bool genero){
+        Personaje::esHombre = genero;
+    }
+
+    bool getGenero(){
+        return Personaje::esHombre;
+    }
 };

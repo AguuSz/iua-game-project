@@ -3,7 +3,7 @@
 //
 
 #include <SFML/Graphics.hpp>
-#include "Jake.h"
+#include "Personaje.h"
 
 using namespace sf;
 
@@ -15,7 +15,7 @@ private:
     Texture bkgTexture;
 
     // Instancia de Jake
-    Jake jake;
+    Personaje jake;
 
     // Funciones para el funcionamiento
     void input();

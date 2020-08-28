@@ -2,10 +2,10 @@
 // Created by Agus on 28/8/2020.
 //
 
-#include "Jake.h"
+#include "Personaje.h"
 
 // Constructor
-Jake::Jake() {
+Personaje::Personaje() {
 
     // Velocidad a la que se va a mover
     movementSpeed = 200;
@@ -19,30 +19,32 @@ Jake::Jake() {
     position.y = 200;
 
 }
+
+
 // Declaracion de funciones
 
-Sprite Jake::getSprite() {
+Sprite Personaje::getSprite() {
     return sprite;
 }
 
-void Jake::moveLeft() {
+void Personaje::moveLeft() {
     leftKeyPressed = true;
 }
 
-void Jake::moveRight() {
+void Personaje::moveRight() {
     rightKeyPressed = true;
 }
 
-void Jake::stopLeft() {
+void Personaje::stopLeft() {
     leftKeyPressed = false;
 }
 
-void Jake::stopRight() {
+void Personaje::stopRight() {
     rightKeyPressed = false;
 }
 
 // Funcion que va a ser llamada con el input, tiene en cuenta el tiempo transcurrido y la velocidad
-void Jake::update(float elapsedTime) {
+void Personaje::update(float elapsedTime) {
     if (rightKeyPressed) {
         position.x += movementSpeed * elapsedTime;
     }
