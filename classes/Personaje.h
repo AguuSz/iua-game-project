@@ -11,15 +11,16 @@ private:
     Vector2f position;
 
     Sprite sprite;
-
     Texture texture;
 
-    bool esHombre; // true = hombre ; false = mujer
+    int health;
 
     bool leftKeyPressed;
     bool rightKeyPressed;
 
     float movementSpeed;
+
+    int anim_actual;
 
 public:
     // Constructor
@@ -37,13 +38,8 @@ public:
 
     void stopRight();
 
+    void jump();
+
     void update(float elapsedTime);
 
-    void setGenero(bool genero){
-        Personaje::esHombre = genero;
-    }
-
-    bool getGenero(){
-        return Personaje::esHombre;
-    }
 };

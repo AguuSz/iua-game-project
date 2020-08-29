@@ -18,6 +18,10 @@ Personaje::Personaje() {
     position.x = 200;
     position.y = 200;
 
+    health = 10; // Maximum health
+
+    anim_actual = 0;
+
 }
 
 
@@ -43,6 +47,10 @@ void Personaje::stopRight() {
     rightKeyPressed = false;
 }
 
+void Personaje::jump() {
+
+}
+
 // Funcion que va a ser llamada con el input, tiene en cuenta el tiempo transcurrido y la velocidad
 void Personaje::update(float elapsedTime) {
     if (rightKeyPressed) {
@@ -55,5 +63,10 @@ void Personaje::update(float elapsedTime) {
 
     // Setea en el sprite la nueva posicion
     sprite.setPosition(position);
+
+    anim_actual++;
+    if (anim_actual > 7) {
+        anim_actual = 0;
+    }
 }
 
