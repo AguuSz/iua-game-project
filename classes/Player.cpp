@@ -17,15 +17,11 @@ Player::Player() {
 // Declaracion de funciones
 
 void Player::initVariables() {
-    // Posicion inicial en X e Y
-    position.x = 200;
-    position.y = 400;
-
     // Vida
     maxHp = 10;
     currentHp = 10;
 
-    scaleFactor = 4;
+    scaleFactor = 5;
     animState = IDLE;
 }
 
@@ -162,7 +158,7 @@ void Player::updateAnimations() {
         }
 
         sprite.setScale(-scaleFactor, scaleFactor);
-        sprite.setOrigin(sprite.getGlobalBounds().width / 3.f, 0.f);
+        sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
     }
     else
         animationTimer.restart();
