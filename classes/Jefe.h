@@ -15,24 +15,26 @@ private:
     Sprite sprite;
     Texture texture;
 
-    float vida;
+    String name;
 
-    int damage;
+    float health;
 
-    int projectileSpeed;
+    float damage;
 
-    int damageMultiplier;
+    float projectileSpeed;
+
+    float damageMultiplier;
 
     float movementSpeed;
 
 public:
     // Constructor
-    Jefe();
+    Jefe(String name, float health, float damage, float projectileSpeed, float damageMultiplier, float movementSpeed);
 
     // Mandar el sprite a cualquier funcion que lo llame
     Sprite getSprite();
 
-    void move(Vector2f nextPosition);
+    void randomMovement(Vector2f nextPosition);
 
     void attack();
 
@@ -40,4 +42,6 @@ public:
 
     void update(float elapsedTime);
 
+
+    void randomMovement(Vector2f nextPosition, float health);
 };

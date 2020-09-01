@@ -1,20 +1,21 @@
-//
-// Created by Agus on 28/8/2020.
-//
-
 #include "Jefe.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <Windows.h>
 
-Jefe::Jefe() {
+Jefe::Jefe(String name, float health, float damage, float projectileSpeed, float damageMultiplier, float movementSpeed) {
 
     // Seteo de parametros basicos
-    vida = 1500;
-    damage = 1;
-    projectileSpeed = 300;
-    damageMultiplier = 1;
-    movementSpeed = 300;
+    Jefe::name = name;
+    Jefe::health = health;
+    Jefe::damage = damage;
+    Jefe::projectileSpeed = projectileSpeed;
+    Jefe::damageMultiplier = damageMultiplier;
+    Jefe::movementSpeed = movementSpeed;
 
     // Seteamos posicion inicial
-    position.x = 0;
+    Jefe::position.x = position.x
     position.y = 0;
 
     // Seteamos atributos para la habilidad
@@ -39,12 +40,39 @@ void Jefe::belowHalfLife() {
 void Jefe::update(float elapsedTime) {
     // Movimiento random del boss
     // Modificar position.x y position.y acorde a lo querramos
-    //    sprite.setPosition(position);
+    sprite.setPosition(position);
 
     // Si esta a menos de la mitad de vida..
-    if (vida < vida / 2) {
+    if (health <= health / 2) {
         belowHalfLife();
         sprite.setColor(Color::Red);
+    }
+}
+
+void Jefe::randomMovement(Vector2f nextPosition){  //movimiento random
+
+    srand(time(NULL));
+
+    int direction = rand() % 4 + 1 //Obtengo numeros aleatorios entre 1 y 4, 1=arriba, 2=abajo, 3=izquierda, 4=derecha
+    int movementQuantity = rand() % 11 + 20  // numeros entre 20 y 30
+    int checkPosition = 0;
+
+    while(checkPosition != movementQuantity) {
+        if (direction == 1) {
+            position.y++;
+            checkPosition++;
+        }
+        if (direction == 2) {
+            position.y--;
+            checkPosition++;
+        }
+        if (direction == 3) {
+            position.x--;
+            checkPosition++;
+        } else {
+            position.x++;
+            checkPosition++;
+        }
     }
 }
 
