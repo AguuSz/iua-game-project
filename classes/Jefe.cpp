@@ -15,7 +15,7 @@ Jefe::Jefe(String name, float health, float damage, float projectileSpeed, float
     Jefe::movementSpeed = movementSpeed;
 
     // Seteamos posicion inicial
-    Jefe::position.x = position.x
+    Jefe::position.x = position.x;
     position.y = 0;
 
     // Seteamos atributos para la habilidad
@@ -53,8 +53,8 @@ void Jefe::randomMovement(Vector2f nextPosition){  //movimiento random
 
     srand(time(NULL));
 
-    int direction = rand() % 4 + 1 //Obtengo numeros aleatorios entre 1 y 4, 1=arriba, 2=abajo, 3=izquierda, 4=derecha
-    int movementQuantity = rand() % 11 + 20  // numeros entre 20 y 30
+    int direction = rand() % 4 + 1; //Obtengo numeros aleatorios entre 1 y 4, 1=arriba, 2=abajo, 3=izquierda, 4=derecha
+    int movementQuantity = rand() % 11 + 20;  // numeros entre 20 y 30
     int checkPosition = 0;
 
     while(checkPosition != movementQuantity) {
