@@ -21,8 +21,10 @@ void Player::initVariables() {
     maxHp = 10;
     currentHp = 10;
 
-    scaleFactor = 5;
+    scaleFactor = 3;
     animState = IDLE;
+
+    sprite.setPosition(0, 1200);
 }
 
 void Player::initTexture() {
@@ -48,12 +50,12 @@ void Player::initAnimations() {
 }
 
 void Player::initPhysics() {
-    velocityMax = 20.f;
+    velocityMax = 7.f;
     velocityMin = 1.f;
     acceleration = 3.f;
     drag = 0.7f;
-    gravity = 4.f;
-    velocityMaxY = 15.f;
+    gravity = 3.f;
+    velocityMaxY = 2.f;
 }
 
 Sprite Player::getSprite() {
@@ -74,13 +76,13 @@ void Player::move(const float dir_x, const float dir_y) {
 void Player::updatePhysics() {
 
     // Gravedad
-//    velocity.y += 1.0 * gravity;
-//    // Limitando la velocidad vertical por la gravedad
-//    if (std::abs(velocity.y) < velocityMaxY) {
-//        // Esto hace que el limite de la velocidad sea velocityMax
-//        // Comprueba si va en direccion negativa o positiva para asignarle un valor acorde
-//        velocity.y = velocityMaxY * ((velocity.y < 0) ? -1.f : 1.f);
-//    }
+    velocity.y += 1.0f * gravity;
+    // Limitando la velocidad vertical por la gravedad
+    if (std::abs(velocity.y) < velocityMaxY) {
+        // Esto hace que el limite de la velocidad sea velocityMax
+        // Comprueba si va en direccion negativa o positiva para asignarle un valor acorde
+        velocity.y = velocityMaxY * ((velocity.y < 0) ? -1.f : 1.f);
+    }
 
     // Desaceleracion
     // Multiplica la velocidad por la desaceleracion
@@ -105,6 +107,9 @@ void Player::updateMovement() {
     else if (Keyboard::isKeyPressed(Keyboard::D)) {
         move(1.f, 0.f);
         animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+    }
+    else if (velocity.y > 0.f) {
+        animState = PLAYER_ANIMATION_STATES::FALLING;
     }
 }
 
@@ -160,6 +165,22 @@ void Player::updateAnimations() {
         sprite.setScale(-scaleFactor, scaleFactor);
         sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
     }
+
+    else if(animState == PLAYER_ANIMATION_STATES::FALLING) {
+        if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
+            // Hacemos que se posicione en la 2da fila de nuestro sheet
+            currentFrame.top = 200.f;
+            currentFrame.left += 40.f;
+
+            if (currentFrame.left >= 40.f)
+                currentFrame.left = 0;
+
+            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+            animationTimer.restart();
+            sprite.setTextureRect(currentFrame);
+        }
+
+    }
     else
         animationTimer.restart();
 }
@@ -171,4 +192,16 @@ void Player::update() {
     updateAnimations();
     updatePhysics();
 
+}
+
+const FloatRect Player::getGlobalBounds() const {
+    return sprite.getGlobalBounds();
+}
+
+void Player::resetVelocityY() {
+    velocity.y = 0.f;
+}
+
+void Player::setPosition(const float x, const float y) {
+    sprite.setPosition(x, y);
 }

@@ -18,5 +18,9 @@ add_executable(iuaProject
         classes/Update.cpp
         classes/Draw.cpp
         classes/Jefe.h
-        classes/Habilidad.cpp classes/Habilidad.h classes/Jefe.cpp)
+        classes/Habilidad.cpp
+        classes/Habilidad.h
+        classes/Jefe.cpp
+        classes/UpdateCollision.cpp
+        )
 target_link_libraries(iuaProject sfml-system sfml-window sfml-graphics)

@@ -19,7 +19,7 @@ private:
     short animState;
     IntRect currentFrame;
     bool animationSwitch;
-    short scaleFactor;
+    float scaleFactor;
 
     // Texturas
     Sprite sprite;
@@ -48,6 +48,11 @@ public:
 
     // Mandar el sprite a cualquier funcion que lo llame
     Sprite getSprite();
+    const FloatRect getGlobalBounds() const;
+
+    // Modificadores
+    void setPosition(const float x, const float y);
+    void resetVelocityY();
 
     // Funciones
     void update();

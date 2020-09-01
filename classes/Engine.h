@@ -20,6 +20,7 @@ private:
     // Funciones para el funcionamiento
     void input(Event event);
     void update();
+    void updateCollision();
     void draw();
 
 public:
