@@ -18,7 +18,7 @@ Jefe::Jefe() {
     position.y = 0;
 
     // Seteamos atributos para la habilidad
-    ability();
+//    ability();
 
     texture.loadFromFile("assets/ability1.jpg");
     sprite.setTexture(texture);

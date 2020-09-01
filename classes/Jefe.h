@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <string>
-#include "Habilidad.h"
+//#include "Habilidad.h"
 
 using namespace sf;
 
@@ -10,7 +10,7 @@ private:
 
     Vector2f position;
 
-    Habilidad ability;
+//    Habilidad ability;
 
     Sprite sprite;
     Texture texture;

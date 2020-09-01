@@ -15,8 +15,6 @@ Engine::Engine() {
                   "IUA Game project",
                   Style::Default);
 
-    window.setFramerateLimit(144);
-
     window.setFramerateLimit(60);
 
     // Carga la textura del fondo en una textura
@@ -28,18 +26,11 @@ Engine::Engine() {
 }
 
 void Engine::start() {
-    // Timing
-    Clock clock;
-
     while(window.isOpen()) {
-        Time dt = clock.restart();
-
-        float dtAsSeconds = dt.asSeconds();
-
-        input();
-        update(dtAsSeconds);
-        draw();
         Event event;
+        input(event);
+        update();
+        draw();
         while(window.pollEvent(event)){
             switch(event.type){
                 case Event::Closed:

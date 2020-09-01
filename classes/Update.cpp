@@ -4,8 +4,8 @@
 #include "Engine.h"
 using namespace sf;
 
-void Engine::update(float dtAsSeconds) {
-    jake.update(dtAsSeconds);
+void Engine::update() {
+    player.update();
 
     // Falta la deteccion de colision...
 }

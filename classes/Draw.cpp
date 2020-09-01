@@ -9,7 +9,7 @@ void Engine::draw() {
 
     // Dibuja el fondo
     window.draw(bkgSprite);
-    window.draw(jake.getSprite());
+    window.draw(player.getSprite());
 
     // Mostrar lo que hemos dibujado
     window.display();

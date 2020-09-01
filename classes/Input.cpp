@@ -3,22 +3,11 @@
 //
 #include "Engine.h"
 
-void Engine::input() {
+void Engine::input(Event event) {
+
+    // Aca se manejan las teclas que sean aparte del jugador
     if (Keyboard::isKeyPressed(Keyboard::Escape)) {
         window.close();
-    }
-
-    // Maneja el movimiento del jugador
-    if (Keyboard::isKeyPressed(Keyboard::A)) {
-        jake.moveLeft();
-    } else {
-        jake.stopLeft();
-    }
-
-    if (Keyboard::isKeyPressed(Keyboard::D)) {
-        jake.moveRight();
-    } else {
-        jake.stopRight();
     }
 
 }

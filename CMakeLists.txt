@@ -8,8 +8,8 @@ add_executable(iuaProject
         main.cpp
         classes/Engine.cpp
         classes/Engine.h
-        classes/Personaje.cpp
-        classes/Personaje.h
+        classes/Player.cpp
+        classes/Player.h
         classes/Maggie.cpp
         classes/Maggie.h
         classes/EnemyMob.cpp
