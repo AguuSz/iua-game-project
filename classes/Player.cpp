@@ -17,15 +17,11 @@ Player::Player() {
 // Declaracion de funciones
 
 void Player::initVariables() {
-    // Posicion inicial en X e Y
-    position.x = 200;
-    position.y = 400;
-
     // Vida
     maxHp = 10;
     currentHp = 10;
 
-    scaleFactor = 4;
+    scaleFactor = 5;
     animState = IDLE;
 }
 
@@ -52,10 +48,10 @@ void Player::initAnimations() {
 }
 
 void Player::initPhysics() {
-    velocityMax = 10.f;
+    velocityMax = 20.f;
     velocityMin = 1.f;
-    acceleration = 2.f;
-    drag = 0.5f;
+    acceleration = 3.f;
+    drag = 0.7f;
     gravity = 4.f;
     velocityMaxY = 15.f;
 }
@@ -68,7 +64,7 @@ void Player::move(const float dir_x, const float dir_y) {
     // Aceleracion
     velocity.x += dir_x * acceleration;
     // Limitando la velocidad
-    if (std::abs(velocity.x) < velocityMax) {
+    if (std::abs(velocity.x) > velocityMax) {
         // Esto hace que el limite de la velocidad sea velocityMax
         // Comprueba si va en direccion negativa o positiva para asignarle un valor acorde
         velocity.x = velocityMax * ((velocity.x < 0) ? -1.f : 1.f);
@@ -162,7 +158,7 @@ void Player::updateAnimations() {
         }
 
         sprite.setScale(-scaleFactor, scaleFactor);
-        sprite.setOrigin(sprite.getGlobalBounds().width / 3.f, 0.f);
+        sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
     }
     else
         animationTimer.restart();
