@@ -24,7 +24,7 @@ void Player::initVariables() {
     scaleFactor = 3;
     animState = IDLE;
 
-    sprite.setPosition(0, 1200);
+    sprite.setPosition(0, 1);
 }
 
 void Player::initTexture() {
@@ -200,6 +200,10 @@ const FloatRect Player::getGlobalBounds() const {
 
 void Player::resetVelocityY() {
     velocity.y = 0.f;
+}
+
+void Player::resetVelocityX() {
+    velocity.x = 0.f;
 }
 
 void Player::setPosition(const float x, const float y) {

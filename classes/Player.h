@@ -53,6 +53,7 @@ public:
     // Modificadores
     void setPosition(const float x, const float y);
     void resetVelocityY();
+    void resetVelocityX();
 
     // Funciones
     void update();
