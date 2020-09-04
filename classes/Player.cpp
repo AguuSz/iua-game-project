@@ -20,11 +20,14 @@ void Player::initVariables() {
     // Vida
     maxHp = 10;
     currentHp = 10;
+    isInvincible = false;
 
     scaleFactor = 3;
     animState = IDLE;
-
-    sprite.setPosition(0, 1);
+    
+    sprite.setPosition(0, 1000);
+    middlePoint.x = getGlobalBounds().left + getGlobalBounds().width / 2;
+    middlePoint.y = getGlobalBounds().top + getGlobalBounds().height / 2;
 }
 
 void Player::initTexture() {
@@ -191,7 +194,7 @@ void Player::update() {
     updateMovement();
     updateAnimations();
     updatePhysics();
-
+    updateMiddlePoint();
 }
 
 const FloatRect Player::getGlobalBounds() const {
@@ -208,4 +211,25 @@ void Player::resetVelocityX() {
 
 void Player::setPosition(const float x, const float y) {
     sprite.setPosition(x, y);
+}
+
+const Vector2f Player::getMiddlePoint() const {
+    return middlePoint;
+}
+
+void Player::updateMiddlePoint() {
+    middlePoint.x = getGlobalBounds().left + getGlobalBounds().width / 2;
+    middlePoint.y = getGlobalBounds().top + getGlobalBounds().height / 2;
+}
+
+RectangleShape Player::playerBox() {
+    // Funcion solo utilizada para el desarrollo del juego
+    // Nos devuelve un rectangulo con el tamanio del sprite del jugador
+    box.setSize(Vector2f(getGlobalBounds().width, getGlobalBounds().height));
+    box.setOutlineColor(Color::Red);
+    box.setOutlineThickness(2);
+    box.setFillColor(Color::Transparent);
+    box.setPosition(getGlobalBounds().left, getGlobalBounds().top);
+
+    return box;
 }

@@ -22,6 +22,9 @@ Engine::Engine() {
 
     // Setea el sprite en base a la textura
     bkgSprite.setTexture(bkgTexture);
+    bkgSprite.scale(0.8f, 0.7f);
+
+    view.reset(FloatRect(300, 300, 1366, 768));
 
 }
 

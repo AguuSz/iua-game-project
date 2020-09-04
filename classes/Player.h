@@ -13,6 +13,7 @@ private:
     // Vida del jugador
     int currentHp;
     int maxHp;
+    bool isInvincible;
 
     // Animaciones
     Clock animationTimer;
@@ -35,6 +36,12 @@ private:
     float gravity;
     float velocityMaxY;
 
+    // Extras
+    Vector2f middlePoint;
+
+    // Dev
+    RectangleShape box;
+
     // Nucleo
     void initVariables();
     void initTexture();
@@ -48,6 +55,7 @@ public:
 
     // Mandar el sprite a cualquier funcion que lo llame
     Sprite getSprite();
+    const Vector2f getMiddlePoint() const;
     const FloatRect getGlobalBounds() const;
 
     // Modificadores
@@ -58,8 +66,12 @@ public:
     // Funciones
     void update();
     void move(const float dir_x, const float dir_y);
+    void updateMiddlePoint();
     void updatePhysics();
     void updateMovement();
     void updateAnimations();
+
+    // Dev
+    RectangleShape playerBox();
 
 };

@@ -9,12 +9,17 @@ using namespace sf;
 
 class Engine {
 private:
+    // Ventana del juego
     RenderWindow window;
 
+    // Vista del jugador
+    View view;
+
+    // Fondo
     Sprite bkgSprite;
     Texture bkgTexture;
 
-    // Instancia de Jake
+    // Instancia del jugador
     Player player;
 
     // Funciones para el funcionamiento
