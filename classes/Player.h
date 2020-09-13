@@ -27,14 +27,13 @@ private:
     Texture texture;
 
     // Fisicas
+    Vector2f speed;
     Vector2f position;
     Vector2f velocity;
-    float velocityMax;
-    float velocityMin;
+    float speedYMax;
     float acceleration;
-    float drag;
     float gravity;
-    float velocityMaxY;
+    bool isJumping;
 
     // Extras
     Vector2f middlePoint;
@@ -62,10 +61,12 @@ public:
     void setPosition(const float x, const float y);
     void resetVelocityY();
     void resetVelocityX();
+    void allowJumping();
 
     // Funciones
     void update();
-    void move(const float dir_x, const float dir_y);
+    void move(const float dir_x);
+    void jump();
     void updateMiddlePoint();
     void updatePhysics();
     void updateMovement();

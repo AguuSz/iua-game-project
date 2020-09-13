@@ -8,6 +8,7 @@ void Engine::updateCollision() {
     // Colision dada al tocar el fondo de la pantalla
     if(player.getGlobalBounds().top + player.getGlobalBounds().height >= window.getSize().y - 85) {
         player.resetVelocityY();
+        player.allowJumping();
         player.setPosition(player.getGlobalBounds().left,
                            window.getSize().y - player.getGlobalBounds().height - 85);
     }

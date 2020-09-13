@@ -25,7 +25,7 @@ void Player::initVariables() {
     scaleFactor = 3;
     animState = IDLE;
     
-    sprite.setPosition(0, 1000);
+    sprite.setPosition(0, 0);
     middlePoint.x = getGlobalBounds().left + getGlobalBounds().width / 2;
     middlePoint.y = getGlobalBounds().top + getGlobalBounds().height / 2;
 }
@@ -53,65 +53,73 @@ void Player::initAnimations() {
 }
 
 void Player::initPhysics() {
-    velocityMax = 7.f;
-    velocityMin = 1.f;
-    acceleration = 3.f;
-    drag = 0.7f;
-    gravity = 3.f;
-    velocityMaxY = 2.f;
+
+    speed.x = 5.f;
+    speed.y = 0.f;
+
+    acceleration = 13.f;
+    gravity = 9.f;
+
+    isJumping = false;
+
 }
 
 Sprite Player::getSprite() {
     return sprite;
 }
 
-void Player::move(const float dir_x, const float dir_y) {
-    // Aceleracion
-    velocity.x += dir_x * acceleration;
-    // Limitando la velocidad
-    if (std::abs(velocity.x) > velocityMax) {
-        // Esto hace que el limite de la velocidad sea velocityMax
-        // Comprueba si va en direccion negativa o positiva para asignarle un valor acorde
-        velocity.x = velocityMax * ((velocity.x < 0) ? -1.f : 1.f);
-    }
+void Player::move(const float dir_x) {
+    // Movimiento en X
+    position.x += dir_x * speed.x;
+}
+
+void Player::jump() {
+    isJumping = true;
+    speed.x = 7.f;
+    speed.y = -90.f;
 }
 
 void Player::updatePhysics() {
+    // Hace que la gravedad siempre le haga efecto
+    speed.y += gravity;
 
-    // Gravedad
-    velocity.y += 1.0f * gravity;
-    // Limitando la velocidad vertical por la gravedad
-    if (std::abs(velocity.y) < velocityMaxY) {
-        // Esto hace que el limite de la velocidad sea velocityMax
-        // Comprueba si va en direccion negativa o positiva para asignarle un valor acorde
-        velocity.y = velocityMaxY * ((velocity.y < 0) ? -1.f : 1.f);
-    }
-
-    // Desaceleracion
-    // Multiplica la velocidad por la desaceleracion
-    velocity *= drag;
-    // Limita la desaceleracion
-    if (std::abs(velocity.x) < velocityMin)
-        velocity.x = 0.f;
-    if (std::abs(velocity.y) < velocityMin)
-        velocity.y = 0.f;
+    // Que la velocidad no sea mayor a la gravedad
+    if (speed.y > 2*gravity)
+        speed.y = 2*gravity;
+    position.y += speed.y;
 
     // Mueve el sprite
-    sprite.move(velocity);
+    sprite.setPosition(position);
 }
 
 void Player::updateMovement() {
     animState = PLAYER_ANIMATION_STATES::IDLE;
     // Maneja el movimiento del jugador
     if (Keyboard::isKeyPressed(Keyboard::A)) {
-        move(-1.f, 0.f);
+        move(-1.f);
         animState = PLAYER_ANIMATION_STATES::MOVING_LEFT;
+
+        if (Keyboard::isKeyPressed(Keyboard::Space)) {
+            if (!isJumping)
+                jump();
+        }
     }
     else if (Keyboard::isKeyPressed(Keyboard::D)) {
-        move(1.f, 0.f);
+        move(1.f);
         animState = PLAYER_ANIMATION_STATES::MOVING_RIGHT;
+
+        if (Keyboard::isKeyPressed(Keyboard::Space)) {
+            if (!isJumping)
+                jump();
+        }
     }
-    else if (velocity.y > 0.f) {
+
+    else if (Keyboard::isKeyPressed(Keyboard::Space)) {
+        if (!isJumping)
+            jump();
+    }
+
+    else if (std::abs(speed.y) > 0.f) {
         animState = PLAYER_ANIMATION_STATES::FALLING;
     }
 }
@@ -202,15 +210,16 @@ const FloatRect Player::getGlobalBounds() const {
 }
 
 void Player::resetVelocityY() {
-    velocity.y = 0.f;
+    speed.y = 0.f;
 }
 
 void Player::resetVelocityX() {
-    velocity.x = 0.f;
+    speed.x = 0.f;
 }
 
 void Player::setPosition(const float x, const float y) {
-    sprite.setPosition(x, y);
+    position.x = x;
+    position.y = y;
 }
 
 const Vector2f Player::getMiddlePoint() const {
@@ -232,4 +241,8 @@ RectangleShape Player::playerBox() {
     box.setPosition(getGlobalBounds().left, getGlobalBounds().top);
 
     return box;
+}
+
+void Player::allowJumping() {
+    isJumping = false;
 }

@@ -8,12 +8,12 @@ using namespace sf;
 Engine::Engine() {
     // Setea la resolucion con la que se va a jugar
     Vector2f resolution;
-    resolution.x = 1920;
-    resolution.y = 1080;
+    resolution.x = 1366;
+    resolution.y = 768;
 
     window.create(VideoMode(resolution.x, resolution.y),
                   "IUA Game project",
-                  Style::Fullscreen);
+                  Style::Default);
 
     window.setFramerateLimit(60);
 
@@ -22,9 +22,9 @@ Engine::Engine() {
 
     // Setea el sprite en base a la textura
     bkgSprite.setTexture(bkgTexture);
-    bkgSprite.scale(0.8f, 0.7f);
+    bkgSprite.scale(0.7f, 0.7f);
 
-    view.reset(FloatRect(300, 300, 1366, 768));
+    view.reset(FloatRect(300, 300, 1800, 1200));
 
 }
 
