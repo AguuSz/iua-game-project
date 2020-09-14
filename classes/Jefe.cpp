@@ -2,21 +2,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <Windows.h>
+#include <iostream>
 
-Jefe::Jefe(String name, float health, float damage, float projectileSpeed, float damageMultiplier, float movementSpeed) {
+Jefe::Jefe(float currentHp, float maxHp, bool isInvincible, float projectileSpeed, float damageMultiplier, float movementSpeed) {
 
     // Seteo de parametros basicos
-    Jefe::name = name;
-    Jefe::health = health;
-    Jefe::damage = damage;
+    Jefe::currentHp = currentHp;
+    Jefe::maxHp = maxHp;
+    Jefe::isInvincible = isInvincible;
     Jefe::projectileSpeed = projectileSpeed;
     Jefe::damageMultiplier = damageMultiplier;
     Jefe::movementSpeed = movementSpeed;
 
     // Seteamos posicion inicial
     Jefe::position.x = position.x;
-    position.y = 0;
+    Jefe::position.y = position.y;
+
+    //texturas
+    initTexture();
+    initSprite();
+    initAnimations();
+    initPhysics();
 
     // Seteamos atributos para la habilidad
 //    ability();
@@ -28,52 +34,74 @@ Jefe::Jefe(String name, float health, float damage, float projectileSpeed, float
 
 // Declaramos las funciones
 
+void Jefe::setAsset(String directory){
+    Jefe::directory = directory;
+
+}
+void Jefe::initTexture(){
+    if(!texture.loadFromFile(directory))
+        std::cout << "ERROR::JEFE:: No se ha podido cargar la textura del jeje." << std::endl;
+}
+
+void Jefe::initSprite(){
+    //Cargamos la textura como sprite
+    sprite.setTexture(texture);
+}
+
+void Jefe::initAnimations() {
+    animationTimer.restart();
+    animationSwitch = true;
+}
+
+void Jefe::initPhysics(){
+
+    velocity.x = 5.f;
+    velocity.y = 0.f;
+};
 Sprite Jefe::getSprite() {
     return sprite;
 }
 
+void Jefe::updatePhysics(){
+    sprite.setPosition(position);
+}
+
+void Jefe::updateMovement(){
+    //movimiento random
+}
+
+void Jefe::updateAnimations() {
+    //animaciones del jefe
+}
+
+void Jefe::attack(){
+    //ataque del boss
+}
 void Jefe::belowHalfLife() {
     damageMultiplier *= 3;
     projectileSpeed *= 2;
 }
 
-void Jefe::update(float elapsedTime) {
-    // Movimiento random del boss
-    // Modificar position.x y position.y acorde a lo querramos
-    sprite.setPosition(position);
+void Jefe::update() {
 
-    // Si esta a menos de la mitad de vida..
-    if (health <= health / 2) {
-        belowHalfLife();
-        sprite.setColor(Color::Red);
-    }
+    updateMovement();
+    updateAnimations();
+    updatePhysics();
+
 }
 
-void Jefe::randomMovement(Vector2f nextPosition){  //movimiento random
-
-    srand(time(NULL));
-
-    int direction = rand() % 4 + 1; //Obtengo numeros aleatorios entre 1 y 4, 1=arriba, 2=abajo, 3=izquierda, 4=derecha
-    int movementQuantity = rand() % 11 + 20;  // numeros entre 20 y 30
-    int checkPosition = 0;
-
-    while(checkPosition != movementQuantity) {
-        if (direction == 1) {
-            position.y++;
-            checkPosition++;
-        }
-        if (direction == 2) {
-            position.y--;
-            checkPosition++;
-        }
-        if (direction == 3) {
-            position.x--;
-            checkPosition++;
-        } else {
-            position.x++;
-            checkPosition++;
-        }
-    }
+void Jefe::resetVelocityY() {
+    velocity.y = 0.f;
 }
+
+void Jefe::resetVelocityX() {
+    velocity.x = 0.f;
+
+}
+
+RectangleShape Jefe::jefeBox(){
+    //setear hitbox del jefe
+}
+
 
 
