@@ -11,6 +11,7 @@ private:
     // Vida del jefe
     int currentHp;
     int maxHp;
+    bool isInvincible;
 
     //Propiedades de los ataques del jefe
     float projectileSpeed;
@@ -46,7 +47,7 @@ private:
 
 public:
     // Constructor
-    Jefe(float currentHp, float maxHp, float projectileSpeed, float damageMultiplier, float movementSpeed);
+    Jefe(float currentHp, float maxHp, bool isInvincible, float projectileSpeed, float damageMultiplier, float movementSpeed);
 
     // Mandar el sprite a cualquier funcion que lo llame
     Sprite getSprite();

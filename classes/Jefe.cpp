@@ -18,7 +18,7 @@ Jefe::Jefe(float currentHp, float maxHp, bool isInvincible, float projectileSpee
     Jefe::position.x = position.x;
     Jefe::position.y = position.y;
 
-    //texturas
+    // Inicializacion de variables
     initTexture();
     initSprite();
     initAnimations();
@@ -27,15 +27,16 @@ Jefe::Jefe(float currentHp, float maxHp, bool isInvincible, float projectileSpee
     // Seteamos atributos para la habilidad
 //    ability();
 
-    texture.loadFromFile("assets/ability1.jpg");
-    sprite.setTexture(texture);
+//    texture.loadFromFile("assets/ability1.jpg");
+
 
 }
 
 // Declaramos las funciones
 
 void Jefe::setAsset(String directory){
-    Jefe::directory = directory;
+    if(!texture.loadFromFile(directory))
+        std::cout << "ERROR::JEFE:: No se ha podido cargar la textura del jefe." << std::endl;
 
 }
 void Jefe::initTexture(){
