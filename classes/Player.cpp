@@ -57,7 +57,6 @@ void Player::initPhysics() {
     speed.x = 5.f;
     speed.y = 0.f;
 
-    acceleration = 13.f;
     gravity = 9.f;
 
     isJumping = false;

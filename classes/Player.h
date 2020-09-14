@@ -29,9 +29,6 @@ private:
     // Fisicas
     Vector2f speed;
     Vector2f position;
-    Vector2f velocity;
-    float speedYMax;
-    float acceleration;
     float gravity;
     bool isJumping;
 
