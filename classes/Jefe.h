@@ -8,40 +8,64 @@ class Jefe {
 
 private:
 
-    Vector2f position;
+    // Vida del jefe
+    int currentHp;
+    int maxHp;
 
-//    Habilidad ability;
+    //Propiedades de los ataques del jefe
+    float projectileSpeed;
+    float damageMultiplier;
+    float movementSpeed;
 
+
+
+    // Animaciones
+    Clock animationTimer;
+    short animState;
+    IntRect currentFrame;
+    bool animationSwitch;
+    float scaleFactor;
+
+    // Texturas
     Sprite sprite;
     Texture texture;
+    String directory;
 
-    String name;
+    //Fisicas
+    Vector2f position;
+    Vector2f velocity;
 
-    float health;
+    // Dev
+    RectangleShape box;
 
-    float damage;
-
-    float projectileSpeed;
-
-    float damageMultiplier;
-
-    float movementSpeed;
+    // Nucleo
+    void initTexture();
+    void initSprite();
+    void initAnimations();
+    void initPhysics();
 
 public:
     // Constructor
-    Jefe(String name, float health, float damage, float projectileSpeed, float damageMultiplier, float movementSpeed);
+    Jefe(float currentHp, float maxHp, float projectileSpeed, float damageMultiplier, float movementSpeed);
 
     // Mandar el sprite a cualquier funcion que lo llame
     Sprite getSprite();
 
-    void randomMovement(Vector2f nextPosition);
 
+    //Seteo de imagen
+    void setAsset(String directory);
+    //Modificadores
+    void resetVelocityY();
+    void resetVelocityX();
+
+    //Funciones
     void attack();
-
     void belowHalfLife();
+    void update();
+    void updatePhysics();
+    void updateMovement();
+    void updateAnimations();
 
-    void update(float elapsedTime);
-
-
-    void randomMovement(Vector2f nextPosition, float health);
+    // Dev
+    RectangleShape jefeBox();
 };
