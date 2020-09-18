@@ -4,6 +4,8 @@
 
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Enemy.h"
+#include "Level.h"
 
 using namespace sf;
 
@@ -15,12 +17,11 @@ private:
     // Vista del jugador
     View view;
 
-    // Fondo
-    Sprite bkgSprite;
-    Texture bkgTexture;
-
     // Instancia del jugador
     Player player;
+
+    // Nivel
+    Level level;
 
     // Funciones para el funcionamiento
     void input(Event event);

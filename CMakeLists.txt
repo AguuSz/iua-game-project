@@ -12,8 +12,6 @@ add_executable(iuaProject
         classes/Player.h
         classes/Maggie.cpp
         classes/Maggie.h
-        classes/EnemyMob.cpp
-        classes/EnemyMob.h
         classes/Input.cpp
         classes/Update.cpp
         classes/Draw.cpp
@@ -22,5 +20,7 @@ add_executable(iuaProject
         classes/Habilidad.h
         classes/Jefe.cpp
         classes/UpdateCollision.cpp
-        )
+        classes/Enemy.cpp
+        classes/Enemy.h
+        classes/Level.cpp classes/Level.h)
 target_link_libraries(iuaProject sfml-system sfml-window sfml-graphics)

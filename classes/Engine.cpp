@@ -17,12 +17,13 @@ Engine::Engine() {
 
     window.setFramerateLimit(60);
 
-    // Carga la textura del fondo en una textura
-    bkgTexture.loadFromFile("../assets/background2.jpg");
+    // Setea el fondo del nivel
+    level.setBackground("../assets/background2.jpg");
+    level.setBackgroundScale(0.7);
 
-    // Setea el sprite en base a la textura
-    bkgSprite.setTexture(bkgTexture);
-    bkgSprite.scale(0.7f, 0.7f);
+    // Enemy para borrar dsp
+    level.setEnemyTexture("../assets/background1.jpg");
+    level.setEnemyPosition(0, 0);
 
     view.reset(FloatRect(300, 300, 1800, 1200));
 

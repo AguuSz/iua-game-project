@@ -2,12 +2,15 @@
 #include <string>
 //#include "Habilidad.h"
 
+//enum JEFE_ANIMATION_STATES {IDLE = 0, MOVING_LEFT, MOVING_RIGHT, MOVING_DOWN, MOVING_UP};
+
 using namespace sf;
 
 class Jefe {
 
 private:
 
+    String name;
     // Vida del jefe
     int currentHp;
     int maxHp;
@@ -16,7 +19,6 @@ private:
     //Propiedades de los ataques del jefe
     float projectileSpeed;
     float damageMultiplier;
-    float movementSpeed;
 
 
 
@@ -40,27 +42,33 @@ private:
     RectangleShape box;
 
     // Nucleo
-    void initTexture();
+    void initVariables();
     void initSprite();
     void initAnimations();
     void initPhysics();
 
 public:
     // Constructor
-    Jefe(float currentHp, float maxHp, bool isInvincible, float projectileSpeed, float damageMultiplier, float movementSpeed);
+    Jefe(String name, float maxHp);
 
     // Mandar el sprite a cualquier funcion que lo llame
     Sprite getSprite();
+
+    // Setters
+    void setTexture(String directory);
 
 
     //Seteo de imagen
     void setAsset(String directory);
     //Modificadores
+    void setPosition(const float x, const float y);
     void resetVelocityY();
     void resetVelocityX();
 
     //Funciones
     void attack();
+    void moveX(const float dir_x);
+    void moveY(const float dir_y);
     void belowHalfLife();
     void update();
     void updatePhysics();
@@ -68,5 +76,5 @@ public:
     void updateAnimations();
 
     // Dev
-    RectangleShape jefeBox();
+    // RectangleShape jefeBox();
 };

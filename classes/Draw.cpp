@@ -12,7 +12,7 @@ void Engine::draw() {
     window.setView(view);
 
     // Dibuja el fondo
-    window.draw(bkgSprite);
+    level.draw(window);
     window.draw(player.getSprite());
     window.draw(player.playerBox());
 
