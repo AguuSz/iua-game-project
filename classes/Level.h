@@ -25,7 +25,9 @@ public:
     // Constructor
     Level();
 
+    /// Funciones para el motor
     void draw(RenderWindow &window);
+    void update();
 
     void setBackground(String directory);
     void setDmgMultiplier(int dmgMultiplier);
@@ -33,6 +35,7 @@ public:
 
     Sprite drawMap();
 
+    // Funciones que luego eliminaremos ya que estaran interiorizadas
     void setEnemyTexture(String directory);
     void setEnemyPosition(float x, float y);
     void setBackgroundScale(float scaleFactor);

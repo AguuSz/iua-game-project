@@ -8,7 +8,7 @@
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
-enum ENEMY_ANIMATION_STATES {IDLEE = 0, RUNNING, TOOKDAMAGE, ATTACKING ,DEATH};
+enum ENEMY_ANIMATION_STATES {INACTIVE = 0, RUNNING, TOOKDAMAGE, ATTACKING, DEATH};
 
 class Enemy {
 
@@ -27,6 +27,9 @@ private:
     bool animationSwitch;
     float scaleFactor;
 
+    // Timers
+    Clock movementTimer;
+
     // Texturas
     Sprite sprite;
     Texture texture;
@@ -34,6 +37,7 @@ private:
     // Fisicas
     Vector2f speed;
     Vector2f position;
+    bool isMoving;
 
     // Dev
     RectangleShape box;
@@ -42,13 +46,16 @@ private:
     void initVariables();
     void initAnimations();
 
+    // Actualizaciones por frame
+    void updateAnimations();
+    void updateMovement();
+
 public:
     // Constructor
     Enemy(String name, int maxHp);
 
     // Sprite para dibujar
     Sprite getSprite();
-    const FloatRect getGlobalBounds() const;
 
     // Setters
     void setTexture(String directory);
@@ -57,9 +64,7 @@ public:
     // Funciones
     void update();
     void move();
-    void getEnemyHitbox();
-    void updateAnimations();
-
+    RectangleShape getEnemyHitbox();
 };
 
 

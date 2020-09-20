@@ -25,6 +25,11 @@ void Level::endLevel() {
 void Level::draw(RenderWindow &window) {
     window.draw(drawMap());
     window.draw(enemy.getSprite());
+    window.draw(enemy.getEnemyHitbox());
+}
+
+void Level::update() {
+    enemy.update();
 }
 
 Sprite Level::drawMap() {

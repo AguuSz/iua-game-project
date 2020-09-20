@@ -7,5 +7,7 @@ using namespace sf;
 void Engine::update() {
     player.update();
 
+    level.update();
+
     // Falta la deteccion de colision...
 }

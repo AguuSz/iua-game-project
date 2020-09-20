@@ -22,7 +22,7 @@ Engine::Engine() {
     level.setBackgroundScale(0.7);
 
     // Enemy para borrar dsp
-    level.setEnemyTexture("../assets/background1.jpg");
+    level.setEnemyTexture("../assets/enemies/Goblin/Idle.png");
     level.setEnemyPosition(0, 0);
 
     view.reset(FloatRect(300, 300, 1800, 1200));
