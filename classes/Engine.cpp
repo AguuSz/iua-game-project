@@ -31,7 +31,6 @@ Engine::Engine() {
     rectangle.setOutlineThickness(3);
     rectangle.setFillColor(Color::Transparent);
     // ------------------------------------------------------------
-
     view.reset(FloatRect(300, 300, 1400, 800));
 
 }

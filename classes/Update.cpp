@@ -12,6 +12,20 @@ void Engine::update() {
     updateMousePosition();
     rectangle.setPosition(worldPos.x - 25, worldPos.y - 20);
 
+    // Vectors
+    aimDir = worldPos - player.getMiddlePoint();
+    aimDirNormalized = aimDir / static_cast<float>(sqrt(pow(aimDir.x, 2) + pow(aimDir.y, 2)));
+
+    for (int i = 0; i < bullets.size(); i++) {
+        bullets[i].sprite.move(bullets[i].currVelocity);
+
+        // Eliminando las que estan out of frame
+        if (bullets[i].sprite.getPosition().x < 0 || bullets[i].sprite.getPosition().x  > window.getSize().x
+            || bullets[i].sprite.getPosition().y < 0 || bullets[i].sprite.getPosition().y > window.getSize().y) {
+            bullets.erase(bullets.begin() + i);
+        }
+    }
+
     // Falta la deteccion de colision...
 }
 

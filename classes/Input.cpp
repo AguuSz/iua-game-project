@@ -11,4 +11,12 @@ void Engine::input(Event event) {
         window.close();
     }
 
+    // Disparo
+    if (Mouse::isButtonPressed(Mouse::Left)) {
+        b1.sprite.setPosition(player.getMiddlePoint());
+        b1.currVelocity = aimDirNormalized * b1.maxSpeed;
+
+        bullets.push_back(Bullet(b1));
+    }
+
 }

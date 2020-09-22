@@ -16,6 +16,11 @@ void Engine::draw() {
     window.draw(player.getSprite());
     window.draw(player.playerBox());
 
+    // Dibuja las balas que haya en el array bullets
+    for (int i = 0; i < bullets.size(); i++) {
+        window.draw(bullets[i].sprite);
+    }
+
     // Hitbox para el mouse
     window.draw(rectangle);
 

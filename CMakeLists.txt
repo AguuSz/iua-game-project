@@ -22,5 +22,5 @@ add_executable(iuaProject
         classes/UpdateCollision.cpp
         classes/Enemy.cpp
         classes/Enemy.h
-        classes/Level.cpp classes/Level.h classes/Goblin.cpp classes/Goblin.h)
+        classes/Level.cpp classes/Level.h classes/Goblin.cpp classes/Goblin.h classes/Bullet.cpp classes/Bullet.h)
 target_link_libraries(iuaProject sfml-system sfml-window sfml-graphics)
