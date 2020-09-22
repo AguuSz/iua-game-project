@@ -23,8 +23,15 @@ private:
     // Nivel
     Level level;
 
+    // Mouse
+    Mouse mouse;
+    Vector2i pixelPos;
+    Vector2f worldPos;
+    RectangleShape rectangle;
+
     // Funciones para el funcionamiento
     void input(Event event);
+    void updateMousePosition();
     void update();
     void updateCollision();
     void draw();

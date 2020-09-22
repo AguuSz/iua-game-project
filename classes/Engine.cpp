@@ -25,7 +25,14 @@ Engine::Engine() {
     level.setEnemyTexture("../assets/enemies/Goblin/Idle.png");
     level.setEnemyPosition(0, 0);
 
-    view.reset(FloatRect(300, 300, 1800, 1200));
+    // Datos del rectangulo para ver donde esta el mouse, que luego se eliminara
+    rectangle.setSize(Vector2f(50, 50));
+    rectangle.setOutlineColor(Color::Blue);
+    rectangle.setOutlineThickness(3);
+    rectangle.setFillColor(Color::Transparent);
+    // ------------------------------------------------------------
+
+    view.reset(FloatRect(300, 300, 1400, 800));
 
 }
 

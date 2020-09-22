@@ -16,7 +16,9 @@ void Engine::draw() {
     window.draw(player.getSprite());
     window.draw(player.playerBox());
 
+    // Hitbox para el mouse
+    window.draw(rectangle);
+
     // Mostrar lo que hemos dibujado
     window.display();
 }
-
