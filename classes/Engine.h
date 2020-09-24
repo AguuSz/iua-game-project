@@ -31,7 +31,6 @@ private:
     std::vector<Bullet> bullets;
 
     // Mouse
-    Mouse mouse;
     Vector2i pixelPos;
     Vector2f worldPos;
     RectangleShape rectangle;
@@ -39,11 +38,12 @@ private:
     Vector2f aimDirNormalized;
 
     // Funciones para el funcionamiento
-    void input(Event event);
+    void input(Event& event);
     void updateMousePosition();
     void update();
-    void updateCollision();
+    void checkForCollisions();
     void draw();
+    void setMouseHitbox();
 
 public:
     Engine();

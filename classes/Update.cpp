@@ -6,9 +6,7 @@ using namespace sf;
 
 void Engine::update() {
     player.update();
-
     level.update();
-
     updateMousePosition();
     rectangle.setPosition(worldPos.x - 25, worldPos.y - 20);
 
@@ -16,7 +14,7 @@ void Engine::update() {
     aimDir = worldPos - player.getMiddlePoint();
     aimDirNormalized = aimDir / static_cast<float>(sqrt(pow(aimDir.x, 2) + pow(aimDir.y, 2)));
 
-    for (int i = 0; i < bullets.size(); i++) {
+    for (size_t i = 0; i < bullets.size(); i++) {
         bullets[i].sprite.move(bullets[i].currVelocity);
 
         // Eliminando las que estan out of frame
@@ -30,6 +28,14 @@ void Engine::update() {
 }
 
 void Engine::updateMousePosition() {
-    pixelPos = mouse.getPosition(window);
+    pixelPos = Mouse::getPosition(window);
     worldPos = window.mapPixelToCoords(pixelPos);
+
+    if (!player.ignoreMouseDirection) {
+        if (pixelPos.x > window.getSize().x / 2) {
+            player.setPlayerLookingRight(true);
+        } else {
+            player.setPlayerLookingRight(false);
+        }
+    }
 }

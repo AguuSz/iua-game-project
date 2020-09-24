@@ -46,6 +46,9 @@ private:
     void initPhysics();
 
 public:
+
+    bool ignoreMouseDirection;
+
     // Constructor
     Player();
 
@@ -68,8 +71,10 @@ public:
     void updatePhysics();
     void updateMovement();
     void updateAnimations();
+    void setPlayerLookingRight(bool lookRight);
 
     // Dev
     RectangleShape playerBox();
 
+    Vector2f getPosition();
 };

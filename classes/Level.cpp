@@ -5,8 +5,10 @@
 #include "Level.h"
 
 Level::Level() {
-    levelFinished = false;
+    setInitialValues();
+    setDmgMultiplier(3);
 
+    levelFinished = false;
 }
 
 void Level::setBackground(String directory) {
@@ -48,4 +50,13 @@ void Level::setEnemyTexture(String directory) {
 
 void Level::setEnemyPosition(float x, float y) {
     enemy.setPosition(x, y);
+}
+
+void Level::setInitialValues() {
+    setBackground("../assets/background2.jpg");
+    setBackgroundScale(0.7f);
+
+    // Spawn de enemigos
+    enemy.setTexture("../assets/enemies/Goblin/Idle.png");
+    enemy.setPosition(1000, 575);
 }

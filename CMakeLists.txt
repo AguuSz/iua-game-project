@@ -19,8 +19,8 @@ add_executable(iuaProject
         classes/Habilidad.cpp
         classes/Habilidad.h
         classes/Jefe.cpp
-        classes/UpdateCollision.cpp
+        classes/CheckForCollisions.cpp
         classes/Enemy.cpp
         classes/Enemy.h
-        classes/Level.cpp classes/Level.h classes/Goblin.cpp classes/Goblin.h classes/Bullet.cpp classes/Bullet.h)
+        classes/Level.cpp classes/Level.h classes/Goblin.h classes/Bullet.h classes/Mushroom.h)
 target_link_libraries(iuaProject sfml-system sfml-window sfml-graphics)

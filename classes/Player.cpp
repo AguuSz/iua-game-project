@@ -138,6 +138,8 @@ void Player::updateAnimations() {
             // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
             animationTimer.restart();
             sprite.setTextureRect(currentFrame);
+
+            ignoreMouseDirection = false;
         }
     }
     // Animacion hacia la derecha
@@ -153,10 +155,10 @@ void Player::updateAnimations() {
             // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
             animationTimer.restart();
             sprite.setTextureRect(currentFrame);
-        }
 
-        sprite.setScale(scaleFactor, scaleFactor);
-        sprite.setOrigin(0.f, 0.f);
+            ignoreMouseDirection = true;
+            setPlayerLookingRight(true);
+        }
     }
     else if (animState == PLAYER_ANIMATION_STATES::MOVING_LEFT) {
         if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
@@ -170,10 +172,10 @@ void Player::updateAnimations() {
             // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
             animationTimer.restart();
             sprite.setTextureRect(currentFrame);
-        }
 
-        sprite.setScale(-scaleFactor, scaleFactor);
-        sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
+            ignoreMouseDirection = true;
+            setPlayerLookingRight(false);
+        }
     }
 
     else if(animState == PLAYER_ANIMATION_STATES::FALLING) {
@@ -245,3 +247,18 @@ RectangleShape Player::playerBox() {
 void Player::allowJumping() {
     isJumping = false;
 }
+
+Vector2f Player::getPosition() {
+    return this->position;
+}
+
+void Player::setPlayerLookingRight(bool lookRight) {
+    if (lookRight) {
+        sprite.setScale(scaleFactor, scaleFactor);
+        sprite.setOrigin(0.f, 0.f);
+    } else {
+        sprite.setScale(-scaleFactor, scaleFactor);
+        sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
+    }
+}
+

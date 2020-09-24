@@ -10,7 +10,7 @@ private:
     Enemy enemy = {"Sangu", 50};
 
     // Fondo
-//    Mapa mapa; Fdlta crear la clase, pero por ahora utilizaremos un fondo estatico
+    // Mapa mapa; Fdlta crear la clase, pero por ahora utilizaremos un fondo estatico
     Sprite bkgSprite;
     Texture bkgTexture;
 
@@ -40,4 +40,5 @@ public:
     void setEnemyPosition(float x, float y);
     void setBackgroundScale(float scaleFactor);
 
+    void setInitialValues();
 };

@@ -8,30 +8,23 @@ using namespace sf;
 Engine::Engine() {
     // Setea la resolucion con la que se va a jugar
     Vector2f resolution;
-    resolution.x = 1366;
-    resolution.y = 768;
+    resolution.x = VideoMode().getDesktopMode().width;
+    resolution.y = VideoMode().getDesktopMode().height;
+//    resolution.x = 1366;
+//    resolution.y = 768;
 
     window.create(VideoMode(resolution.x, resolution.y),
                   "IUA Game project",
-                  Style::Default);
+                  Style::Fullscreen);
 
     window.setFramerateLimit(60);
 
-    // Setea el fondo del nivel
-    level.setBackground("../assets/background2.jpg");
-    level.setBackgroundScale(0.7);
-
-    // Enemy para borrar dsp
-    level.setEnemyTexture("../assets/enemies/Goblin/Idle.png");
-    level.setEnemyPosition(0, 0);
-
     // Datos del rectangulo para ver donde esta el mouse, que luego se eliminara
-    rectangle.setSize(Vector2f(50, 50));
-    rectangle.setOutlineColor(Color::Blue);
-    rectangle.setOutlineThickness(3);
-    rectangle.setFillColor(Color::Transparent);
-    // ------------------------------------------------------------
+    setMouseHitbox();
+
     view.reset(FloatRect(300, 300, 1400, 800));
+
+    player.setPosition(1, 500);
 
 }
 
@@ -40,7 +33,7 @@ void Engine::start() {
         Event event;
         input(event);
         update();
-        updateCollision();
+        checkForCollisions();
         draw();
         while(window.pollEvent(event)){
             switch(event.type){
@@ -50,4 +43,12 @@ void Engine::start() {
             }
         }
     }
+}
+
+
+void Engine::setMouseHitbox() {
+    rectangle.setSize(Vector2f(50, 50));
+    rectangle.setOutlineColor(Color::Blue);
+    rectangle.setOutlineThickness(3);
+    rectangle.setFillColor(Color::Transparent);
 }

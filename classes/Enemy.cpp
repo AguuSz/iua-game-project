@@ -16,7 +16,7 @@ Enemy::Enemy(String name, int maxHp) {
 
 void Enemy::initVariables() {
     animState = ENEMY_ANIMATION_STATES::INACTIVE;
-    scaleFactor = 3;
+    scaleFactor = 2.5f;
     movementTimer.restart();
 }
 
@@ -46,6 +46,8 @@ void Enemy::updateAnimations() {
             sprite.setTextureRect(currentFrame);
         }
     }
+    sprite.setScale(-scaleFactor, scaleFactor);
+    sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
 }
 
 Sprite Enemy::getSprite() {
@@ -73,7 +75,7 @@ void Enemy::setPosition(int x, int y) {
 RectangleShape Enemy::getEnemyHitbox() {
     box.setSize(Vector2f(sprite.getGlobalBounds().width, sprite.getGlobalBounds().height));
     box.setOutlineColor(Color::Red);
-    box.setOutlineThickness(2);
+    box.setOutlineThickness(1);
     box.setFillColor(Color::Transparent);
     box.setPosition(sprite.getGlobalBounds().left, sprite.getGlobalBounds().top);
 
