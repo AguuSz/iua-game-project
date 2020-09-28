@@ -29,13 +29,17 @@ private:
     // Bala
     Bullet b1;
     std::vector<Bullet> bullets;
+    float shootingDelay;
+    Clock shootingTimer;
 
     // Mouse
     Vector2i pixelPos;
     Vector2f worldPos;
-    RectangleShape rectangle;
+    RectangleShape mouseHitbox;
     Vector2f aimDir;
     Vector2f aimDirNormalized;
+    Sprite mouseSprite;
+    Texture mouseTexture;
 
     // Funciones para el funcionamiento
     void input(Event& event);
@@ -44,6 +48,8 @@ private:
     void checkForCollisions();
     void draw();
     void setMouseHitbox();
+    void setMouseSprite();
+    Sprite drawMouse();
 
 public:
     Engine();

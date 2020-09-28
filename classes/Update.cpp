@@ -8,7 +8,7 @@ void Engine::update() {
     player.update();
     level.update();
     updateMousePosition();
-    rectangle.setPosition(worldPos.x - 25, worldPos.y - 20);
+    mouseHitbox.setPosition(worldPos.x - 25, worldPos.y - 20);
 
     // Vectors
     aimDir = worldPos - player.getMiddlePoint();
@@ -38,4 +38,6 @@ void Engine::updateMousePosition() {
             player.setPlayerLookingRight(false);
         }
     }
+
+    mouseSprite.setPosition(worldPos.x - 25, worldPos.y - 20);
 }

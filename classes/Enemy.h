@@ -11,20 +11,18 @@ using namespace sf;
 enum ENEMY_ANIMATION_STATES {INACTIVE = 0, RUNNING, TOOKDAMAGE, ATTACKING, DEATH};
 
 class Enemy {
-
-private:
-
+public:
     String name;
 
     // Vida
     int maxHp;
     int currentHp;
+    bool isInvincible;
 
     // Animaciones
     Clock animationTimer;
     short animState;
     IntRect currentFrame;
-    bool animationSwitch;
     float scaleFactor;
 
     // Timers
@@ -49,13 +47,13 @@ private:
     // Actualizaciones por frame
     void updateAnimations();
     void updateMovement();
+    void updateLife();
 
-public:
     // Constructor
-    Enemy(String name, int maxHp);
+    Enemy();
 
     // Sprite para dibujar
-    Sprite getSprite();
+    Sprite getSprite() const;
 
     // Setters
     void setTexture(String directory);
@@ -63,8 +61,11 @@ public:
 
     // Funciones
     void update();
+    void damage();
     void move();
     RectangleShape getEnemyHitbox();
+
+    void setEnemyLookingRight(bool lookRight);
 };
 
 

@@ -3,11 +3,13 @@
 //
 #include "Enemy.h"
 #include "Jefe.h"
+#include "Goblin.h"
+#include "Mushroom.h"
+#include "FlyingEye.h"
 
 class Level {
 private:
     // Jefe boss
-    Enemy enemy = {"Sangu", 50};
 
     // Fondo
     // Mapa mapa; Fdlta crear la clase, pero por ahora utilizaremos un fondo estatico
@@ -22,6 +24,11 @@ private:
     // Item item;
 
 public:
+    // Seccion enemigos
+    Mushroom mushroom;
+    Goblin goblin;
+    FlyingEye flyingEye;
+
     // Constructor
     Level();
 
@@ -30,15 +37,14 @@ public:
     void update();
 
     void setBackground(String directory);
-    void setDmgMultiplier(int dmgMultiplier);
+    void setDmgMultiplier(float dmgMultiplier);
     void endLevel();
 
-    Sprite drawMap();
 
     // Funciones que luego eliminaremos ya que estaran interiorizadas
-    void setEnemyTexture(String directory);
-    void setEnemyPosition(float x, float y);
     void setBackgroundScale(float scaleFactor);
+
+    void getEnemies();
 
     void setInitialValues();
 };

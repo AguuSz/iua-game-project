@@ -5,53 +5,17 @@
 #include "Enemy.h"
 #include <iostream>
 
-Enemy::Enemy(String name, int maxHp) {
+Enemy::Enemy() {
+    maxHp = 10;
+    currentHp = 10;
+    isMoving = false;
+    isInvincible = false;
 
-    this->maxHp = maxHp;
-    currentHp = maxHp;
-
-    initVariables();
-    initAnimations();
-}
-
-void Enemy::initVariables() {
     animState = ENEMY_ANIMATION_STATES::INACTIVE;
     scaleFactor = 2.5f;
     movementTimer.restart();
-}
 
-void Enemy::initAnimations() {
     animationTimer.restart();
-    animationSwitch = true;
-}
-
-void Enemy::update() {
-
-    updateMovement();
-    updateAnimations();
-}
-
-void Enemy::updateAnimations() {
-    if (animState == ENEMY_ANIMATION_STATES::INACTIVE) {
-        // Animacion IDLE (35x36)
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.3f) {
-            currentFrame.top = 60.f;
-            currentFrame.left += 150.f;
-
-            if (currentFrame.left >= 505.f)
-                currentFrame.left = 55.f;
-
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
-            animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
-        }
-    }
-    sprite.setScale(-scaleFactor, scaleFactor);
-    sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
-}
-
-Sprite Enemy::getSprite() {
-    return this->sprite;
 }
 
 void Enemy::setTexture(String directory) {
@@ -63,6 +27,54 @@ void Enemy::setTexture(String directory) {
     sprite.setTextureRect(currentFrame);
 
     this->sprite.setScale(scaleFactor, scaleFactor);
+}
+
+void Enemy::update() {
+
+    updateMovement();
+    updateAnimations();
+    updateLife();
+}
+
+void Enemy::updateAnimations() {
+    if (animState == ENEMY_ANIMATION_STATES::INACTIVE) {
+        // Animacion IDLE (35x36)
+        if (animationTimer.getElapsedTime().asSeconds() >= 0.2f) {
+            currentFrame.top = 60.f;
+            currentFrame.left += 150.f;
+
+            if (currentFrame.left >= 505.f)
+                currentFrame.left = 55.f;
+
+            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+            animationTimer.restart();
+            sprite.setTextureRect(currentFrame);
+        }
+    }
+    else if (animState == ENEMY_ANIMATION_STATES::TOOKDAMAGE) {
+        if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
+            currentFrame.top = 360.f; // 60 + 150 * linea en la que esta (en este caso 2)
+            currentFrame.left += 150.f;
+
+            // Cuando llega al final de la sheet vuelve al estado inactivo
+            if (currentFrame.left >= 540.f) {
+                isInvincible = false;
+                currentFrame.left = 55.f;
+                animState = ENEMY_ANIMATION_STATES::INACTIVE;
+            }
+
+            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+            animationTimer.restart();
+            sprite.setTextureRect(currentFrame);
+        }
+    }
+
+    sprite.setScale(-scaleFactor, scaleFactor);
+    sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
+}
+
+Sprite Enemy::getSprite() const {
+    return this->sprite;
 }
 
 void Enemy::setPosition(int x, int y) {
@@ -90,3 +102,24 @@ void Enemy::updateMovement() {
     }
 
 }
+
+void Enemy::updateLife() {
+
+}
+
+void Enemy::damage() {
+    isInvincible = true;
+    currentFrame.left = 55.f;
+    animState = ENEMY_ANIMATION_STATES::TOOKDAMAGE;
+}
+
+void Enemy::setEnemyLookingRight(bool lookRight) {
+    if (lookRight) {
+        sprite.setScale(scaleFactor, scaleFactor);
+        sprite.setOrigin(0.f, 0.f);
+    } else {
+        sprite.setScale(-scaleFactor, scaleFactor);
+        sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
+    }
+}
+

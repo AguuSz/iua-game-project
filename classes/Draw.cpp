@@ -21,8 +21,8 @@ void Engine::draw() {
         window.draw(bullet.sprite);
     }
 
-    // Hitbox para el mouse
-    window.draw(rectangle);
+    // Dibujando la textura del mouse
+    window.draw(drawMouse());
 
     // Mostrar lo que hemos dibujado
     window.display();

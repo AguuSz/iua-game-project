@@ -11,52 +11,49 @@ Level::Level() {
     levelFinished = false;
 }
 
+// Seccion valores iniciales
+void Level::setInitialValues() {
+    setBackground("../assets/background2.jpg");
+    setBackgroundScale(0.7f);
+
+    // Spawn de enemigos
+    goblin.setPosition(1000, 575);
+    mushroom.setPosition(700, 575);
+    flyingEye.setPosition(850, 300);
+}
+
 void Level::setBackground(String directory) {
     bkgTexture.loadFromFile(directory);
     bkgSprite.setTexture(bkgTexture);
-}
-
-void Level::setDmgMultiplier(int dmgMultiplier) {
-    this->dmgMultiplier = dmgMultiplier;
-}
-
-void Level::endLevel() {
-    levelFinished = true;
-}
-
-void Level::draw(RenderWindow &window) {
-    window.draw(drawMap());
-    window.draw(enemy.getSprite());
-    window.draw(enemy.getEnemyHitbox());
-}
-
-void Level::update() {
-    enemy.update();
-}
-
-Sprite Level::drawMap() {
-    return bkgSprite;
 }
 
 void Level::setBackgroundScale(float scaleFactor) {
     bkgSprite.scale(scaleFactor, scaleFactor);
 }
 
-// Seccion enemigo
-
-void Level::setEnemyTexture(String directory) {
-    enemy.setTexture(directory);
+void Level::setDmgMultiplier(float multiplier) {
+    this->dmgMultiplier = multiplier;
 }
 
-void Level::setEnemyPosition(float x, float y) {
-    enemy.setPosition(x, y);
+void Level::endLevel() {
+    levelFinished = true;
 }
 
-void Level::setInitialValues() {
-    setBackground("../assets/background2.jpg");
-    setBackgroundScale(0.7f);
+// Seccion game-loop
+void Level::draw(RenderWindow &window) {
+    window.draw(bkgSprite);
+    window.draw(goblin.getSprite());
+    window.draw(goblin.getEnemyHitbox());
 
-    // Spawn de enemigos
-    enemy.setTexture("../assets/enemies/Goblin/Idle.png");
-    enemy.setPosition(1000, 575);
+    window.draw(mushroom.getSprite());
+    window.draw(mushroom.getEnemyHitbox());
+
+    window.draw(flyingEye.getSprite());
+    window.draw(flyingEye.getEnemyHitbox());
+}
+
+void Level::update() {
+    goblin.update();
+    mushroom.update();
+    flyingEye.update();
 }
