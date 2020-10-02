@@ -4,6 +4,9 @@ Este es un proyecto realizado para el IUA (Instituto Universitario Aeronautico).
 # Instalacion
 Solo hace falta tener instalado la libreria grafica SFML para poder hacerlo correr.
 
+# Tablero
+El tablero donde se va detallando el desarrollo de las actividades del juego se puede encontrar [aqui](https://trello.com/b/dqmfRRv4/iua-game-project)
+
 # Capturas
 ![Screenshot](https://i.imgur.com/rM4VvDi.png)
 
