@@ -30,7 +30,7 @@ add_executable(iuaProject
         classes/Update.cpp
         classes/Draw.cpp
         classes/Habilidad.cpp
-        classes/Jefe.cpp
+        classes/Boss.cpp
         classes/CheckForCollisions.cpp
         classes/Enemy.cpp
         classes/Level.cpp)
