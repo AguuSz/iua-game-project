@@ -38,17 +38,4 @@ void Engine::checkForCollisions() {
         }
 
     }
-//
-//    for (auto &bullet : bullets) {
-//        for (auto &e : level.enemies) {
-//            if (bullet.sprite.getGlobalBounds().intersects(e.getSprite().getGlobalBounds())) {
-//                // Impacto la bala con el enemigo
-//                bullets.remove();
-//                if (!e.isInvincible) {
-//                    e.damage();
-//                }
-//            }
-//        }
-//    }
-
 }

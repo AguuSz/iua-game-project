@@ -11,7 +11,7 @@ Level::Level() {
     levelFinished = false;
 }
 
-// Seccion valores iniciales
+// Seccion valores inicialesaaa
 void Level::setInitialValues() {
     int scale = 1;
     setBackground("../assets/FondoCompleto1.png");
