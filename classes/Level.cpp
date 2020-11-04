@@ -4,6 +4,7 @@
 
 #include "Level.h"
 
+
 Level::Level() {
     setInitialValues();
     setDmgMultiplier(3);
@@ -46,12 +47,15 @@ void Level::draw(RenderWindow &window) {
         window.draw(e.getSprite());
         window.draw(e.getEnemyHitbox());
     }
+
+    window.draw(boss.getSprite());
 }
 
 void Level::update() {
     for (auto &e : enemies) {
         e.update();
     }
+    boss.update();
 }
 
 void Level::spawnEnemies() {

@@ -1,7 +1,7 @@
 #include "Boss.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <ctime>
 #include <iostream>
 
 Boss::Boss() {
@@ -11,7 +11,7 @@ Boss::Boss() {
     initTexture();
     initSprite();
     initAnimations();
-    initPhysics();
+    //initPhysics();
 
 }
 
@@ -23,7 +23,7 @@ void Boss::initVariables(){
     currentHp = 100;
     isInvincible = false;
 
-    scaleFactor = 6;
+    scaleFactor = 3;
     animState = IDLE1;
 
     sprite.setPosition(0, 0);
@@ -33,7 +33,7 @@ void Boss::initVariables(){
 
 void Boss::initTexture() {
     // Se carga la textura, y si tira error, que nos muestre el error
-    if(!texture.loadFromFile("../assets/player_sheet.png"))
+    if(!texture.loadFromFile("../assets/jefe.png"))
         std::cout << "ERROR::BOSS:: No se ha podido cargar la textura del boss." << std::endl;
 }
 
@@ -52,59 +52,35 @@ void Boss::initAnimations() {
     animationTimer.restart();
 }
 
-void Boss::initPhysics(){
-
-    speed.x = 5.f;
-    speed.y = 0.f;
-
-    gravity = 1.f;
-
-};
 Sprite Boss::getSprite() {
     return sprite;
 }
 
-void Boss::moveX(const float dir_x) {
-    // Movimiento en X
-    position.x += dir_x * speed.x;
+void Boss::move(const float dir_x, const float dir_y) {
+    position.x += dir_x * speed;
+    position.y += dir_y * speed;
 }
-void Boss::moveY(const float dir_y) {
-    // Movimiento en Y
-    position.y += dir_y * speed.y;
-}
-
 void Boss::updateMovement(){
 
-    animState = BOSS_ANIMATION_STATES::IDLE1;
-    int movementQuantity, movementSense;
     srand(time(NULL));
-    while(currentHp != 0){
-        movementSense = rand() % 3 + 0;
-        movementQuantity = rand() % 10 + 20;
-        if(movementSense == 0) {
-            for (int i = 0; i < movementQuantity; i++) {
-                moveX(-1.f);
-                animState = BOSS_ANIMATION_STATES::MOVING_LEFT1;
-            }
-        }
-        if(movementSense == 1){
-            for(int j = 0; j < movementQuantity; j++){
-                moveX(1.f);
-                animState = BOSS_ANIMATION_STATES::MOVING_RIGHT1;
-            }
-        }
-        if(movementSense == 2){
-            for(int k = 0; k < movementQuantity; k++){
-                moveY(1.f);
-                animState = BOSS_ANIMATION_STATES::MOVING_UP1;
-            }
-        }
-        if(movementSense == 3){
-            for(int l = 0; l < movementQuantity; l++){
-                moveY(-1.f);
-                animState = BOSS_ANIMATION_STATES::MOVING_DOWN1;
-            }
-        }
+    direction = rand() % 4 + 1;
+    animState = BOSS_ANIMATION_STATES::IDLE1;
+    if(direction == 1){
+        move(0, 1);
+        animState = BOSS_ANIMATION_STATES::MOVING_DOWN1;
+    }
+    if(direction == 2){
+        move(0, -1);
+        animState = BOSS_ANIMATION_STATES::MOVING_UP1;
+    }
+    if(direction == 3){
+        move(-1, 0);
+        animState = BOSS_ANIMATION_STATES::MOVING_LEFT1;
+    }
+    if(direction == 4){
+        move(1, 0);
+       // sprite.setTextureRect(currentFrame);
+        animState = BOSS_ANIMATION_STATES::MOVING_RIGHT1;
     }
 }
 
@@ -191,21 +167,12 @@ void Boss::belowHalfLife() {
 void Boss::update() {
 
     updateMovement();
-    updateAnimations();
+    //updateAnimations();
     updateMiddlePoint();
 }
 
 const FloatRect Boss::getGlobalBounds() const {
     return sprite.getGlobalBounds();
-}
-
-void Boss::resetVelocityY() {
-    speed.y = 0.f;
-}
-
-void Boss::resetVelocityX() {
-    speed.x = 0.f;
-
 }
 
 const Vector2f Boss::getMiddlePoint() const {
