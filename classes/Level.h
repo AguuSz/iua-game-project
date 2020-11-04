@@ -3,7 +3,7 @@
 //
 #include "Enemy.h"
 #include <list>
-#include "Jefe.h"
+#include "Boss.h"
 #include "Goblin.h"
 #include "Mushroom.h"
 #include "FlyingEye.h"
