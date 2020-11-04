@@ -2,6 +2,7 @@
 // Created by Agus on 14/9/2020.
 //
 #include "Enemy.h"
+#include <list>
 #include "Jefe.h"
 #include "Goblin.h"
 #include "Mushroom.h"
@@ -25,9 +26,7 @@ private:
 
 public:
     // Seccion enemigos
-    Mushroom mushroom;
-    Goblin goblin;
-    FlyingEye flyingEye;
+    std::list<Enemy> enemies;
 
     // Constructor
     Level();
@@ -47,4 +46,6 @@ public:
     void getEnemies();
 
     void setInitialValues();
+
+    void spawnEnemies();
 };

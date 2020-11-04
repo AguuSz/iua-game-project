@@ -52,6 +52,8 @@ public:
     // Constructor
     Enemy();
 
+    Enemy(std::string directory, Vector2f initialPosition);
+
     // Sprite para dibujar
     Sprite getSprite() const;
 

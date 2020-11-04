@@ -19,7 +19,6 @@ private:
     Clock animationTimer;
     short animState;
     IntRect currentFrame;
-    bool animationSwitch;
     float scaleFactor;
 
     // Texturas

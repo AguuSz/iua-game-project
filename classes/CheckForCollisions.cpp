@@ -13,6 +13,7 @@ void Engine::checkForCollisions() {
         player.setPosition(player.getGlobalBounds().left,
                            window.getSize().y - player.getGlobalBounds().height - 85);
     }
+
     // Colision al tocar la parte derecha
 //    if(player.getGlobalBounds().left + player.getGlobalBounds().width >= 1240){
 //        player.resetVelocityX();
@@ -26,21 +27,23 @@ void Engine::checkForCollisions() {
     // Bala impactando al enemigo
     for (size_t i = 0; i < bullets.size(); i++) {
         // Checkea si impacta con el goblin
-        if (bullets[i].sprite.getGlobalBounds().intersects(level.goblin.getSprite().getGlobalBounds())) {
-            // Impacto con el enemigo
-            bullets.erase(bullets.begin() + i);
-            if (!level.goblin.isInvincible) {
-                level.goblin.damage();
-            }
-        }
+//        if (bullets[i].sprite.getGlobalBounds().intersects(level.goblin->getSprite().getGlobalBounds())) {
+//            // Impacto con el enemigo
+//            bullets.erase(bullets.begin() + i);
+//            if (!level.goblin->isInvincible) {
+//                level.goblin->damage();
+//            }
+//        }
+//
+//        // Checkea si impacta con el mushroom
+//        if (bullets[i].sprite.getGlobalBounds().intersects((level.mushroom->getSprite().getGlobalBounds()))) {
+//            bullets.erase(bullets.begin() + i);
+//            if (!level.mushroom->isInvincible) {
+//                level.mushroom->damage();
+//            }
+//        }
 
-        // Checkea si impacta con el mushroom
-        if (bullets[i].sprite.getGlobalBounds().intersects((level.mushroom.getSprite().getGlobalBounds()))) {
-            bullets.erase(bullets.begin() + i);
-            if (!level.mushroom.isInvincible) {
-                level.mushroom.damage();
-            }
-        }
+
     }
 
 }

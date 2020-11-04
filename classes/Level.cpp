@@ -16,10 +16,11 @@ void Level::setInitialValues() {
     setBackground("../assets/background2.jpg");
     setBackgroundScale(0.7f);
 
-    // Spawn de enemigos
-    goblin.setPosition(1000, 575);
-    mushroom.setPosition(700, 575);
-    flyingEye.setPosition(850, 300);
+    enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(250, 550));
+    enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(400, 550));
+
+
+
 }
 
 void Level::setBackground(String directory) {
@@ -41,19 +42,21 @@ void Level::endLevel() {
 
 // Seccion game-loop
 void Level::draw(RenderWindow &window) {
+    // Dibuja el fondo
     window.draw(bkgSprite);
-    window.draw(goblin.getSprite());
-    window.draw(goblin.getEnemyHitbox());
 
-    window.draw(mushroom.getSprite());
-    window.draw(mushroom.getEnemyHitbox());
-
-    window.draw(flyingEye.getSprite());
-    window.draw(flyingEye.getEnemyHitbox());
+    // Dibuja enemigos
+    for (auto &e : enemies) {
+        window.draw(e.getSprite());
+    }
 }
 
 void Level::update() {
-    goblin.update();
-    mushroom.update();
-    flyingEye.update();
+    for (auto &e : enemies) {
+        e.update();
+    }
+}
+
+void Level::spawnEnemies() {
+    
 }

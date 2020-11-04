@@ -49,7 +49,6 @@ void Player::initSprite() {
 
 void Player::initAnimations() {
     animationTimer.restart();
-    animationSwitch = true;
 }
 
 void Player::initPhysics() {
@@ -57,7 +56,7 @@ void Player::initPhysics() {
     speed.x = 5.f;
     speed.y = 0.f;
 
-    gravity = 9.f;
+    gravity = 1.f;
 
     isJumping = false;
 
@@ -75,16 +74,13 @@ void Player::move(const float dir_x) {
 void Player::jump() {
     isJumping = true;
     speed.x = 7.f;
-    speed.y = -90.f;
+    speed.y = -30.f;
 }
 
 void Player::updatePhysics() {
     // Hace que la gravedad siempre le haga efecto
     speed.y += gravity;
 
-    // Que la velocidad no sea mayor a la gravedad
-    if (speed.y > 2*gravity)
-        speed.y = 2*gravity;
     position.y += speed.y;
 
     // Mueve el sprite
@@ -160,6 +156,7 @@ void Player::updateAnimations() {
             setPlayerLookingRight(true);
         }
     }
+
     else if (animState == PLAYER_ANIMATION_STATES::MOVING_LEFT) {
         if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
             // Hacemos que se posicione en la 2da fila de nuestro sheet

@@ -7,7 +7,7 @@
 
 Enemy::Enemy() {
     maxHp = 10;
-    currentHp = 10;
+    currentHp = maxHp;
     isMoving = false;
     isInvincible = false;
 
@@ -16,6 +16,11 @@ Enemy::Enemy() {
     movementTimer.restart();
 
     animationTimer.restart();
+}
+
+Enemy::Enemy(std::string directory, Vector2f initialPosition):Enemy() {
+    setTexture(directory);
+    setPosition(initialPosition.x, initialPosition.y);
 }
 
 void Enemy::setTexture(String directory) {
@@ -111,6 +116,13 @@ void Enemy::damage() {
     isInvincible = true;
     currentFrame.left = 55.f;
     animState = ENEMY_ANIMATION_STATES::TOOKDAMAGE;
+
+    // Luego de 5 balas, el enemigo muere
+    currentHp -= 2;
+    if (currentHp <= 0) {
+        // Muere
+        // Aca iria la animacion de muerte, la destruccion del objeto, contadorEnemigosLvl--;
+    }
 }
 
 void Enemy::setEnemyLookingRight(bool lookRight) {

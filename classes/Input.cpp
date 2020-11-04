@@ -22,4 +22,8 @@ void Engine::input(Event& event) {
 
     }
 
+    if (Keyboard::isKeyPressed(Keyboard::O)) {
+        // Que active el hitbox del mouse como si fuera un enemigo, asi lo podemos posicionar
+    }
+
 }
