@@ -26,7 +26,6 @@ add_executable(iuaProject
         main.cpp
         classes/Engine.cpp
         classes/Player.cpp
-        classes/Maggie.cpp
         classes/Input.cpp
         classes/Update.cpp
         classes/Draw.cpp

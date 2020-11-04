@@ -27,23 +27,28 @@ void Engine::checkForCollisions() {
     // Bala impactando al enemigo
     for (size_t i = 0; i < bullets.size(); i++) {
         // Checkea si impacta con el goblin
-//        if (bullets[i].sprite.getGlobalBounds().intersects(level.goblin->getSprite().getGlobalBounds())) {
-//            // Impacto con el enemigo
-//            bullets.erase(bullets.begin() + i);
-//            if (!level.goblin->isInvincible) {
-//                level.goblin->damage();
-//            }
-//        }
-//
-//        // Checkea si impacta con el mushroom
-//        if (bullets[i].sprite.getGlobalBounds().intersects((level.mushroom->getSprite().getGlobalBounds()))) {
-//            bullets.erase(bullets.begin() + i);
-//            if (!level.mushroom->isInvincible) {
-//                level.mushroom->damage();
-//            }
-//        }
-
+        for (auto &e: level.enemies) {
+            if (bullets[i].sprite.getGlobalBounds().intersects(e.getSprite().getGlobalBounds())) {
+                // Impacto con el enemigo
+                bullets.erase(bullets.begin() + i);
+                if (!e.isInvincible) {
+                    e.damage();
+                }
+            }
+        }
 
     }
+//
+//    for (auto &bullet : bullets) {
+//        for (auto &e : level.enemies) {
+//            if (bullet.sprite.getGlobalBounds().intersects(e.getSprite().getGlobalBounds())) {
+//                // Impacto la bala con el enemigo
+//                bullets.remove();
+//                if (!e.isInvincible) {
+//                    e.damage();
+//                }
+//            }
+//        }
+//    }
 
 }

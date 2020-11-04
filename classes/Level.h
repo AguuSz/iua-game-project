@@ -4,9 +4,6 @@
 #include "Enemy.h"
 #include <list>
 #include "Jefe.h"
-#include "Goblin.h"
-#include "Mushroom.h"
-#include "FlyingEye.h"
 
 class Level {
 private:
@@ -21,6 +18,9 @@ private:
 
     // El multiplicador de dano que va a tener cada nivel
     float dmgMultiplier;
+
+    // Cantidad de enemigos que va a haber en el nivel
+    int totalEnemies = 20;
 
     // Item item;
 

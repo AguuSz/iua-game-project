@@ -16,10 +16,23 @@ void Level::setInitialValues() {
     setBackground("../assets/background2.jpg");
     setBackgroundScale(0.7f);
 
-    enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(250, 550));
-    enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(400, 550));
+    totalEnemies = 20;
 
+    int totalGoblins = 8;
+    int totalMushrooms = 6;
+    int totalFlyingEye = 6;
 
+    for (int i = 0; i < totalGoblins; i++) {
+        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(250 + 110 * i, 550));
+    }
+
+    for (int i = 0; i < totalMushrooms; i++) {
+        enemies.emplace_back("../assets/enemies/Mushroom/mushroomSheet.png", Vector2f(250 + 110 * i, 410));
+    }
+
+    for (int i = 0; i < totalFlyingEye; i++) {
+        enemies.emplace_back("../assets/enemies/Flying Eye/flyingEyeSheet.png", Vector2f(250 + 110 * i, 270));
+    }
 
 }
 
@@ -48,6 +61,7 @@ void Level::draw(RenderWindow &window) {
     // Dibuja enemigos
     for (auto &e : enemies) {
         window.draw(e.getSprite());
+        window.draw(e.getEnemyHitbox());
     }
 }
 
