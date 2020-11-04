@@ -24,7 +24,17 @@ void Engine::update() {
         }
     }
 
-    // Falta la deteccion de colision...
+//    for (auto &b : bullets) {
+//        b.sprite.move(b.currVelocity);
+//
+//        // Eliminamos las que esten out of frame
+//        if (b.sprite.getPosition().x < 0 ||
+//            b.sprite.getPosition().x > window.getSize().x ||
+//            b.sprite.getPosition().y < 0 ||
+//            b.sprite.getPosition().y > window.getSize().y ) {
+//            bullets.remove(b);
+//        }
+//    }
 }
 
 void Engine::updateMousePosition() {
