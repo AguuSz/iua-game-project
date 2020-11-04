@@ -26,6 +26,9 @@ private:
     // Nivel
     Level level;
 
+    // Boss
+    Boss boss;
+
     // Bala
     Bullet b1;
     std::vector<Bullet> bullets;

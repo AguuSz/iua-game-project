@@ -6,6 +6,7 @@ using namespace sf;
 
 void Engine::update() {
     player.update();
+    boss.update();
     level.update();
     updateMousePosition();
     mouseHitbox.setPosition(worldPos.x - 25, worldPos.y - 20);
@@ -16,25 +17,7 @@ void Engine::update() {
 
     for (size_t i = 0; i < bullets.size(); i++) {
         bullets[i].sprite.move(bullets[i].currVelocity);
-
-        // Eliminando las que estan out of frame
-        if (bullets[i].sprite.getPosition().x < 0 || bullets[i].sprite.getPosition().x  > window.getSize().x
-            || bullets[i].sprite.getPosition().y < 0 || bullets[i].sprite.getPosition().y > window.getSize().y) {
-            bullets.erase(bullets.begin() + i);
-        }
     }
-
-//    for (auto &b : bullets) {
-//        b.sprite.move(b.currVelocity);
-//
-//        // Eliminamos las que esten out of frame
-//        if (b.sprite.getPosition().x < 0 ||
-//            b.sprite.getPosition().x > window.getSize().x ||
-//            b.sprite.getPosition().y < 0 ||
-//            b.sprite.getPosition().y > window.getSize().y ) {
-//            bullets.remove(b);
-//        }
-//    }
 }
 
 void Engine::updateMousePosition() {

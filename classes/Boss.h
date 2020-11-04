@@ -2,11 +2,11 @@
 #include <string>
 //#include "Habilidad.h"
 
-//enum JEFE_ANIMATION_STATES {IDLE = 0, MOVING_LEFT, MOVING_RIGHT, MOVING_DOWN, MOVING_UP};
+enum BOSS_ANIMATION_STATES {IDLE1 = 0, MOVING_LEFT1, MOVING_RIGHT1, MOVING_DOWN1, MOVING_UP1};
 
 using namespace sf;
 
-class Jefe {
+class Boss {
 
 private:
 
@@ -20,23 +20,24 @@ private:
     float projectileSpeed;
     float damageMultiplier;
 
-
-
     // Animaciones
     Clock animationTimer;
     short animState;
     IntRect currentFrame;
-    bool animationSwitch;
     float scaleFactor;
 
     // Texturas
     Sprite sprite;
     Texture texture;
-    String directory;
 
     //Fisicas
     Vector2f position;
-    Vector2f velocity;
+    int speed = 1;
+    int movementLenght = 100;
+    int direction = 0;
+
+    //Extras
+    Vector2f middlePoint;
 
     // Dev
     RectangleShape box;
@@ -44,22 +45,19 @@ private:
     // Nucleo
     void initVariables();
     void initSprite();
+    void initTexture();
     void initAnimations();
     void initPhysics();
 
 public:
     // Constructor
-    Jefe(String name, float maxHp);
+    Boss();
 
     // Mandar el sprite a cualquier funcion que lo llame
     Sprite getSprite();
+    const Vector2f getMiddlePoint() const;
+    const FloatRect getGlobalBounds() const;
 
-    // Setters
-    void setTexture(String directory);
-
-
-    //Seteo de imagen
-    void setAsset(String directory);
     //Modificadores
     void setPosition(const float x, const float y);
     void resetVelocityY();
@@ -67,14 +65,16 @@ public:
 
     //Funciones
     void attack();
-    void moveX(const float dir_x);
-    void moveY(const float dir_y);
+    void move(const float dir_x, const float dir_y);
     void belowHalfLife();
     void update();
-    void updatePhysics();
+    void updateMiddlePoint();
     void updateMovement();
     void updateAnimations();
+    void setBossLookingRight(bool lookRight);
 
     // Dev
-    // RectangleShape jefeBox();
+    RectangleShape bossBox();
+
+    Vector2f getPosition();
 };
