@@ -13,8 +13,9 @@ Level::Level() {
 
 // Seccion valores iniciales
 void Level::setInitialValues() {
-    setBackground("../assets/background2.jpg");
-    setBackgroundScale(0.7f);
+    int scale = 1;
+    setBackground("../assets/FondoCompleto1.png");
+    setBackgroundScale(scale);
 
     enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(250, 550));
     enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(400, 550));
