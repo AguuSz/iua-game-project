@@ -4,9 +4,6 @@
 #include "Enemy.h"
 #include <list>
 #include "Boss.h"
-#include "Goblin.h"
-#include "Mushroom.h"
-#include "FlyingEye.h"
 
 class Level {
 private:

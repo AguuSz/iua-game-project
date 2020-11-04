@@ -16,8 +16,7 @@ void Level::setInitialValues() {
     int scale = 1;
     setBackground("../assets/FondoCompleto1.png");
     setBackgroundScale(scale);
-
-    totalEnemies = 20;
+    
 
     int totalGoblins = 8;
     int totalMushrooms = 6;
