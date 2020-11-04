@@ -26,7 +26,7 @@ void Boss::initVariables(){
     scaleFactor = 3;
     animState = IDLE1;
 
-    sprite.setPosition(0, 0);
+    sprite.setPosition(50, 200);
     middlePoint.x = getGlobalBounds().left + getGlobalBounds().width / 2;
     middlePoint.y = getGlobalBounds().top + getGlobalBounds().height / 2;
 }
@@ -63,24 +63,31 @@ void Boss::move(const float dir_x, const float dir_y) {
 void Boss::updateMovement(){
 
     srand(time(NULL));
-    direction = rand() % 4 + 1;
-    animState = BOSS_ANIMATION_STATES::IDLE1;
-    if(direction == 1){
-        move(0, 1);
-        animState = BOSS_ANIMATION_STATES::MOVING_DOWN1;
-    }
-    if(direction == 2){
-        move(0, -1);
-        animState = BOSS_ANIMATION_STATES::MOVING_UP1;
-    }
-    if(direction == 3){
-        move(-1, 0);
-        animState = BOSS_ANIMATION_STATES::MOVING_LEFT1;
-    }
-    if(direction == 4){
-        move(1, 0);
-       // sprite.setTextureRect(currentFrame);
-        animState = BOSS_ANIMATION_STATES::MOVING_RIGHT1;
+    for(int i = 0; i < 5; i++) {
+        direction = rand() % 4 + 1;
+        std::cout << direction;
+        animState = BOSS_ANIMATION_STATES::IDLE1;
+        if (direction == 1) {
+            move(0, 10);
+            animState = BOSS_ANIMATION_STATES::MOVING_DOWN1;
+            direction = 0;
+        }
+        if (direction == 2) {
+            move(0, -10);
+            animState = BOSS_ANIMATION_STATES::MOVING_UP1;
+            direction = 0;
+        }
+        if (direction == 3) {
+            move(-10, 0);
+            animState = BOSS_ANIMATION_STATES::MOVING_LEFT1;
+            direction = 0;
+        }
+        if (direction == 4) {
+            move(10, 0);
+            // sprite.setTextureRect(currentFrame);
+            animState = BOSS_ANIMATION_STATES::MOVING_RIGHT1;
+            direction = 0;
+        }
     }
 }
 
