@@ -22,7 +22,7 @@ void Player::initVariables() {
     currentHp = 10;
     isInvincible = false;
 
-    scaleFactor = 3;
+    scaleFactor = 2.5;
     animState = IDLE;
     
     sprite.setPosition(0, 0);
