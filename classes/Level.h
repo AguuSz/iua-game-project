@@ -13,7 +13,9 @@ private:
     // Mapa mapa; Fdlta crear la clase, pero por ahora utilizaremos un fondo estatico
     Sprite bkgSprite;
     Texture bkgTexture;
+    int instance;
 
+private:
     bool levelFinished;
 
     // El multiplicador de dano que va a tener cada nivel
@@ -27,6 +29,11 @@ public:
 
     // Constructor
     Level();
+
+    //Instancia define la parte del nivel en la que estamos
+
+    void setInstance(int instance);
+    int getInstance();
 
     /// Funciones para el motor
     void draw(RenderWindow &window);

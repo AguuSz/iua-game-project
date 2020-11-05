@@ -8,7 +8,7 @@
 Level::Level() {
     setInitialValues();
     setDmgMultiplier(3);
-
+    instance = 1;
     levelFinished = false;
 }
 
@@ -74,4 +74,12 @@ void Level::spawnEnemies() {
     for (int i = 0; i < totalFlyingEye; i++) {
         enemies.emplace_back("../assets/enemies/Flying Eye/flyingEyeSheet.png", Vector2f(250 + 110 * i, 270));
     }
+}
+
+void Level::setInstance(int instance) {
+    Level::instance = instance;
+}
+
+int Level::getInstance(){
+    return instance;
 }
