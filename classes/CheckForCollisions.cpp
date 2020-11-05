@@ -5,7 +5,7 @@
 #include "Engine.h"
 
 void Engine::checkForCollisions() {
-
+    // Colision al tocar la parte de abajo
      if(player.getGlobalBounds().top + player.getGlobalBounds().height >= window.getSize().y - 330) {
         player.resetVelocityY();
         player.allowJumping();

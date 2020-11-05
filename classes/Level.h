@@ -9,13 +9,12 @@ class Level {
 private:
     // Jefe boss
     Boss boss;
-    // Fondo
-    // Mapa mapa; Fdlta crear la clase, pero por ahora utilizaremos un fondo estatico
+    Sprite tileMapSprite[476][8];
+    Texture tileMapTexture;
     Sprite bkgSprite;
     Texture bkgTexture;
     int instance;
 
-private:
     bool levelFinished;
 
     // El multiplicador de dano que va a tener cada nivel

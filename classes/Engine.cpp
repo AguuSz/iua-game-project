@@ -22,7 +22,7 @@ Engine::Engine() {
     setMouseSprite();
     setMouseHitbox();
 
-    view.reset(FloatRect(300, 300, 1400, 800));
+    view.reset(FloatRect(300, 300, 900, 800));
 
     shootingDelay = 0.1f;
     shootingTimer.restart();
