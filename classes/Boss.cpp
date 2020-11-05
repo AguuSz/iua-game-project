@@ -65,7 +65,6 @@ void Boss::updateMovement(){
     srand(time(NULL));
     for(int i = 0; i < 5; i++) {
         direction = rand() % 4 + 1;
-        std::cout << direction;
         animState = BOSS_ANIMATION_STATES::IDLE1;
         if (direction == 1) {
             move(0, 10);
