@@ -4,17 +4,19 @@
 
 #include "Level.h"
 #include <fstream>
+#include <iostream>
 
 Level::Level() {
     setInitialValues();
     setDmgMultiplier(3);
-    instance = 1;
+    instance = 2;
     levelFinished = false;
 
     int tmp;
 
     std::ifstream lectura;
     lectura.open("../assets/Mapa.txt");
+
 
     tileMapTexture.loadFromFile("../assets/AssetsPiso1.png");
 
@@ -27,7 +29,7 @@ Level::Level() {
 
             tileMapSprite[i][j].setTexture(tileMapTexture);
             tileMapSprite[i][j].setTextureRect({col * 20, fil * 20, 20, 20});
-            tileMapSprite[i][j].setPosition(i * 20, j * 20+746);
+            tileMapSprite[i][j].setPosition(i * 20, (j * 20)+746);
         }
     }
     lectura.close();
