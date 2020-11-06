@@ -38,4 +38,11 @@ void Engine::checkForCollisions() {
         }
 
     }
+
+    for (auto &e: level.enemies) {
+        if (player.getGlobalBounds().intersects(e.getSprite().getGlobalBounds())) {
+            // Si el player choca con alguno de los enemigos
+
+        }
+    }
 }

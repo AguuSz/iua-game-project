@@ -68,6 +68,8 @@ public:
     RectangleShape getEnemyHitbox();
 
     void setEnemyLookingRight(bool lookRight);
+
+    void setScaleFactor(float scaleFactor);
 };
 
 

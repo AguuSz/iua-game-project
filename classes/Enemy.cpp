@@ -34,6 +34,10 @@ void Enemy::setTexture(String directory) {
     this->sprite.setScale(scaleFactor, scaleFactor);
 }
 
+void Enemy::setScaleFactor(float sf) {
+    scaleFactor = sf;
+}
+
 void Enemy::update() {
 
     updateMovement();
@@ -48,7 +52,7 @@ void Enemy::updateAnimations() {
             currentFrame.top = 60.f;
             currentFrame.left += 150.f;
 
-            if (currentFrame.left >= 505.f)
+            if (currentFrame.left >= 540.f)
                 currentFrame.left = 55.f;
 
             // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
@@ -59,6 +63,23 @@ void Enemy::updateAnimations() {
     else if (animState == ENEMY_ANIMATION_STATES::TOOKDAMAGE) {
         if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
             currentFrame.top = 360.f; // 60 + 150 * linea en la que esta (en este caso 2)
+            currentFrame.left += 150.f;
+
+            // Cuando llega al final de la sheet vuelve al estado inactivo
+            if (currentFrame.left >= 540.f) {
+                isInvincible = false;
+                currentFrame.left = 55.f;
+                animState = ENEMY_ANIMATION_STATES::INACTIVE;
+            }
+
+            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+            animationTimer.restart();
+            sprite.setTextureRect(currentFrame);
+        }
+    }
+    else if (animState == ENEMY_ANIMATION_STATES::DEATH) {
+        if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
+            currentFrame.top = 660.f; // 60 + 150 * linea en la que esta (en este caso 2)
             currentFrame.left += 150.f;
 
             // Cuando llega al final de la sheet vuelve al estado inactivo
@@ -119,9 +140,12 @@ void Enemy::damage() {
 
     // Luego de 5 balas, el enemigo muere
     currentHp -= 2;
+    std::cout << currentHp << "\n";
     if (currentHp <= 0) {
         // Muere
         // Aca iria la animacion de muerte, la destruccion del objeto, contadorEnemigosLvl--;
+        currentHp = maxHp;
+        animState = ENEMY_ANIMATION_STATES::DEATH;
     }
 }
 

@@ -7,8 +7,6 @@
 
 class Level {
 private:
-    // Jefe boss
-
     // Fondo
     // Mapa mapa; Fdlta crear la clase, pero por ahora utilizaremos un fondo estatico
     Sprite bkgSprite;
