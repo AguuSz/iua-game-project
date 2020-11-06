@@ -20,8 +20,6 @@ private:
     float projectileSpeed;
     float damageMultiplier;
 
-
-
     // Animaciones
     Clock animationTimer;
     short animState;
@@ -34,8 +32,10 @@ private:
 
     //Fisicas
     Vector2f position;
-    Vector2f speed;
-    float gravity;
+    int speed = 1;
+    int movementLenght = 100;
+    int direction = 0;
+    int timeout = 0;
 
     //Extras
     Vector2f middlePoint;
@@ -66,8 +66,7 @@ public:
 
     //Funciones
     void attack();
-    void moveX(const float dir_x);
-    void moveY(const float dir_y);
+    void move(const float dir_x, const float dir_y);
     void belowHalfLife();
     void update();
     void updateMiddlePoint();

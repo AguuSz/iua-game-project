@@ -9,8 +9,13 @@ class Level {
 private:
     // Fondo
     // Mapa mapa; Fdlta crear la clase, pero por ahora utilizaremos un fondo estatico
+    // Jefe boss
+    Boss boss;
+    Sprite tileMapSprite[476][8];
+    Texture tileMapTexture;
     Sprite bkgSprite;
     Texture bkgTexture;
+    int instance;
 
     bool levelFinished;
 
@@ -25,6 +30,11 @@ public:
 
     // Constructor
     Level();
+
+    //Instancia define la parte del nivel en la que estamos
+
+    void setInstance(int instance);
+    int getInstance();
 
     /// Funciones para el motor
     void draw(RenderWindow &window);

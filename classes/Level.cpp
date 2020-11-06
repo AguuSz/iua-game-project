@@ -3,15 +3,40 @@
 //
 
 #include "Level.h"
+#include <fstream>
+#include <iostream>
 
 Level::Level() {
     setInitialValues();
     setDmgMultiplier(3);
-
+    instance = 2;
     levelFinished = false;
+
+    int tmp;
+
+    std::ifstream lectura;
+    lectura.open("../assets/Mapa.txt");
+
+
+    tileMapTexture.loadFromFile("../assets/AssetsPiso1.png");
+
+    for (int j = 0; j < 8; ++j) {
+        for (int i = 0; i < 476; i++) {
+            lectura >> tmp;
+            int fil, col;
+            col = tmp % 3;
+            fil = tmp / 3;
+
+            tileMapSprite[i][j].setTexture(tileMapTexture);
+            tileMapSprite[i][j].setTextureRect({col * 20, fil * 20, 20, 20});
+            tileMapSprite[i][j].setPosition(i * 20, (j * 20)+746);
+        }
+    }
+    lectura.close();
 }
 
-// Seccion valores inicialesaaa
+
+// Seccion valores iniciales
 void Level::setInitialValues() {
     int scale = 1;
     setBackground("../assets/FondoCompleto1.png");
@@ -40,12 +65,19 @@ void Level::endLevel() {
 void Level::draw(RenderWindow &window) {
     // Dibuja el fondo
     window.draw(bkgSprite);
+    for (int i = 0; i < 476; i++) {
+        for (int j = 0; j < 8; ++j) {
+            window.draw(tileMapSprite[i][j]);
+        }
+    }
 
     // Dibuja enemigos
     for (auto &e : enemies) {
         window.draw(e.getSprite());
         window.draw(e.getEnemyHitbox());
     }
+
+    window.draw(boss.getSprite());
 }
 
 void Level::update() {
@@ -54,6 +86,7 @@ void Level::update() {
         e.update();
         e.setEnemyLookingRight(true);
     }
+    boss.update();
 }
 
 void Level::spawnEnemies() {
@@ -76,4 +109,12 @@ void Level::spawnEnemies() {
         e.setEnemyLookingRight(true);
         e.setScaleFactor(2);
     }
+}
+
+void Level::setInstance(int instance) {
+    Level::instance = instance;
+}
+
+int Level::getInstance(){
+    return instance;
 }

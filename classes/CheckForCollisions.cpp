@@ -5,24 +5,31 @@
 #include "Engine.h"
 
 void Engine::checkForCollisions() {
-
-    // Colision dada al tocar el fondo de la pantalla
-    if(player.getGlobalBounds().top + player.getGlobalBounds().height >= window.getSize().y - 85) {
+    // Colision al tocar la parte de abajo
+     if(player.getGlobalBounds().top + player.getGlobalBounds().height >= window.getSize().y - 330) {
         player.resetVelocityY();
         player.allowJumping();
         player.setPosition(player.getGlobalBounds().left,
-                           window.getSize().y - player.getGlobalBounds().height - 85);
+                           window.getSize().y - player.getGlobalBounds().height - 330);
     }
 
-    // Colision al tocar la parte derecha
-//    if(player.getGlobalBounds().left + player.getGlobalBounds().width >= 1240){
-//        player.resetVelocityX();
-//        player.setPosition(1240 - player.getGlobalBounds().width, player.getGlobalBounds().top);
-//    }
-//    // Colision al tocar la parte izquierda
-//    if(player.getGlobalBounds().left < 0){
-//        player.setPosition(0, player.getGlobalBounds().top);
-//    }
+     //Colision al tocar la parte derecha
+    if(player.getGlobalBounds().left + player.getGlobalBounds().width >= 1360*level.getInstance()){
+        if(player.getPosition().x >= 1360*level.getInstance()){
+            player.setPosition(1360*level.getInstance(), player.getPosition().y);
+        }else {
+            player.setPosition(1360 * level.getInstance() - player.getGlobalBounds().width,
+                               player.getPosition().y);
+        };
+    }
+    // Colision al tocar la parte izquierda
+    if(player.getGlobalBounds().left < (1360*level.getInstance() - 1360)){
+        if(player.getPosition().x < (1360*level.getInstance() - 1360)){
+            player.setPosition(1360*level.getInstance() - 1360, player.getPosition().y);
+        }else {
+            player.setPosition(0, player.getPosition().y);
+        }
+    }
 
     // Bala impactando al enemigo
     for (size_t i = 0; i < bullets.size(); i++) {
