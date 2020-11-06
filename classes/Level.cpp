@@ -103,7 +103,7 @@ void Level::spawnEnemies() {
 //    }
 
     for (int i = 0; i < totalFlyingEye; i++) {
-        enemies.emplace_back("../assets/enemies/Flying Eye/flyingEyeSheett.png", Vector2f(250 + 110 * i, 270));
+        enemies.emplace_back("../assets/enemies/Flying Eye/flyingEyeSheet.png", Vector2f(250 + 110 * i, 270));
     }
     for(auto &e : enemies) {
         e.setEnemyLookingRight(true);
