@@ -26,7 +26,8 @@ void Boss::initVariables(){
     scaleFactor = 3;
     animState = IDLE1;
 
-    sprite.setPosition(50, 200);
+    position.x = 300;
+    position.y = 200;
     middlePoint.x = getGlobalBounds().left + getGlobalBounds().width / 2;
     middlePoint.y = getGlobalBounds().top + getGlobalBounds().height / 2;
 }
@@ -59,35 +60,36 @@ Sprite Boss::getSprite() {
 void Boss::move(const float dir_x, const float dir_y) {
     position.x += dir_x * speed;
     position.y += dir_y * speed;
+    sprite.setPosition(position);
 }
 void Boss::updateMovement(){
 
-    srand(time(NULL));
-    for(int i = 0; i < 5; i++) {
+    if(timeout-- <= 0) {
         direction = rand() % 4 + 1;
+        timeout = rand() % 60;
+    }
         animState = BOSS_ANIMATION_STATES::IDLE1;
         if (direction == 1) {
-            move(0, 10);
+            move(0, 2);
             animState = BOSS_ANIMATION_STATES::MOVING_DOWN1;
-            direction = 0;
+
         }
         if (direction == 2) {
-            move(0, -10);
+            move(0, -2);
             animState = BOSS_ANIMATION_STATES::MOVING_UP1;
-            direction = 0;
+
         }
         if (direction == 3) {
-            move(-10, 0);
+            move(-2, 0);
             animState = BOSS_ANIMATION_STATES::MOVING_LEFT1;
-            direction = 0;
+
         }
         if (direction == 4) {
-            move(10, 0);
+            move(2, 0);
             // sprite.setTextureRect(currentFrame);
             animState = BOSS_ANIMATION_STATES::MOVING_RIGHT1;
-            direction = 0;
+
         }
-    }
 }
 
 void Boss::updateAnimations() {

@@ -35,6 +35,7 @@ private:
     int speed = 1;
     int movementLenght = 100;
     int direction = 0;
+    int timeout = 0;
 
     //Extras
     Vector2f middlePoint;
