@@ -23,7 +23,7 @@ void Boss::initVariables(){
     currentHp = 100;
     isInvincible = false;
 
-    scaleFactor = 3;
+    scaleFactor = 5;
     animState = IDLE1;
 
     position.x = 300;
@@ -34,7 +34,7 @@ void Boss::initVariables(){
 
 void Boss::initTexture() {
     // Se carga la textura, y si tira error, que nos muestre el error
-    if(!texture.loadFromFile("../assets/jefe.png"))
+    if(!texture.loadFromFile("../assets/enemies/Boss/bossSheet.png"))
         std::cout << "ERROR::BOSS:: No se ha podido cargar la textura del boss." << std::endl;
 }
 
@@ -66,7 +66,8 @@ void Boss::updateMovement(){
 
     if(timeout-- <= 0) {
         direction = rand() % 4 + 1;
-        timeout = rand() % 60;
+        //timeout = rand() % 100;
+        timeout = animationTimer.getElapsedTime().asSeconds() + 100;
     }
         animState = BOSS_ANIMATION_STATES::IDLE1;
         if (direction == 1) {
@@ -110,11 +111,10 @@ void Boss::updateAnimations() {
 
         }
     }
-        // Animacion hacia la derecha
     else if (animState == BOSS_ANIMATION_STATES::MOVING_RIGHT1) {
         if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
             // Hacemos que se posicione en la 2da fila de nuestro sheet
-            currentFrame.top = 50.f;
+            currentFrame.top = 100.f;
             currentFrame.left += 40.f;
 
             if (currentFrame.left >= 360.f)
@@ -131,7 +131,7 @@ void Boss::updateAnimations() {
     else if (animState == BOSS_ANIMATION_STATES::MOVING_LEFT1) {
         if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
             // Hacemos que se posicione en la 2da fila de nuestro sheet
-            currentFrame.top = 50.f;
+            currentFrame.top = 100.f;
             currentFrame.left += 40.f;
 
             if (currentFrame.left >= 360.f)
@@ -175,7 +175,7 @@ void Boss::belowHalfLife() {
 void Boss::update() {
 
     updateMovement();
-    //updateAnimations();
+    updateAnimations();
     updateMiddlePoint();
 }
 
