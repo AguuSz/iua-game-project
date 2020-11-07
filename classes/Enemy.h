@@ -39,6 +39,9 @@ public:
     bool isMoving;
     int direction = 0;
     int timeout = 0;
+    bool doesFly;
+    bool ignorePlayerPosition;
+    bool cannotMove;
 
     // Dev
     RectangleShape box;
@@ -56,7 +59,7 @@ public:
     // Constructor
     Enemy();
 
-    Enemy(std::string directory, Vector2f initialPosition);
+    Enemy(std::string directory, Vector2f initialPosition, bool doesFly);
 
     // Sprite para dibujar
     Sprite getSprite() const;

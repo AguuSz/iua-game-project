@@ -10,6 +10,8 @@ Enemy::Enemy() {
     currentHp = maxHp;
     isMoving = false;
     isInvincible = false;
+    ignorePlayerPosition = false;
+    cannotMove = false;
 
     animState = ENEMY_ANIMATION_STATES::INACTIVE;
     scaleFactor = 2.5f;
@@ -18,9 +20,10 @@ Enemy::Enemy() {
     animationTimer.restart();
 }
 
-Enemy::Enemy(std::string directory, Vector2f initialPosition):Enemy() {
+Enemy::Enemy(std::string directory, Vector2f initialPosition, bool doesFly):Enemy() {
     setTexture(directory);
     setPosition(initialPosition.x, initialPosition.y);
+    this->doesFly = doesFly;
 }
 
 void Enemy::setTexture(String directory) {
@@ -58,6 +61,24 @@ void Enemy::updateAnimations() {
             // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
             animationTimer.restart();
             sprite.setTextureRect(currentFrame);
+
+            // Una vez termine de correr, que vuelva a tener en cuenta la posicion del jugador
+            ignorePlayerPosition = false;
+        }
+    }
+    else if (animState == ENEMY_ANIMATION_STATES::RUNNING) {
+        if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
+            currentFrame.top = 210.f; // 60 + 150 * linea en la que esta (en este caso 1)
+            currentFrame.left += 150.f;
+
+            // Cuando llega al final de la sheet vuelve al estado inactivo
+            if (currentFrame.left >= 1080.f) {
+                currentFrame.left = 55.f;
+            }
+
+            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+            animationTimer.restart();
+            sprite.setTextureRect(currentFrame);
         }
     }
     else if (animState == ENEMY_ANIMATION_STATES::TOOKDAMAGE) {
@@ -68,6 +89,7 @@ void Enemy::updateAnimations() {
             // Cuando llega al final de la sheet vuelve al estado inactivo
             if (currentFrame.left >= 540.f) {
                 isInvincible = false;
+                cannotMove = false;
                 currentFrame.left = 55.f;
                 animState = ENEMY_ANIMATION_STATES::INACTIVE;
             }
@@ -79,7 +101,7 @@ void Enemy::updateAnimations() {
     }
     else if (animState == ENEMY_ANIMATION_STATES::DEATH) {
         if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
-            currentFrame.top = 660.f; // 60 + 150 * linea en la que esta (en este caso 2)
+            currentFrame.top = 660.f; // 60 + 150 * linea en la que esta (en este caso 4)
             currentFrame.left += 150.f;
 
             // Cuando llega al final de la sheet vuelve al estado inactivo
@@ -123,29 +145,53 @@ RectangleShape Enemy::getEnemyHitbox() {
 void Enemy::move(const float dir_x, const float dir_y) {
     position.x += dir_x * speed;
     position.y += dir_y * speed;
+
+    animState = ENEMY_ANIMATION_STATES::RUNNING;
+
     sprite.setPosition(position);
 }
 
 void Enemy::updateMovement() {
     if(timeout-- <= 0) {
-        direction = rand() % 4 + 1;
-        timeout = rand() % 60;
+        direction = rand() % 6 + 1;
+        timeout = rand() % 120;
     }
-    if (direction == 1) {
-        move(0, 2);
-
-    }
-    if (direction == 2) {
-        move(0, -2);
-
-    }
-    if (direction == 3) {
-        move(-2, 0);
-
-    }
-    if (direction == 4) {
-        move(2, 0);
-
+    if (!cannotMove) {
+        if (doesFly) {
+            switch (direction) {
+                case 1:
+                    move(0, 2);
+                    break;
+                case 2:
+                    move(0, -2);
+                    break;
+                case 3:
+                    move(-2, 0);
+                    break;
+                case 4:
+                    move(2, 0);
+                    break;
+                default:
+                    animState = ENEMY_ANIMATION_STATES::INACTIVE;
+                    break;
+            }
+        } else {
+            switch (direction) {
+                case 1:
+                    ignorePlayerPosition = true;
+                    setEnemyLookingRight(false);
+                    move(-2, 0);
+                    break;
+                case 2:
+                    ignorePlayerPosition = true;
+                    setEnemyLookingRight(true);
+                    move(2, 0);
+                    break;
+                default:
+                    animState = ENEMY_ANIMATION_STATES::INACTIVE;
+                    break;
+            }
+        }
     }
 }
 
@@ -155,6 +201,7 @@ void Enemy::updateLife() {
 
 void Enemy::damage() {
     isInvincible = true;
+    cannotMove = true;
     currentFrame.left = 55.f;
     animState = ENEMY_ANIMATION_STATES::TOOKDAMAGE;
 
