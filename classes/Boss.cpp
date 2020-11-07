@@ -41,7 +41,7 @@ void Boss::initTexture() {
 void Boss::initSprite() {
     // Cargamos la textura como sprite
     sprite.setTexture(texture);
-    currentFrame = IntRect(0, 0, 40, 50);
+    currentFrame = IntRect(0, 0, 40, 60);
 
     sprite.setTextureRect(currentFrame);
 
@@ -66,44 +66,44 @@ void Boss::updateMovement(){
 
     if(timeout-- <= 0) {
         direction = rand() % 4 + 1;
-        //timeout = rand() % 100;
-        timeout = animationTimer.getElapsedTime().asSeconds() + 100;
+        timeout = rand() % 100;
     }
-        animState = BOSS_ANIMATION_STATES::IDLE1;
+        animState = BOSS_ANIMATION_STATES::MOVING;
         if (direction == 1) {
             move(0, 2);
-            animState = BOSS_ANIMATION_STATES::MOVING_DOWN1;
+//            animState = BOSS_ANIMATION_STATES::MOVING_DOWN1;
 
         }
         if (direction == 2) {
             move(0, -2);
-            animState = BOSS_ANIMATION_STATES::MOVING_UP1;
+//            animState = BOSS_ANIMATION_STATES::MOVING_UP1;
 
         }
         if (direction == 3) {
             move(-2, 0);
-            animState = BOSS_ANIMATION_STATES::MOVING_LEFT1;
+//            animState = BOSS_ANIMATION_STATES::MOVING_LEFT1;
 
         }
         if (direction == 4) {
             move(2, 0);
             // sprite.setTextureRect(currentFrame);
-            animState = BOSS_ANIMATION_STATES::MOVING_RIGHT1;
+//            animState = BOSS_ANIMATION_STATES::MOVING_RIGHT1;
 
         }
 }
 
 void Boss::updateAnimations() {
+    IntRect tempFrame;
     // Animacion IDLE
     if (animState == BOSS_ANIMATION_STATES::IDLE1) {
         // Cuando pasa medio segundo, ahi recien que empieze a animar
         if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
             // Hacemos que vuelva arriba, debido a nuestro boss sheet
             currentFrame.top = 0;
-            currentFrame.left += 40.f;
+            currentFrame.left += 80.f;
 
-            if (currentFrame.left >= 160.f)
-                currentFrame.left = 0;
+            if (currentFrame.left >= 760.f)
+                currentFrame.left = 400.f;
 
             // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
             animationTimer.restart();
@@ -111,54 +111,39 @@ void Boss::updateAnimations() {
 
         }
     }
-    else if (animState == BOSS_ANIMATION_STATES::MOVING_RIGHT1) {
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
+    else if (animState == BOSS_ANIMATION_STATES::MOVING) {
+        if (animationTimer.getElapsedTime().asSeconds() >= 0.3f) {
             // Hacemos que se posicione en la 2da fila de nuestro sheet
-            currentFrame.top = 100.f;
-            currentFrame.left += 40.f;
+            currentFrame.top = 80.f;
+            currentFrame.left += 80.f;
 
-            if (currentFrame.left >= 360.f)
-                currentFrame.left = 0;
+            if (currentFrame.left == 240.f) {
+                // Aumenta el tamanio del sprite
+                // Cargamos la textura como sprite
+                tempFrame = IntRect(currentFrame.left, currentFrame.top, 70, 60);
+                currentFrame = tempFrame;
+            }
+            else if (currentFrame.left == 320.f) {
+                tempFrame = IntRect(currentFrame.left + 40, currentFrame.top, 76, 60);
+                currentFrame = tempFrame;
+            }
+            else if (currentFrame.left == 440.f ) {
+                tempFrame = IntRect(currentFrame.left + 40, currentFrame.top, 76, 60);
+                currentFrame = tempFrame;
+            }
+            else if (currentFrame.left >= 560.f) {
+                // Reinicio de animacion
+                animState = BOSS_ANIMATION_STATES::IDLE1;
+                currentFrame = IntRect(0, 0, 40, 60);
+            }
 
+            std::cout << currentFrame.left << std::endl;
             // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
             animationTimer.restart();
             sprite.setTextureRect(currentFrame);
 
             setBossLookingRight(true);
         }
-    }
-
-    else if (animState == BOSS_ANIMATION_STATES::MOVING_LEFT1) {
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
-            // Hacemos que se posicione en la 2da fila de nuestro sheet
-            currentFrame.top = 100.f;
-            currentFrame.left += 40.f;
-
-            if (currentFrame.left >= 360.f)
-                currentFrame.left = 0;
-
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
-            animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
-
-            setBossLookingRight(false);
-        }
-    }
-
-    else if(animState == BOSS_ANIMATION_STATES::MOVING_DOWN1) {
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
-            // Hacemos que se posicione en la 2da fila de nuestro sheet
-            currentFrame.top = 200.f;
-            currentFrame.left += 40.f;
-
-            if (currentFrame.left >= 40.f)
-                currentFrame.left = 0;
-
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
-            animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
-        }
-
     }
     else
         animationTimer.restart();

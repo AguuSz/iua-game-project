@@ -2,7 +2,7 @@
 #include <string>
 //#include "Habilidad.h"
 
-enum BOSS_ANIMATION_STATES {IDLE1 = 0, MOVING_LEFT1, MOVING_RIGHT1, MOVING_DOWN1, MOVING_UP1};
+enum BOSS_ANIMATION_STATES {IDLE1 = 0, MOVING};
 
 using namespace sf;
 

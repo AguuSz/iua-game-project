@@ -40,6 +40,7 @@ void Engine::checkForCollisions() {
                 bullets.erase(bullets.begin() + i);
                 if (!e.isInvincible) {
                     e.damage();
+                    break;
                 }
             }
         }
