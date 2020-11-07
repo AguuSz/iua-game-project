@@ -10,6 +10,7 @@ using namespace sf;
 
 enum ENEMY_ANIMATION_STATES {INACTIVE = 0, RUNNING, TOOKDAMAGE, ATTACKING, DEATH};
 
+
 class Enemy {
 public:
     String name;
@@ -33,9 +34,11 @@ public:
     Texture texture;
 
     // Fisicas
-    Vector2f speed;
+    int speed = 1;
     Vector2f position;
     bool isMoving;
+    int direction = 0;
+    int timeout = 0;
 
     // Dev
     RectangleShape box;
@@ -43,6 +46,7 @@ public:
     // Nucleo
     void initVariables();
     void initAnimations();
+
 
     // Actualizaciones por frame
     void updateAnimations();
@@ -64,7 +68,7 @@ public:
     // Funciones
     void update();
     void damage();
-    void move();
+    void move(const float dir_x, const float dir_y);
     RectangleShape getEnemyHitbox();
 
     void setEnemyLookingRight(bool lookRight);

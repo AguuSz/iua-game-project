@@ -9,7 +9,7 @@
 Level::Level() {
     setInitialValues();
     setDmgMultiplier(3);
-    instance = 2;
+    instance = 1;
     levelFinished = false;
 
     int tmp;

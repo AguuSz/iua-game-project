@@ -120,13 +120,33 @@ RectangleShape Enemy::getEnemyHitbox() {
     return box;
 }
 
-void Enemy::updateMovement() {
-    if (movementTimer.getElapsedTime().asSeconds() > 3) {
-        // Moverse despues de 3 segundos
-        // Falta la logica del movimiento y direccion de movimiento
-        // this->move();
-    }
+void Enemy::move(const float dir_x, const float dir_y) {
+    position.x += dir_x * speed;
+    position.y += dir_y * speed;
+    sprite.setPosition(position);
+}
 
+void Enemy::updateMovement() {
+    if(timeout-- <= 0) {
+        direction = rand() % 4 + 1;
+        timeout = rand() % 60;
+    }
+    if (direction == 1) {
+        move(0, 2);
+
+    }
+    if (direction == 2) {
+        move(0, -2);
+
+    }
+    if (direction == 3) {
+        move(-2, 0);
+
+    }
+    if (direction == 4) {
+        move(2, 0);
+
+    }
 }
 
 void Enemy::updateLife() {
@@ -158,4 +178,5 @@ void Enemy::setEnemyLookingRight(bool lookRight) {
         sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
     }
 }
+
 
