@@ -15,7 +15,6 @@ void Engine::draw() {
     level.draw(window);
     window.draw(player.getSprite());
     window.draw(player.playerBox());
-    window.draw(boss.bossBox());
 
     // Dibuja las balas que haya en el array bullets
     for (auto & bullet : bullets) {

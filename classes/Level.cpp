@@ -77,8 +77,8 @@ void Level::draw(RenderWindow &window) {
         window.draw(e.getSprite());
         window.draw(e.getEnemyHitbox());
     }
-
     window.draw(boss.getSprite());
+    window.draw(boss.bossBox());
 }
 
 void Level::update(Player &player) {

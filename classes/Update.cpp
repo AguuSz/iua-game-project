@@ -6,7 +6,6 @@ using namespace sf;
 
 void Engine::update() {
     player.update();
-    boss.update();
     level.update(player);
     updateMousePosition();
     mouseHitbox.setPosition(worldPos.x - 25, worldPos.y - 20);
