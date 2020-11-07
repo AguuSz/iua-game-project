@@ -3,6 +3,7 @@
 //
 
 #include "Level.h"
+#include "Player.h"
 #include <fstream>
 #include <iostream>
 
@@ -80,11 +81,18 @@ void Level::draw(RenderWindow &window) {
     window.draw(boss.getSprite());
 }
 
-void Level::update() {
+void Level::update(Player &player) {
     // Actualizan los enemigos
     for (auto &e : enemies) {
         e.update();
-        e.setEnemyLookingRight(true);
+
+        if (player.getPosition().x < e.getPosition().x) {
+            // Player a la izquierda del enemigo
+            e.setEnemyLookingRight(false);
+        } else {
+            // Player a la derecha del enemigo
+            e.setEnemyLookingRight(true);
+        }
     }
     boss.update();
 }

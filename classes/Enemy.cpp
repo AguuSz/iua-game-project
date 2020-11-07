@@ -179,4 +179,8 @@ void Enemy::setEnemyLookingRight(bool lookRight) {
     }
 }
 
+Vector2f Enemy::getPosition() {
+    return position;
+}
+
 

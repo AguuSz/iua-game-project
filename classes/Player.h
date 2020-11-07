@@ -7,6 +7,7 @@
 using namespace sf;
 
 enum PLAYER_ANIMATION_STATES {IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING};
+#pragma once
 
 class Player {
 private:

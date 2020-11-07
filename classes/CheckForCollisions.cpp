@@ -6,11 +6,11 @@
 
 void Engine::checkForCollisions() {
     // Colision al tocar la parte de abajo
-     if(player.getGlobalBounds().top + player.getGlobalBounds().height >= window.getSize().y - 330) {
+     if(player.getGlobalBounds().top + player.getGlobalBounds().height >= window.getSize().y - 25) {
         player.resetVelocityY();
         player.allowJumping();
         player.setPosition(player.getGlobalBounds().left,
-                           window.getSize().y - player.getGlobalBounds().height - 330);
+                           window.getSize().y - player.getGlobalBounds().height - 25);
     }
 
      //Colision al tocar la parte derecha

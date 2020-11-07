@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include <list>
 #include "Boss.h"
+#include "Player.h"
 
 class Level {
 private:
@@ -38,7 +39,7 @@ public:
 
     /// Funciones para el motor
     void draw(RenderWindow &window);
-    void update();
+    void update(Player &player);
 
     void setBackground(String directory);
     void setDmgMultiplier(float dmgMultiplier);

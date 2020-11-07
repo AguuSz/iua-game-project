@@ -60,6 +60,7 @@ public:
 
     // Sprite para dibujar
     Sprite getSprite() const;
+    Vector2f getPosition();
 
     // Setters
     void setTexture(String directory);
