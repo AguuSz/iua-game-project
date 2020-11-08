@@ -36,6 +36,7 @@ void Engine::start() {
         input(event);
         update();
         checkForCollisions();
+        //checkForBossColisions();
         draw();
         while(window.pollEvent(event)){
             if (event.type == Event::Closed)

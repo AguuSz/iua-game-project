@@ -49,6 +49,7 @@ private:
     void updateMousePosition();
     void update();
     void checkForCollisions();
+    void checkForBossColisions();
     void draw();
     void setMouseHitbox();
     void setMouseSprite();

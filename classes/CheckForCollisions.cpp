@@ -54,3 +54,30 @@ void Engine::checkForCollisions() {
         }
     }
 }
+void Engine::checkForBossColisions(){
+
+    //Limites jefe
+// Colision al tocar la parte de abajo
+    if(boss.getGlobalBounds().top + boss.getGlobalBounds().height >= window.getSize().y - 25) {
+        boss.resetSpeed();
+        boss.setPosition(boss.getGlobalBounds().left, window.getSize().y - boss.getGlobalBounds().height - 25);
+    }
+
+    //Colision al tocar la parte derecha
+    if(boss.getGlobalBounds().left + boss.getGlobalBounds().width >= 1360*level.getInstance()){
+        if(boss.getPosition().x >= 1360*level.getInstance()){
+            boss.setPosition(1360*level.getInstance(), boss.getPosition().y);
+        }else {
+            boss.setPosition(1360 * level.getInstance() - boss.getGlobalBounds().width, boss.getPosition().y);
+        };
+    }
+    // Colision al tocar la parte izquierda
+    if(boss.getGlobalBounds().left < (1360*level.getInstance() - 1360)){
+        if(boss.getPosition().x < (1360*level.getInstance() - 1360)){
+            boss.setPosition(1360*level.getInstance() - 1360, boss.getPosition().y);
+        }else {
+            boss.setPosition(0, boss.getPosition().y);
+        }
+    }
+
+}

@@ -66,7 +66,9 @@ public:
 
     //Funciones
     void attack();
+    void attackAnimation();
     void move(const float dir_x, const float dir_y);
+    void resetSpeed();
     void belowHalfLife();
     void update();
     void updateMiddlePoint();
