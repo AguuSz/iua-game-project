@@ -25,6 +25,7 @@ private:
     short animState;
     IntRect currentFrame;
     float scaleFactor;
+    bool isGoing;
 
     // Texturas
     Sprite sprite;
@@ -36,6 +37,7 @@ private:
     int movementLenght = 100;
     int direction = 0;
     int timeout = 0;
+    bool moving;
 
     //Extras
     Vector2f middlePoint;
