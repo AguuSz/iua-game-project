@@ -60,7 +60,7 @@ void Engine::checkForBossColisions(){
 // Colision al tocar la parte de abajo
     if(boss.getGlobalBounds().top + boss.getGlobalBounds().height >= window.getSize().y - 25) {
         boss.resetSpeed();
-        boss.setPosition(boss.getGlobalBounds().left, window.getSize().y - boss.getGlobalBounds().height - 25);
+         boss.setPosition(boss.getGlobalBounds().left, window.getSize().y - boss.getGlobalBounds().height - 25);
     }
 
     //Colision al tocar la parte derecha

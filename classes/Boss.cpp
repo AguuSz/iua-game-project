@@ -64,6 +64,15 @@ void Boss::move(const float dir_x, const float dir_y) {
     position.y += dir_y * speed;
     sprite.setPosition(position);
 }
+
+void Boss::setPosition(const float x, const float y) {
+    position.x = x;
+    position.y = y;
+}
+
+void Boss::resetSpeed(){
+    speed = 0;
+};
 void Boss::updateMovement(){
 
     if(timeout-- <= 0) {
@@ -96,7 +105,7 @@ void Boss::updateMovement(){
 void Boss::updateAnimations() {
     IntRect tempFrame;
     // Animacion IDLE
-    if (animState == BOSS_ANIMATION_STATES::IDLE1) {
+    if (animState == BOSS_ANIMATION_STATES::MOVING || animState == BOSS_ANIMATION_STATES::IDLE1) {
         moving = false;
         // Cuando pasa medio segundo, ahi recien que empieze a animar
         if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
@@ -112,8 +121,20 @@ void Boss::updateAnimations() {
             sprite.setTextureRect(currentFrame);
 
         }
+    } else {
+        animationTimer.restart();
     }
-    else if (animState == BOSS_ANIMATION_STATES::MOVING) {
+}
+
+void Boss::attack(){
+    //ataque del boss
+}
+
+void Boss::attackAnimation() {
+
+    IntRect tempFrame;
+
+    if (animState == BOSS_ANIMATION_STATES::MOVING) {
         if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
             // Hacemos que se posicione en la 2da fila de nuestro sheet
             currentFrame.top = 80.f;
@@ -126,16 +147,13 @@ void Boss::updateAnimations() {
                     // Cargamos la textura como sprite
                     tempFrame = IntRect(currentFrame.left, currentFrame.top, 70, 60);
                     currentFrame = tempFrame;
-                }
-                else if (currentFrame.left == 320.f) {
+                } else if (currentFrame.left == 320.f) {
                     tempFrame = IntRect(currentFrame.left + 40, currentFrame.top, 76, 60);
                     currentFrame = tempFrame;
-                }
-                else if (currentFrame.left == 440.f ) {
+                } else if (currentFrame.left == 440.f) {
                     tempFrame = IntRect(currentFrame.left + 40, currentFrame.top, 76, 60);
                     currentFrame = tempFrame;
-                }
-                else if (currentFrame.left >= 560.f) {
+                } else if (currentFrame.left >= 560.f) {
                     // Reinicio de animacion
                     isGoing = false;
                     currentFrame.left = 480.f;
@@ -146,16 +164,13 @@ void Boss::updateAnimations() {
                     // Cargamos la textura como sprite
                     tempFrame = IntRect(360.f, currentFrame.top, 70, 60);
                     currentFrame = tempFrame;
-                }
-                else if (currentFrame.left == 360.f) {
+                } else if (currentFrame.left == 360.f) {
                     tempFrame = IntRect(240.f, currentFrame.top, 76, 60);
                     currentFrame = tempFrame;
-                }
-                else if (currentFrame.left == 240.f ) {
+                } else if (currentFrame.left == 240.f) {
                     tempFrame = IntRect(160.f, currentFrame.top, 76, 60);
                     currentFrame = tempFrame;
-                }
-                else if (currentFrame.left <= 160.f) {
+                } else if (currentFrame.left <= 160.f) {
                     // Reinicio de animacion
                     currentFrame = IntRect(0, 0, 40, 60);
                     animState = BOSS_ANIMATION_STATES::IDLE1;
@@ -168,14 +183,9 @@ void Boss::updateAnimations() {
             animationTimer.restart();
             sprite.setTextureRect(currentFrame);
         }
-    } else {
-        animationTimer.restart();
-        }
+    }
 }
 
-void Boss::attack(){
-    //ataque del boss
-}
 void Boss::belowHalfLife() {
     damageMultiplier *= 3;
     projectileSpeed *= 2;
