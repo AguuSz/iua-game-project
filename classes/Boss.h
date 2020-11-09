@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
-//#include "Habilidad.h"
+#include "Bullet.h"
+
 
 enum BOSS_ANIMATION_STATES {IDLE1 = 0, MOVING};
 
@@ -37,7 +38,14 @@ private:
     int movementLenght = 100;
     int direction = 0;
     int timeout = 0;
+    int timeoutHability = 0;
     bool moving;
+
+    //Ataque
+    Bullet bossHability;
+    std::vector<Bullet> bossProyectiles;
+    float bossShootingDelay;
+    Clock bossShootingTimer;
 
     //Extras
     Vector2f middlePoint;
@@ -67,15 +75,16 @@ public:
     void resetVelocityX();
 
     //Funciones
-    void attack();
     void attackAnimation();
     void move(const float dir_x, const float dir_y);
     void resetSpeed();
+    bool isMoving();
     void belowHalfLife();
     void update();
     void updateMiddlePoint();
     void updateMovement();
     void updateAnimations();
+    void updateShooting(Vector2f playerPosition);
     void setBossLookingRight(bool lookRight);
 
     // Dev

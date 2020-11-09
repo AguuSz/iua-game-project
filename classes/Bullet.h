@@ -4,6 +4,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#pragma once
+
 using namespace sf;
 
 class Bullet {

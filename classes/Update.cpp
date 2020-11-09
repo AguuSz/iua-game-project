@@ -17,6 +17,7 @@ void Engine::update() {
     for (size_t i = 0; i < bullets.size(); i++) {
         bullets[i].sprite.move(bullets[i].currVelocity);
     }
+
 }
 
 void Engine::updateMousePosition() {

@@ -12,6 +12,8 @@ Boss::Boss() {
     initSprite();
     initAnimations();
     //initPhysics();
+    bossShootingDelay = 0.1f;
+    bossShootingTimer.restart();
 
 }
 
@@ -121,13 +123,10 @@ void Boss::updateAnimations() {
             sprite.setTextureRect(currentFrame);
 
         }
+
     } else {
         animationTimer.restart();
     }
-}
-
-void Boss::attack(){
-    //ataque del boss
 }
 
 void Boss::attackAnimation() {
@@ -186,6 +185,11 @@ void Boss::attackAnimation() {
     }
 }
 
+bool Boss::isMoving(){
+
+    return moving;
+}
+
 void Boss::belowHalfLife() {
     damageMultiplier *= 3;
     projectileSpeed *= 2;
@@ -196,6 +200,8 @@ void Boss::update() {
     updateMovement();
     updateAnimations();
     updateMiddlePoint();
+    //updateShooting(playerPosition);
+
 }
 
 const FloatRect Boss::getGlobalBounds() const {
@@ -210,6 +216,20 @@ void Boss::updateMiddlePoint() {
     middlePoint.x = getGlobalBounds().left + getGlobalBounds().width / 2;
     middlePoint.y = getGlobalBounds().top + getGlobalBounds().height / 2;
 }
+
+void Boss::updateShooting(Vector2f playerPosition){
+    //Habilidad Boss
+    if (timeoutHability-- <= 0) {
+        timeoutHability = 500;
+    }
+    if (bossShootingTimer.getElapsedTime().asSeconds() >= bossShootingDelay) {
+        bossHability.sprite.setPosition(getMiddlePoint().x, getMiddlePoint().y - 15);
+        bossHability.currVelocity = playerPosition * bossHability.maxSpeed;
+
+        bossProyectiles.emplace_back(bossHability);
+        bossShootingTimer.restart();
+    }
+};
 
 RectangleShape Boss::bossBox() {
     // Funcion solo utilizada para el desarrollo del juego
