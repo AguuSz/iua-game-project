@@ -8,7 +8,7 @@ void Engine::draw() {
     window.clear();
 
     // Vista que sigue al jugador
-    view.setCenter(player.getMiddlePoint().x, window.getSize().y / 2);
+    view.setCenter(player.getMiddlePoint().x, window.getSize().y / 2 +40);
     window.setView(view);
 
     // Dibuja el fondo

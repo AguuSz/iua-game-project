@@ -8,12 +8,14 @@ using namespace sf;
 Engine::Engine() {
     // Setea la resolucion con la que se va a jugar
     Vector2f resolution;
-    resolution.x = VideoMode().getDesktopMode().width;
-    resolution.y = VideoMode().getDesktopMode().height;
+    /*resolution.x = VideoMode().getDesktopMode().width;
+    resolution.y = VideoMode().getDesktopMode().height;*/
+    resolution.x = 1360;
+    resolution.y = 766;
 
     window.create(VideoMode(resolution.x, resolution.y),
                   "IUA Game project",
-                  Style::Fullscreen);
+                  Style::Default);
 
     window.setFramerateLimit(60);
 
@@ -22,7 +24,7 @@ Engine::Engine() {
     setMouseSprite();
     setMouseHitbox();
 
-    view.reset(FloatRect(300, 300, (resolution.x / 16) * 15, (resolution.y / 9) * 10));
+    view.reset(FloatRect(300, 300, (resolution.x / 16) * 14, (resolution.y / 9) * 10));
 
     shootingDelay = 0.1f;
     shootingTimer.restart();
