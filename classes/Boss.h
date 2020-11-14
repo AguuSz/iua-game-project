@@ -34,7 +34,7 @@ private:
 
     //Fisicas
     Vector2f position;
-    int speed = 1;
+    int speed;
     int movementLenght = 100;
     int direction = 0;
     int timeout = 0;
@@ -70,7 +70,7 @@ public:
     const FloatRect getGlobalBounds() const;
 
     //Modificadores
-    void setPosition(const float x, const float y);
+    void setPosition(int x, int y);
     void resetVelocityY();
     void resetVelocityX();
 
@@ -84,7 +84,7 @@ public:
     void updateMiddlePoint();
     void updateMovement();
     void updateAnimations();
-    void updateShooting(Vector2f playerPosition);
+    void updateShooting(Vector2f &playerPosition);
     void setBossLookingRight(bool lookRight);
 
     // Dev

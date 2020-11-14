@@ -8,10 +8,6 @@
 
 class Level {
 private:
-    // Fondo
-    // Mapa mapa; Fdlta crear la clase, pero por ahora utilizaremos un fondo estatico
-    // Jefe boss
-    Boss boss;
     Sprite tileMapSprite[476][8];
     Texture tileMapTexture;
     Sprite bkgSprite;
@@ -28,6 +24,7 @@ private:
 public:
     // Seccion enemigos
     std::list<Enemy> enemies;
+    Boss boss;
 
     // Constructor
     Level();

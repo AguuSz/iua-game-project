@@ -26,14 +26,11 @@ void Boss::initVariables(){
     isInvincible = false;
     moving = false;
     isGoing = true;
+    speed = 1;
 
     scaleFactor = 4;
-    animState = IDLE1;
-
-    position.x = 300;
-    position.y = 200;
-    middlePoint.x = getGlobalBounds().left + getGlobalBounds().width / 2;
-    middlePoint.y = getGlobalBounds().top + getGlobalBounds().height / 2;
+    animState = BOSS_ANIMATION_STATES::IDLE1;
+    position = Vector2f(50, 50);
 }
 
 void Boss::initTexture() {
@@ -50,7 +47,9 @@ void Boss::initSprite() {
     sprite.setTextureRect(currentFrame);
 
     // Reescalando la textura
-    sprite.scale(scaleFactor, scaleFactor);
+    sprite.setScale(scaleFactor, scaleFactor);
+
+    sprite.setPosition(position);
 }
 
 void Boss::initAnimations() {
@@ -62,14 +61,16 @@ Sprite Boss::getSprite() {
 }
 
 void Boss::move(const float dir_x, const float dir_y) {
-    position.x += dir_x * speed;
-    position.y += dir_y * speed;
+    this->position.x += dir_x * speed;
+    this->position.y += dir_y * speed;
     sprite.setPosition(position);
 }
 
-void Boss::setPosition(const float x, const float y) {
-    position.x = x;
-    position.y = y;
+void Boss::setPosition(int x, int y) {
+    this->position.x = x;
+    this->position.y = y;
+
+    sprite.setPosition(position);
 }
 
 void Boss::resetSpeed(){
@@ -78,7 +79,7 @@ void Boss::resetSpeed(){
 void Boss::updateMovement(){
 
     if(timeout-- <= 0) {
-        direction = rand() % 10 + 1;
+        direction = rand() % 6 + 1;
         timeout = rand() % 100;
     }
     if (!moving) {
@@ -102,6 +103,7 @@ void Boss::updateMovement(){
                 break;
         }
     }
+    sprite.setPosition(position);
 }
 
 void Boss::updateAnimations() {
@@ -199,7 +201,6 @@ void Boss::update() {
 
     updateMovement();
     updateAnimations();
-    updateMiddlePoint();
     //updateShooting(playerPosition);
 
 }
@@ -212,12 +213,7 @@ const Vector2f Boss::getMiddlePoint() const {
     return middlePoint;
 }
 
-void Boss::updateMiddlePoint() {
-    middlePoint.x = getGlobalBounds().left + getGlobalBounds().width / 2;
-    middlePoint.y = getGlobalBounds().top + getGlobalBounds().height / 2;
-}
-
-void Boss::updateShooting(Vector2f playerPosition){
+void Boss::updateShooting(Vector2f &playerPosition){
     //Habilidad Boss
     if (timeoutHability-- <= 0) {
         timeoutHability = 500;

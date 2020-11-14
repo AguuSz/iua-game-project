@@ -75,7 +75,7 @@ void Level::draw(RenderWindow &window) {
     // Dibuja enemigos
     for (auto &e : enemies) {
         window.draw(e.getSprite());
-        window.draw(e.getEnemyHitbox());
+//        window.draw(e.getEnemyHitbox());
     }
     window.draw(boss.getSprite());
     window.draw(boss.bossBox());
@@ -106,11 +106,11 @@ void Level::spawnEnemies() {
     int totalFlyingEye = 20;
 
     for (int i = 0; i < totalGoblins; i++) {
-        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(250 + 110 * i, 550), false);
+        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(250 + 110 * i, 1500), false);
     }
 
     for (int i = 0; i < totalMushrooms; i++) {
-        enemies.emplace_back("../assets/enemies/Mushroom/mushroomSheet.png", Vector2f(250 + 110 * i, 410), false);
+        enemies.emplace_back("../assets/enemies/Mushroom/mushroomSheet.png", Vector2f(250 + 110 * i, 1500), false);
     }
 
     for (int i = 0; i < totalFlyingEye; i++) {

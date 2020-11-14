@@ -52,32 +52,48 @@ void Engine::checkForCollisions() {
             // Si el player choca con alguno de los enemigos
 
         }
-    }
-}
-void Engine::checkForBossColisions(){
 
-    //Limites jefe
-// Colision al tocar la parte de abajo
-    if(boss.getGlobalBounds().top + boss.getGlobalBounds().height >= window.getSize().y - 25) {
-        boss.resetSpeed();
-         boss.setPosition(boss.getGlobalBounds().left, window.getSize().y - boss.getGlobalBounds().height - 25);
-    }
+        // El enemigo se choco con la parte izquierda de la pantalla o instancia
+        if (e.getSprite().getGlobalBounds().left <= (1360*level.getInstance() - 1360)) {
+            e.setPosition(1360*level.getInstance() - 1360, e.getSprite().getGlobalBounds().top);
+        }
 
-    //Colision al tocar la parte derecha
-    if(boss.getGlobalBounds().left + boss.getGlobalBounds().width >= 1360*level.getInstance()){
-        if(boss.getPosition().x >= 1360*level.getInstance()){
-            boss.setPosition(1360*level.getInstance(), boss.getPosition().y);
-        }else {
-            boss.setPosition(1360 * level.getInstance() - boss.getGlobalBounds().width, boss.getPosition().y);
-        };
-    }
-    // Colision al tocar la parte izquierda
-    if(boss.getGlobalBounds().left < (1360*level.getInstance() - 1360)){
-        if(boss.getPosition().x < (1360*level.getInstance() - 1360)){
-            boss.setPosition(1360*level.getInstance() - 1360, boss.getPosition().y);
-        }else {
-            boss.setPosition(0, boss.getPosition().y);
+        // El enemigo se choco con la parte derecha de la pantalla o instancia
+        if (e.getSprite().getGlobalBounds().left + e.getSprite().getGlobalBounds().width >= 1360*level.getInstance()) {
+            e.setPosition(1360*level.getInstance() - e.getSprite().getGlobalBounds().width, e.getSprite().getGlobalBounds().top);
+        }
+
+        // El enemigo se choco con el techo de la pantalla o instancia
+        if (e.getSprite().getGlobalBounds().top <= 0) {
+            e.setPosition(e.getSprite().getGlobalBounds().left, 0);
+        }
+
+        // El enemigo se choco con el piso de la pantalla o instancia
+        if (e.getSprite().getGlobalBounds().top + e.getSprite().getGlobalBounds().height >= window.getSize().y - 15) {
+            e.setPosition(e.getSprite().getGlobalBounds().left, window.getSize().y - 15 - e.getSprite().getGlobalBounds().height);
         }
     }
 
+    // Jefe colisionando con nivel
+    // El jefe se choco con la parte izquierda de la pantalla o instancia
+    if (level.boss.getSprite().getGlobalBounds().left <= (1360*level.getInstance() - 1360)) {
+        level.boss.setPosition(1360*level.getInstance() - 1360, level.boss.getSprite().getGlobalBounds().top);
+    }
+
+    // El jefe se choco con la parte derecha de la pantalla o instancia
+    if (level.boss.getSprite().getGlobalBounds().left + level.boss.getSprite().getGlobalBounds().width >= 1360*level.getInstance()) {
+        level.boss.setPosition(1360*level.getInstance() - level.boss.getSprite().getGlobalBounds().width, level.boss.getSprite().getGlobalBounds().top);
+    }
+
+    // El jefe se choco con el techo de la pantalla o instancia
+    if (level.boss.getSprite().getGlobalBounds().top <= 0) {
+        level.boss.setPosition(level.boss.getSprite().getGlobalBounds().left, 0);
+    }
+
+    // El jefe se choco con el piso de la pantalla o instancia
+    if (level.boss.getSprite().getGlobalBounds().top + level.boss.getSprite().getGlobalBounds().height >= window.getSize().y - 25) {
+        level.boss.setPosition(level.boss.getSprite().getGlobalBounds().left, window.getSize().y - 25 - level.boss.getSprite().getGlobalBounds().height);
+    }
+
+    std::cout << "X: " << level.boss.getSprite().getGlobalBounds().left << " | Y:" << level.boss.getSprite().getGlobalBounds().top << "\n";
 }

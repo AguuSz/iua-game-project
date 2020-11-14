@@ -73,7 +73,6 @@ void Player::move(const float dir_x) {
 
 void Player::jump() {
     isJumping = true;
-    speed.x = 7.f;
     speed.y = -30.f;
 }
 
