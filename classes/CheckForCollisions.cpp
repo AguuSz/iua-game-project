@@ -76,24 +76,22 @@ void Engine::checkForCollisions() {
 
     // Jefe colisionando con nivel
     // El jefe se choco con la parte izquierda de la pantalla o instancia
-    if (level.boss.getSprite().getGlobalBounds().left <= (1360*level.getInstance() - 1360)) {
-        level.boss.setPosition(1360*level.getInstance() - 1360, level.boss.getSprite().getGlobalBounds().top);
+    if (level.boss->getSprite().getGlobalBounds().left <= (1360*level.getInstance() - 1360)) {
+        level.boss->setPosition(1360*level.getInstance() - 1360, level.boss->getSprite().getGlobalBounds().top);
     }
 
     // El jefe se choco con la parte derecha de la pantalla o instancia
-    if (level.boss.getSprite().getGlobalBounds().left + level.boss.getSprite().getGlobalBounds().width >= 1360*level.getInstance()) {
-        level.boss.setPosition(1360*level.getInstance() - level.boss.getSprite().getGlobalBounds().width, level.boss.getSprite().getGlobalBounds().top);
+    if (level.boss->getSprite().getGlobalBounds().left + level.boss->getSprite().getGlobalBounds().width >= 1360*level.getInstance()) {
+        level.boss->setPosition(1360*level.getInstance() - level.boss->getSprite().getGlobalBounds().width, level.boss->getSprite().getGlobalBounds().top);
     }
 
     // El jefe se choco con el techo de la pantalla o instancia
-    if (level.boss.getSprite().getGlobalBounds().top <= 0) {
-        level.boss.setPosition(level.boss.getSprite().getGlobalBounds().left, 0);
+    if (level.boss->getSprite().getGlobalBounds().top <= 0) {
+        level.boss->setPosition(level.boss->getSprite().getGlobalBounds().left, 0);
     }
 
     // El jefe se choco con el piso de la pantalla o instancia
-    if (level.boss.getSprite().getGlobalBounds().top + level.boss.getSprite().getGlobalBounds().height >= window.getSize().y - 25) {
-        level.boss.setPosition(level.boss.getSprite().getGlobalBounds().left, window.getSize().y - 25 - level.boss.getSprite().getGlobalBounds().height);
+    if (level.boss->getSprite().getGlobalBounds().top + level.boss->getSprite().getGlobalBounds().height >= window.getSize().y - 25) {
+        level.boss->setPosition(level.boss->getSprite().getGlobalBounds().left, window.getSize().y - 25 - level.boss->getSprite().getGlobalBounds().height);
     }
-
-    std::cout << "X: " << level.boss.getSprite().getGlobalBounds().left << " | Y:" << level.boss.getSprite().getGlobalBounds().top << "\n";
 }

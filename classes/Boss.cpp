@@ -26,6 +26,7 @@ void Boss::initVariables(){
     isInvincible = false;
     moving = false;
     isGoing = true;
+    isDead =  false;
     speed = 1;
 
     scaleFactor = 4;
@@ -125,8 +126,23 @@ void Boss::updateAnimations() {
             sprite.setTextureRect(currentFrame);
 
         }
+    }
+    else if(animState == BOSS_ANIMATION_STATES::DEAD) {
+        if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
+            currentFrame.top = 320.f; // 60 + 150 * linea en la que esta (en este caso 2)
+            currentFrame.left += 80.f;
 
-    } else {
+            // Cuando llega al final de la sheet vuelve al estado inactivo
+            if (currentFrame.left >= 720.f) {
+                isDead = true;
+            }
+
+            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+            animationTimer.restart();
+            sprite.setTextureRect(currentFrame);
+        }
+    }
+    else {
         animationTimer.restart();
     }
 }
@@ -251,4 +267,8 @@ void Boss::setBossLookingRight(bool lookRight) {
         sprite.setScale(-scaleFactor, scaleFactor);
         sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
     }
+}
+
+bool Boss::isBossDead() {
+    return isDead;
 }

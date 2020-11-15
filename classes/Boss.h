@@ -2,8 +2,9 @@
 #include <string>
 #include "Bullet.h"
 
+#pragma once
 
-enum BOSS_ANIMATION_STATES {IDLE1 = 0, MOVING};
+enum BOSS_ANIMATION_STATES {IDLE1 = 0, MOVING, TAKEHIT, SHOOTING, DEAD};
 
 using namespace sf;
 
@@ -16,6 +17,7 @@ private:
     int currentHp;
     int maxHp;
     bool isInvincible;
+    bool isDead;
 
     //Propiedades de los ataques del jefe
     float projectileSpeed;
@@ -68,6 +70,7 @@ public:
     Sprite getSprite();
     const Vector2f getMiddlePoint() const;
     const FloatRect getGlobalBounds() const;
+    bool isBossDead();
 
     //Modificadores
     void setPosition(int x, int y);

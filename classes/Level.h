@@ -24,7 +24,7 @@ private:
 public:
     // Seccion enemigos
     std::list<Enemy> enemies;
-    Boss boss;
+    Boss *boss = new Boss;
 
     // Constructor
     Level();

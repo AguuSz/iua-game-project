@@ -77,27 +77,38 @@ void Level::draw(RenderWindow &window) {
         window.draw(e.getSprite());
 //        window.draw(e.getEnemyHitbox());
     }
-    window.draw(boss.getSprite());
-    window.draw(boss.bossBox());
+    window.draw(boss->getSprite());
+//    window.draw(boss.bossBox());
 }
 
 void Level::update(Player &player) {
     // Actualizan los enemigos
-    for (auto &e : enemies) {
-        e.update();
+    for (auto e = enemies.begin(); e != enemies.end();) {
 
-        if (!e.ignorePlayerPosition) {
+        e->update();
+
+        if (!e->ignorePlayerPosition) {
             // Si no esta ignorando la posicion del jugador, el enemigo mirara hacia el jugador
-            if (player.getPosition().x < e.getPosition().x) {
+            if (player.getPosition().x < e->getPosition().x) {
                 // Player a la izquierda del enemigo
-                e.setEnemyLookingRight(false);
+                e->setEnemyLookingRight(false);
             } else {
                 // Player a la derecha del enemigo
-                e.setEnemyLookingRight(true);
+                e->setEnemyLookingRight(true);
             }
         }
+
+        if (e->isDead) {
+            enemies.erase(e);
+            break;
+        } else {
+            ++e;
+        }
     }
-    boss.update();
+    boss->update();
+    if (boss->isBossDead()) {
+        delete[] boss;
+    }
 }
 
 void Level::spawnEnemies() {

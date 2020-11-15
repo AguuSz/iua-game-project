@@ -12,6 +12,7 @@ Enemy::Enemy() {
     isInvincible = false;
     ignorePlayerPosition = false;
     cannotMove = false;
+    isDead = false;
 
     animState = ENEMY_ANIMATION_STATES::INACTIVE;
     scaleFactor = 2.5f;
@@ -107,8 +108,7 @@ void Enemy::updateAnimations() {
             // Cuando llega al final de la sheet vuelve al estado inactivo
             if (currentFrame.left >= 540.f) {
                 isInvincible = false;
-                currentFrame.left = 55.f;
-                animState = ENEMY_ANIMATION_STATES::INACTIVE;
+                isDead = true;
             }
 
             // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
@@ -207,11 +207,8 @@ void Enemy::damage() {
 
     // Luego de 5 balas, el enemigo muere
     currentHp -= 2;
-    std::cout << currentHp << "\n";
     if (currentHp <= 0) {
         // Muere
-        // Aca iria la animacion de muerte, la destruccion del objeto, contadorEnemigosLvl--;
-        currentHp = maxHp;
         animState = ENEMY_ANIMATION_STATES::DEATH;
     }
 }
@@ -228,6 +225,10 @@ void Enemy::setEnemyLookingRight(bool lookRight) {
 
 Vector2f Enemy::getPosition() {
     return position;
+}
+
+bool Enemy::dead() {
+    return isDead;
 }
 
 

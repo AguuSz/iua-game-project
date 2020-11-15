@@ -19,6 +19,7 @@ public:
     int maxHp;
     int currentHp;
     bool isInvincible;
+    bool isDead;
 
     // Animaciones
     Clock animationTimer;
@@ -64,6 +65,7 @@ public:
     // Sprite para dibujar
     Sprite getSprite() const;
     Vector2f getPosition();
+    bool dead();
 
     // Setters
     void setTexture(String directory);
