@@ -3,6 +3,7 @@
 //
 
 #include <SFML/Graphics.hpp>
+#include "Hearth.h"
 
 using namespace sf;
 
@@ -56,6 +57,7 @@ public:
     Sprite getSprite();
     const Vector2f getMiddlePoint() const;
     const FloatRect getGlobalBounds() const;
+    Sprite getHearthSprite();
 
     // Modificadores
     void setPosition(const float x, const float y);

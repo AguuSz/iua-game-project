@@ -44,6 +44,12 @@ void Engine::checkForCollisions() {
                 }
             }
         }
+        if (bullets[i].sprite.getGlobalBounds().intersects(level.boss->getSprite().getGlobalBounds())) {
+            if (!level.boss->isInvincible()) {
+                bullets.erase(bullets.begin() + i);
+                level.boss->damage();
+            }
+        }
 
     }
 

@@ -77,6 +77,7 @@ void Level::draw(RenderWindow &window) {
         window.draw(e.getSprite());
 //        window.draw(e.getEnemyHitbox());
     }
+
     window.draw(boss->getSprite());
 //    window.draw(boss.bossBox());
 }
@@ -105,10 +106,14 @@ void Level::update(Player &player) {
             ++e;
         }
     }
-    boss->update();
-    if (boss->isBossDead()) {
-        delete[] boss;
+
+    if (player.getPosition().x < boss->getPosition().x) {
+        boss->setBossLookingRight(true);
+    } else {
+        boss->setBossLookingRight(false);
     }
+
+    boss->update();
 }
 
 void Level::spawnEnemies() {
@@ -116,17 +121,17 @@ void Level::spawnEnemies() {
     int totalMushrooms = 6;
     int totalFlyingEye = 20;
 
-    for (int i = 0; i < totalGoblins; i++) {
-        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(250 + 110 * i, 1500), false);
-    }
-
-    for (int i = 0; i < totalMushrooms; i++) {
-        enemies.emplace_back("../assets/enemies/Mushroom/mushroomSheet.png", Vector2f(250 + 110 * i, 1500), false);
-    }
-
-    for (int i = 0; i < totalFlyingEye; i++) {
-        enemies.emplace_back("../assets/enemies/Flying Eye/flyingEyeSheet.png", Vector2f(250 + 110 * i, 270), true);
-    }
+//    for (int i = 0; i < totalGoblins; i++) {
+//        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(250 + 110 * i, 1500), false);
+//    }
+//
+//    for (int i = 0; i < totalMushrooms; i++) {
+//        enemies.emplace_back("../assets/enemies/Mushroom/mushroomSheet.png", Vector2f(250 + 110 * i, 1500), false);
+//    }
+//
+//    for (int i = 0; i < totalFlyingEye; i++) {
+//        enemies.emplace_back("../assets/enemies/Flying Eye/flyingEyeSheet.png", Vector2f(250 + 110 * i, 270), true);
+//    }
 
     for(auto &e : enemies) {
         e.setScaleFactor(2);

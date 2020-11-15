@@ -258,3 +258,7 @@ void Player::setPlayerLookingRight(bool lookRight) {
     }
 }
 
+Sprite Player::getHearthSprite() {
+    return sprite;
+}
+

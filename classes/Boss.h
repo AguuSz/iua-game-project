@@ -12,16 +12,11 @@ class Boss {
 
 private:
 
-    String name;
     // Vida del jefe
     int currentHp;
     int maxHp;
-    bool isInvincible;
+    bool invincible;
     bool isDead;
-
-    //Propiedades de los ataques del jefe
-    float projectileSpeed;
-    float damageMultiplier;
 
     // Animaciones
     Clock animationTimer;
@@ -29,6 +24,7 @@ private:
     IntRect currentFrame;
     float scaleFactor;
     bool isGoing;
+    bool cannotMove;
 
     // Texturas
     Sprite sprite;
@@ -37,7 +33,6 @@ private:
     //Fisicas
     Vector2f position;
     int speed;
-    int movementLenght = 100;
     int direction = 0;
     int timeout = 0;
     int timeoutHability = 0;
@@ -49,18 +44,11 @@ private:
     float bossShootingDelay;
     Clock bossShootingTimer;
 
-    //Extras
-    Vector2f middlePoint;
-
-    // Dev
-    RectangleShape box;
-
     // Nucleo
     void initVariables();
     void initSprite();
     void initTexture();
     void initAnimations();
-    void initPhysics();
 
 public:
     // Constructor
@@ -68,30 +56,20 @@ public:
 
     // Mandar el sprite a cualquier funcion que lo llame
     Sprite getSprite();
-    const Vector2f getMiddlePoint() const;
-    const FloatRect getGlobalBounds() const;
+    Vector2f getPosition();
     bool isBossDead();
+    bool isInvincible();
+    bool isMoving();
 
     //Modificadores
     void setPosition(int x, int y);
-    void resetVelocityY();
-    void resetVelocityX();
 
     //Funciones
-    void attackAnimation();
-    void move(const float dir_x, const float dir_y);
-    void resetSpeed();
-    bool isMoving();
-    void belowHalfLife();
     void update();
-    void updateMiddlePoint();
     void updateMovement();
     void updateAnimations();
     void updateShooting(Vector2f &playerPosition);
+    void move(const float dir_x, const float dir_y);
+    void damage();
     void setBossLookingRight(bool lookRight);
-
-    // Dev
-    RectangleShape bossBox();
-
-    Vector2f getPosition();
 };

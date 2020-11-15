@@ -14,7 +14,6 @@ void Engine::draw() {
     // Dibuja el fondo
     level.draw(window);
     window.draw(player.getSprite());
-    window.draw(player.playerBox());
 
     // Dibuja las balas que haya en el array bullets
     for (auto & bullet : bullets) {

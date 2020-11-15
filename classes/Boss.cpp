@@ -22,11 +22,12 @@ Boss::Boss() {
 void Boss::initVariables(){
     //vida
     maxHp = 100;
-    currentHp = 100;
-    isInvincible = false;
+    currentHp = 20;
+    invincible = false;
     moving = false;
     isGoing = true;
     isDead =  false;
+    cannotMove = false;
     speed = 1;
 
     scaleFactor = 4;
@@ -61,10 +62,20 @@ Sprite Boss::getSprite() {
     return sprite;
 }
 
-void Boss::move(const float dir_x, const float dir_y) {
-    this->position.x += dir_x * speed;
-    this->position.y += dir_y * speed;
-    sprite.setPosition(position);
+Vector2f Boss::getPosition() {
+    return this->position;
+}
+
+bool Boss::isBossDead() {
+    return isDead;
+}
+
+bool Boss::isInvincible() {
+    return invincible;
+}
+
+bool Boss::isMoving(){
+    return moving;
 }
 
 void Boss::setPosition(int x, int y) {
@@ -74,16 +85,20 @@ void Boss::setPosition(int x, int y) {
     sprite.setPosition(position);
 }
 
-void Boss::resetSpeed(){
-    speed = 0;
-};
+void Boss::update() {
+
+    updateMovement();
+    updateAnimations();
+    //updateShooting(playerPosition);
+}
+
 void Boss::updateMovement(){
 
     if(timeout-- <= 0) {
         direction = rand() % 6 + 1;
         timeout = rand() % 100;
     }
-    if (!moving) {
+    if (!cannotMove) {
         switch (direction) {
             case 1:
                 move(0, 2);
@@ -127,31 +142,7 @@ void Boss::updateAnimations() {
 
         }
     }
-    else if(animState == BOSS_ANIMATION_STATES::DEAD) {
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
-            currentFrame.top = 320.f; // 60 + 150 * linea en la que esta (en este caso 2)
-            currentFrame.left += 80.f;
-
-            // Cuando llega al final de la sheet vuelve al estado inactivo
-            if (currentFrame.left >= 720.f) {
-                isDead = true;
-            }
-
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
-            animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
-        }
-    }
-    else {
-        animationTimer.restart();
-    }
-}
-
-void Boss::attackAnimation() {
-
-    IntRect tempFrame;
-
-    if (animState == BOSS_ANIMATION_STATES::MOVING) {
+    else if (animState == BOSS_ANIMATION_STATES::MOVING) {
         if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
             // Hacemos que se posicione en la 2da fila de nuestro sheet
             currentFrame.top = 80.f;
@@ -201,32 +192,39 @@ void Boss::attackAnimation() {
             sprite.setTextureRect(currentFrame);
         }
     }
-}
+    else if (animState == BOSS_ANIMATION_STATES::TAKEHIT) {
+        if (animationTimer.getElapsedTime().asSeconds() >= 0.30f) {
+            currentFrame.top = 160.f; // 60 + 150 * linea en la que esta (en este caso 2)
+            currentFrame.left += 80.f;
 
-bool Boss::isMoving(){
+            // Cuando llega al final de la sheet vuelve al estado inactivo
+            if (currentFrame.left >= 120.f) {
+                invincible = false;
+                cannotMove = false;
+                currentFrame.left = 0.f;
+                animState = BOSS_ANIMATION_STATES::IDLE1;
+            }
 
-    return moving;
-}
+            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+            animationTimer.restart();
+            sprite.setTextureRect(currentFrame);
+        }
+    }
+    else if (animState == BOSS_ANIMATION_STATES::DEAD) {
+        if (animationTimer.getElapsedTime().asSeconds() >= 0.25f) {
+            currentFrame.top = 321.f; // 60 + 150 * linea en la que esta (en este caso 4)
+            currentFrame.left += 80.f;
 
-void Boss::belowHalfLife() {
-    damageMultiplier *= 3;
-    projectileSpeed *= 2;
-}
+            // Cuando llega al final de la sheet vuelve al estado inactivo
+            if (currentFrame.left >= 720.f) {
+                isDead = true;
+            }
 
-void Boss::update() {
-
-    updateMovement();
-    updateAnimations();
-    //updateShooting(playerPosition);
-
-}
-
-const FloatRect Boss::getGlobalBounds() const {
-    return sprite.getGlobalBounds();
-}
-
-const Vector2f Boss::getMiddlePoint() const {
-    return middlePoint;
+            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+            animationTimer.restart();
+            sprite.setTextureRect(currentFrame);
+        }
+    }
 }
 
 void Boss::updateShooting(Vector2f &playerPosition){
@@ -243,20 +241,24 @@ void Boss::updateShooting(Vector2f &playerPosition){
     }
 };
 
-RectangleShape Boss::bossBox() {
-    // Funcion solo utilizada para el desarrollo del juego
-    // Nos devuelve un rectangulo con el tamanio del sprite del boss
-    box.setSize(Vector2f(getGlobalBounds().width, getGlobalBounds().height));
-    box.setOutlineColor(Color::Red);
-    box.setOutlineThickness(2);
-    box.setFillColor(Color::Transparent);
-    box.setPosition(getGlobalBounds().left, getGlobalBounds().top);
-
-    return box;
+void Boss::move(const float dir_x, const float dir_y) {
+    this->position.x += dir_x * speed;
+    this->position.y += dir_y * speed;
+    sprite.setPosition(position);
 }
 
-Vector2f Boss::getPosition() {
-    return this->position;
+void Boss::damage() {
+    invincible = true;
+    cannotMove = true;
+    currentFrame.left = 0;
+    animState = BOSS_ANIMATION_STATES::TAKEHIT;
+
+    // Luego de 5 balas, el enemigo muere
+    currentHp -= 2;
+    if (currentHp <= 0) {
+        // Muere
+        animState = BOSS_ANIMATION_STATES::DEAD;
+    }
 }
 
 void Boss::setBossLookingRight(bool lookRight) {
@@ -267,8 +269,4 @@ void Boss::setBossLookingRight(bool lookRight) {
         sprite.setScale(-scaleFactor, scaleFactor);
         sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
     }
-}
-
-bool Boss::isBossDead() {
-    return isDead;
 }
