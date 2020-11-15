@@ -195,10 +195,6 @@ void Enemy::updateMovement() {
     }
 }
 
-void Enemy::updateLife() {
-
-}
-
 void Enemy::damage() {
     isInvincible = true;
     cannotMove = true;

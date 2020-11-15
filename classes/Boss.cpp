@@ -233,7 +233,7 @@ void Boss::updateShooting(Vector2f &playerPosition){
         timeoutHability = 500;
     }
     if (bossShootingTimer.getElapsedTime().asSeconds() >= bossShootingDelay) {
-        bossHability.sprite.setPosition(getMiddlePoint().x, getMiddlePoint().y - 15);
+        bossHability.sprite.setPosition(sprite.getGlobalBounds().left, sprite.getGlobalBounds().top - 15);
         bossHability.currVelocity = playerPosition * bossHability.maxSpeed;
 
         bossProyectiles.emplace_back(bossHability);
