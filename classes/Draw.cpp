@@ -19,6 +19,9 @@ void Engine::draw() {
     for (auto & bullet : bullets) {
         window.draw(bullet.sprite);
     }
+    for (auto & bossBullet : level.boss->bossBullets) {
+        window.draw(bossBullet.sprite);
+    }
 
     // Dibujando la textura del mouse
     window.draw(drawMouse());

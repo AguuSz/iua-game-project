@@ -31,6 +31,8 @@ private:
     std::vector<Bullet> bullets;
     float shootingDelay;
     Clock shootingTimer;
+    Vector2f bossDir;
+    Vector2f bossDirNormalized;
 
     // Mouse
     Vector2i pixelPos;

@@ -18,6 +18,9 @@ void Engine::update() {
         bullets[i].sprite.move(bullets[i].currVelocity);
     }
 
+    for (size_t i = 0; i < level.boss->bossBullets.size(); i++) {
+        level.boss->bossBullets[i].sprite.move(level.boss->bossBullets[i].currVelocity);
+    }
 }
 
 void Engine::updateMousePosition() {

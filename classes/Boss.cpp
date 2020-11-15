@@ -12,7 +12,6 @@ Boss::Boss() {
     initSprite();
     initAnimations();
     //initPhysics();
-    bossShootingDelay = 0.1f;
     bossShootingTimer.restart();
 
 }
@@ -33,6 +32,8 @@ void Boss::initVariables(){
     scaleFactor = 4;
     animState = BOSS_ANIMATION_STATES::IDLE1;
     position = Vector2f(50, 50);
+
+    bossShootingTimer.restart();
 }
 
 void Boss::initTexture() {
@@ -78,6 +79,14 @@ bool Boss::isMoving(){
     return moving;
 }
 
+Vector2<float> Boss::getMiddlePoint() {
+
+    Vector2f middlePoint;
+    middlePoint.x = sprite.getGlobalBounds().left + sprite.getGlobalBounds().width / 2;
+    middlePoint.y = sprite.getGlobalBounds().top + sprite.getGlobalBounds().height / 2;
+    return middlePoint;
+}
+
 void Boss::setPosition(int x, int y) {
     this->position.x = x;
     this->position.y = y;
@@ -85,17 +94,19 @@ void Boss::setPosition(int x, int y) {
     sprite.setPosition(position);
 }
 
-void Boss::update() {
+void Boss::update(Player &player) {
 
     updateMovement();
     updateAnimations();
-    //updateShooting(playerPosition);
+
+    bossDir = player.getMiddlePoint();
+    bossDirNormalized = bossDir / static_cast<float>(sqrt(pow(bossDir.x, 2) + pow(bossDir.y, 2)));
 }
 
 void Boss::updateMovement(){
 
     if(timeout-- <= 0) {
-        direction = rand() % 6 + 1;
+        direction = rand() % 7 + 1;
         timeout = rand() % 100;
     }
     if (!cannotMove) {
@@ -113,6 +124,9 @@ void Boss::updateMovement(){
             case 4:
                 move(2, 0);
                 animState = BOSS_ANIMATION_STATES::MOVING;
+                break;
+            case 5:
+                attack();
                 break;
             default:
                 animState = BOSS_ANIMATION_STATES::IDLE1;
@@ -210,6 +224,23 @@ void Boss::updateAnimations() {
             sprite.setTextureRect(currentFrame);
         }
     }
+    else if (animState == BOSS_ANIMATION_STATES::SHOOTING) {
+        if (animationTimer.getElapsedTime().asSeconds() >= 0.10f) {
+            currentFrame.top = 239.f; // 60 + 150 * linea en la que esta (en este caso 2)
+            currentFrame.left += 80.f;
+
+            // Cuando llega al final de la sheet vuelve al estado inactivo
+            if (currentFrame.left >= 760.f) {
+                cannotMove = false;
+                currentFrame.left = 0.f;
+                animState = BOSS_ANIMATION_STATES::IDLE1;
+            }
+
+            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+            animationTimer.restart();
+            sprite.setTextureRect(currentFrame);
+        }
+    }
     else if (animState == BOSS_ANIMATION_STATES::DEAD) {
         if (animationTimer.getElapsedTime().asSeconds() >= 0.25f) {
             currentFrame.top = 321.f; // 60 + 150 * linea en la que esta (en este caso 4)
@@ -227,16 +258,13 @@ void Boss::updateAnimations() {
     }
 }
 
-void Boss::updateShooting(Vector2f &playerPosition){
-    //Habilidad Boss
-    if (timeoutHability-- <= 0) {
-        timeoutHability = 500;
-    }
-    if (bossShootingTimer.getElapsedTime().asSeconds() >= bossShootingDelay) {
-        bossHability.sprite.setPosition(sprite.getGlobalBounds().left, sprite.getGlobalBounds().top - 15);
-        bossHability.currVelocity = playerPosition * bossHability.maxSpeed;
-
-        bossProyectiles.emplace_back(bossHability);
+void Boss::attack(){
+    //Ataque boss
+    if(bossShootingTimer.getElapsedTime().asSeconds() >= 0.15f){
+        animState = BOSS_ANIMATION_STATES::SHOOTING;
+        boss1.sprite.setPosition(getMiddlePoint());
+        boss1.currVelocity = bossDirNormalized * boss1.maxSpeed;
+        bossBullets.emplace_back(boss1);
         bossShootingTimer.restart();
     }
 };
@@ -257,6 +285,7 @@ void Boss::damage() {
     currentHp -= 2;
     if (currentHp <= 0) {
         // Muere
+        this->position.y += 2;
         animState = BOSS_ANIMATION_STATES::DEAD;
     }
 }

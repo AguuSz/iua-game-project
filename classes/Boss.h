@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "Bullet.h"
+#include "Player.h"
+#include <math.h>
 
 #pragma once
 
@@ -35,14 +37,13 @@ private:
     int speed;
     int direction = 0;
     int timeout = 0;
-    int timeoutHability = 0;
     bool moving;
 
     //Ataque
-    Bullet bossHability;
-    std::vector<Bullet> bossProyectiles;
-    float bossShootingDelay;
     Clock bossShootingTimer;
+    Bullet boss1;
+    Vector2f bossDir;
+    Vector2f bossDirNormalized;
 
     // Nucleo
     void initVariables();
@@ -52,6 +53,7 @@ private:
 
 public:
     // Constructor
+    std::vector<Bullet> bossBullets;
     Boss();
 
     // Mandar el sprite a cualquier funcion que lo llame
@@ -60,15 +62,16 @@ public:
     bool isBossDead();
     bool isInvincible();
     bool isMoving();
+    Vector2<float> getMiddlePoint();
 
     //Modificadores
     void setPosition(int x, int y);
 
     //Funciones
-    void update();
+    void update(Player &player);
     void updateMovement();
     void updateAnimations();
-    void updateShooting(Vector2f &playerPosition);
+    void attack();
     void move(const float dir_x, const float dir_y);
     void damage();
     void setBossLookingRight(bool lookRight);

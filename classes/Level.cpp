@@ -113,7 +113,7 @@ void Level::update(Player &player) {
         boss->setBossLookingRight(false);
     }
 
-    boss->update();
+    boss->update(player);
 }
 
 void Level::spawnEnemies() {
