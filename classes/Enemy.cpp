@@ -46,7 +46,6 @@ void Enemy::update() {
 
     updateMovement();
     updateAnimations();
-    updateLife();
 }
 
 void Enemy::updateAnimations() {
