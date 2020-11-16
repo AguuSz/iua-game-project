@@ -116,6 +116,10 @@ void Player::updateMovement() {
     else if (std::abs(speed.y) > 0.f) {
         animState = PLAYER_ANIMATION_STATES::FALLING;
     }
+
+    else if (isPlayerInvincible()) {
+        animState = PLAYER_ANIMATION_STATES::DAMAGED;
+    }
 }
 
 void Player::updateAnimations() {
@@ -189,6 +193,25 @@ void Player::updateAnimations() {
         }
 
     }
+    else if (animState == PLAYER_ANIMATION_STATES::DAMAGED) {
+        // Cuando pasa medio segundo, ahi recien que empieze a animar
+        if (animationTimer.getElapsedTime().asSeconds() >= 0.2f) {
+            // Hacemos que vuelva arriba, debido a nuestro jake sheet
+            currentFrame.top = 300.f;
+            currentFrame.left += 40.f;
+
+            if (currentFrame.left >= 80.f) {
+                currentFrame.left = 0;
+                isInvincible = false;
+            }
+
+            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+            animationTimer.restart();
+            sprite.setTextureRect(currentFrame);
+
+            ignoreMouseDirection = false;
+        }
+    }
     else
         animationTimer.restart();
 }
@@ -201,10 +224,14 @@ void Player::update() {
     updatePhysics();
     updateMiddlePoint();
     updateHp();
+
+    std::cout << "Vida del jugador: " << currentHp << "\n";
 }
 
 void Player::damage() {
     animState = PLAYER_ANIMATION_STATES::DAMAGED;
+    currentFrame.left = 0;
+    isInvincible = true;
     currentHp -= 2;
 }
 

@@ -68,7 +68,14 @@ void Engine::checkForCollisions() {
     for (auto &e: level.enemies) {
         if (player.getGlobalBounds().intersects(e.getSprite().getGlobalBounds())) {
             // Si el player choca con alguno de los enemigos
+            if (!e.isAttacking) {
+                e.meleeAttack();
+            }
 
+            // Hace que si el jugador no es invencible, que le haga danio
+            if (!player.isPlayerInvincible() && e.attacked) {
+                player.damage();
+            }
         }
 
         // El enemigo se choco con la parte izquierda de la pantalla o instancia

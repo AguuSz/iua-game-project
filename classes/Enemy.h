@@ -43,6 +43,8 @@ public:
     bool doesFly;
     bool ignorePlayerPosition;
     bool cannotMove;
+    bool isAttacking;
+    bool attacked;
 
     // Dev
     RectangleShape box;
@@ -74,6 +76,7 @@ public:
     // Funciones
     void update();
     void damage();
+    void meleeAttack();
     void move(const float dir_x, const float dir_y);
     RectangleShape getEnemyHitbox();
 
