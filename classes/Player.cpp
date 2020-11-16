@@ -218,14 +218,11 @@ void Player::updateAnimations() {
 
 // Funcion que va a ser llamada para updatear los valores
 void Player::update() {
-
     updateMovement();
     updateAnimations();
     updatePhysics();
     updateMiddlePoint();
     updateHp();
-
-    std::cout << "Vida del jugador: " << currentHp << "\n";
 }
 
 void Player::damage() {

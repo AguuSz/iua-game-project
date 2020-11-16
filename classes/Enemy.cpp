@@ -47,7 +47,8 @@ void Enemy::setScaleFactor(float sf) {
 void Enemy::update(Player &player) {
 
     updateMovement();
-    updateShooting(player);
+    if (doesFly)
+        updateShooting(player);
     updateAnimations();
 }
 
@@ -114,17 +115,19 @@ void Enemy::updateAnimations() {
         }
     }
     else if (animState == ENEMY_ANIMATION_STATES::ATTACKING) {
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.10f) {
-            currentFrame.top = 510.f; // 60 + 150 * linea en la que esta (en este caso 1)
+        if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
+            currentFrame.top = 510.f; // 60 + 150 * linea en la que esta (en este caso 4)
             currentFrame.left += 150.f;
 
             // Cuando llega al final de la sheet vuelve al estado inactivo
-            if (currentFrame.left >= 1080.f) {
+            if (currentFrame.left >= 805.f) {
                 cannotMove = false;
                 isAttacking = false;
                 attacked = true;
                 currentFrame.left = 55.f;
                 animState = ENEMY_ANIMATION_STATES::INACTIVE;
+                distanceAttack();
+                enemyShootingTimer.restart();
             }
 
             // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
@@ -247,12 +250,13 @@ void Enemy::updateShooting(Player &player) {
     enemyDir = player.getMiddlePoint();
     enemyDirNormalized = enemyDir / static_cast<float>(sqrt(pow(enemyDir.x, 2) + pow(enemyDir.y, 2)));
 
-    if (enemyShootingTimer.getElapsedTime().asSeconds() >= 3.f) {
+    if (enemyShootingTimer.getElapsedTime().asSeconds() >= 5.f) {
         cannotMove = true;
         if (animState != ENEMY_ANIMATION_STATES::ATTACKING)
-            currentFrame.left = 0;
+            currentFrame.left = 55.f;
         animState = ENEMY_ANIMATION_STATES::ATTACKING;
     }
+
 }
 
 void Enemy::damage() {
