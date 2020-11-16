@@ -48,7 +48,7 @@ private:
     void updateMousePosition();
     void update();
     void checkForCollisions();
-    void checkForBossColisions();
+    bool isOutOfScreen(Rect<float> element, Window &screen, Level &level);
     void draw();
     void setMouseHitbox();
     void setMouseSprite();
@@ -59,5 +59,4 @@ public:
 
     // Inicia el juego llamando a todas las funciones privadas
     void start();
-
 };

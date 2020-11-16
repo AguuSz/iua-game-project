@@ -41,6 +41,11 @@ void Engine::checkForCollisions() {
                 break;
             }
         }
+
+        // Si las balas del enemigo se salen de la pantalla, que las borre
+        if (isOutOfScreen(level.boss->bossBullets[i].sprite.getGlobalBounds(), window, level)) {
+            level.boss->bossBullets.erase(level.boss->bossBullets.begin() + i );
+        }
     }
 
     // Bala impactando al enemigo
@@ -66,6 +71,11 @@ void Engine::checkForCollisions() {
                         break;
                     }
                 }
+
+                // Si las balas del enemigo se salen de la pantalla, que las borre
+                if (isOutOfScreen(e.enemyBullets[j].sprite.getGlobalBounds(), window, level)) {
+                    e.enemyBullets.erase(e.enemyBullets.begin() + i );
+                }
             }
         }
         if (bullets[i].sprite.getGlobalBounds().intersects(level.boss->getSprite().getGlobalBounds())) {
@@ -73,6 +83,11 @@ void Engine::checkForCollisions() {
                 bullets.erase(bullets.begin() + i);
                 level.boss->damage();
             }
+        }
+
+        // Si las balas del player se salen de la pantalla, que las borre
+        if (isOutOfScreen(bullets[i].sprite.getGlobalBounds(), window, level)) {
+            bullets.erase(bullets.begin() + i );
         }
 
     }
@@ -131,4 +146,27 @@ void Engine::checkForCollisions() {
     if (level.boss->getSprite().getGlobalBounds().top + level.boss->getSprite().getGlobalBounds().height >= window.getSize().y - 25) {
         level.boss->setPosition(level.boss->getSprite().getGlobalBounds().left, window.getSize().y - 25 - level.boss->getSprite().getGlobalBounds().height);
     }
+}
+
+bool Engine::isOutOfScreen(Rect<float> element, Window &screen, Level &level) {
+    if (element.left <= (1360*level.getInstance() - 1360)) {
+        return true;
+    }
+
+    // El jefe se choco con la parte derecha de la pantalla o instancia
+    if (element.left + element.width >= 1360*level.getInstance()) {
+        return true;
+    }
+
+    // El jefe se choco con el techo de la pantalla o instancia
+    if (element.top <= 0) {
+        return true;
+    }
+
+    // El jefe se choco con el piso de la pantalla o instancia
+    if (element.top + element.height >= screen.getSize().y - 25) {
+        return true;
+    }
+
+    return false;
 }
