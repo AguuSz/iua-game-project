@@ -44,9 +44,10 @@ void Enemy::setScaleFactor(float sf) {
     scaleFactor = sf;
 }
 
-void Enemy::update() {
+void Enemy::update(Player &player) {
 
     updateMovement();
+    updateShooting(player);
     updateAnimations();
 }
 
@@ -157,6 +158,14 @@ Sprite Enemy::getSprite() const {
     return this->sprite;
 }
 
+Vector2<float> Enemy::getMiddlePoint() const {
+
+    Vector2f middlePoint;
+    middlePoint.x = sprite.getGlobalBounds().left + sprite.getGlobalBounds().width / 2;
+    middlePoint.y = sprite.getGlobalBounds().top + sprite.getGlobalBounds().height / 2;
+    return middlePoint;
+}
+
 void Enemy::setPosition(int x, int y) {
     this->position.x = x;
     this->position.y = y;
@@ -173,6 +182,13 @@ RectangleShape Enemy::getEnemyHitbox() {
 
     return box;
 }
+
+void Enemy::distanceAttack(){
+    //Ataque enemy
+    enemy1.sprite.setPosition(getMiddlePoint());
+    enemy1.currVelocity = enemyDirNormalized * (enemy1.maxSpeed + 10);
+    enemyBullets.emplace_back(enemy1);
+};
 
 void Enemy::move(const float dir_x, const float dir_y) {
     position.x += dir_x * speed;
@@ -224,6 +240,18 @@ void Enemy::updateMovement() {
                     break;
             }
         }
+    }
+}
+
+void Enemy::updateShooting(Player &player) {
+    enemyDir = player.getMiddlePoint();
+    enemyDirNormalized = enemyDir / static_cast<float>(sqrt(pow(enemyDir.x, 2) + pow(enemyDir.y, 2)));
+
+    if (enemyShootingTimer.getElapsedTime().asSeconds() >= 3.f) {
+        cannotMove = true;
+        if (animState != ENEMY_ANIMATION_STATES::ATTACKING)
+            currentFrame.left = 0;
+        animState = ENEMY_ANIMATION_STATES::ATTACKING;
     }
 }
 

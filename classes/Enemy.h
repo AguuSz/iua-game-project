@@ -6,6 +6,10 @@
 #define IUAPROJECT_ENEMY_H
 
 #include <SFML/Graphics.hpp>
+#include "Bullet.h"
+#include "Player.h"
+#include <math.h>
+
 using namespace sf;
 
 enum ENEMY_ANIMATION_STATES {INACTIVE = 0, RUNNING, TOOKDAMAGE, ATTACKING, DEATH};
@@ -46,6 +50,12 @@ public:
     bool isAttacking;
     bool attacked;
 
+    //Ataque
+    Clock enemyShootingTimer;
+    Bullet enemy1 = 7;
+    Vector2f enemyDir;
+    Vector2f enemyDirNormalized;
+
     // Dev
     RectangleShape box;
 
@@ -58,8 +68,10 @@ public:
     void updateAnimations();
     void updateMovement();
     void updateLife();
+    void updateShooting(Player &player);
 
     // Constructor
+    std::vector<Bullet> enemyBullets;
     Enemy();
 
     Enemy(std::string directory, Vector2f initialPosition, bool doesFly);
@@ -68,15 +80,17 @@ public:
     Sprite getSprite() const;
     Vector2f getPosition();
     bool dead();
+    Vector2<float> getMiddlePoint() const;
 
     // Setters
     void setTexture(String directory);
     void setPosition(int x, int y);
 
     // Funciones
-    void update();
+    void update(Player &player);
     void damage();
     void meleeAttack();
+    void distanceAttack();
     void move(const float dir_x, const float dir_y);
     RectangleShape getEnemyHitbox();
 

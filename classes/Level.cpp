@@ -85,7 +85,7 @@ void Level::update(Player &player) {
     // Actualizan los enemigos
     for (auto e = enemies.begin(); e != enemies.end();) {
 
-        e->update();
+        e->update(player);
 
         if (!e->ignorePlayerPosition) {
             // Si no esta ignorando la posicion del jugador, el enemigo mirara hacia el jugador
