@@ -22,6 +22,14 @@ public:
         sprite.setTexture(texture);
     }
 
+    Bullet(float scaleFactor) : currVelocity(0.f, 0.f), maxSpeed(5.f) {
+        if(!texture.loadFromFile("../assets/enemies/Boss/bossBullet.png"))
+            std::cout << "Error al cargar la textura de la bala";
+        sprite.setTexture(texture);
+        sprite.setTextureRect(IntRect(0, 0, 17, 17));
+        sprite.setScale(scaleFactor, scaleFactor);
+    }
+
     void impact() {
         // Hacer la animacion, y que al final se destruya el objeto.
     }

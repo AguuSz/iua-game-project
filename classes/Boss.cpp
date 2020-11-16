@@ -28,6 +28,7 @@ void Boss::initVariables(){
     isDead =  false;
     cannotMove = false;
     speed = 1;
+    canAttack = true;
 
     scaleFactor = 4;
     animState = BOSS_ANIMATION_STATES::IDLE1;
@@ -95,18 +96,16 @@ void Boss::setPosition(int x, int y) {
 }
 
 void Boss::update(Player &player) {
-
     updateMovement();
+    updateShooting(player);
     updateAnimations();
-
-    bossDir = player.getMiddlePoint();
-    bossDirNormalized = bossDir / static_cast<float>(sqrt(pow(bossDir.x, 2) + pow(bossDir.y, 2)));
+    std::cout << "Puede disparar: " << canAttack << "\n";
 }
 
 void Boss::updateMovement(){
 
     if(timeout-- <= 0) {
-        direction = rand() % 7 + 1;
+        direction = rand() % 6 + 1;
         timeout = rand() % 100;
     }
     if (!cannotMove) {
@@ -125,15 +124,24 @@ void Boss::updateMovement(){
                 move(2, 0);
                 animState = BOSS_ANIMATION_STATES::MOVING;
                 break;
-            case 5:
-                attack();
-                break;
+//            case 5:
+//                attack();
+//                break;
             default:
                 animState = BOSS_ANIMATION_STATES::IDLE1;
                 break;
         }
     }
     sprite.setPosition(position);
+}
+
+void Boss::updateShooting(Player &player) {
+    bossDir = player.getMiddlePoint();
+    bossDirNormalized = bossDir / static_cast<float>(sqrt(pow(bossDir.x, 2) + pow(bossDir.y, 2)));
+
+    if (bossShootingTimer.getElapsedTime().asSeconds() >= 2.f) {
+        animState = BOSS_ANIMATION_STATES::SHOOTING;
+    }
 }
 
 void Boss::updateAnimations() {
@@ -233,7 +241,9 @@ void Boss::updateAnimations() {
             if (currentFrame.left >= 760.f) {
                 cannotMove = false;
                 currentFrame.left = 0.f;
+                attack();
                 animState = BOSS_ANIMATION_STATES::IDLE1;
+                bossShootingTimer.restart();
             }
 
             // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
@@ -260,13 +270,9 @@ void Boss::updateAnimations() {
 
 void Boss::attack(){
     //Ataque boss
-    if(bossShootingTimer.getElapsedTime().asSeconds() >= 0.15f){
-        animState = BOSS_ANIMATION_STATES::SHOOTING;
-        boss1.sprite.setPosition(getMiddlePoint());
-        boss1.currVelocity = bossDirNormalized * boss1.maxSpeed;
-        bossBullets.emplace_back(boss1);
-        bossShootingTimer.restart();
-    }
+    boss1.sprite.setPosition(getMiddlePoint());
+    boss1.currVelocity = bossDirNormalized * boss1.maxSpeed;
+    bossBullets.emplace_back(boss1);
 };
 
 void Boss::move(const float dir_x, const float dir_y) {

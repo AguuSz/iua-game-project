@@ -38,10 +38,11 @@ private:
     int direction = 0;
     int timeout = 0;
     bool moving;
+    bool canAttack;
 
     //Ataque
     Clock bossShootingTimer;
-    Bullet boss1;
+    Bullet boss1 = 5;
     Vector2f bossDir;
     Vector2f bossDirNormalized;
 
@@ -71,6 +72,7 @@ public:
     void update(Player &player);
     void updateMovement();
     void updateAnimations();
+    void updateShooting(Player &player);
     void attack();
     void move(const float dir_x, const float dir_y);
     void damage();
