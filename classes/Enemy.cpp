@@ -119,15 +119,25 @@ void Enemy::updateAnimations() {
             currentFrame.top = 510.f; // 60 + 150 * linea en la que esta (en este caso 4)
             currentFrame.left += 150.f;
 
-            // Cuando llega al final de la sheet vuelve al estado inactivo
-            if (currentFrame.left >= 805.f) {
-                cannotMove = false;
-                isAttacking = false;
-                attacked = true;
-                currentFrame.left = 55.f;
-                animState = ENEMY_ANIMATION_STATES::INACTIVE;
-                distanceAttack();
-                enemyShootingTimer.restart();
+            if (doesFly) {
+                if (currentFrame.left >= 805.f) {
+                    cannotMove = false;
+                    isAttacking = false;
+                    attacked = true;
+                    currentFrame.left = 55.f;
+                    animState = ENEMY_ANIMATION_STATES::INACTIVE;
+                    distanceAttack();
+                    enemyShootingTimer.restart();
+                }
+            } else {
+                if (currentFrame.left >= 1080.f) {
+                    cannotMove = false;
+                    isAttacking = false;
+                    attacked = true;
+                    currentFrame.left = 55.f;
+                    animState = ENEMY_ANIMATION_STATES::INACTIVE;
+                    enemyShootingTimer.restart();
+                }
             }
 
             // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s

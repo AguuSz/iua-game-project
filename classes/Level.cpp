@@ -75,7 +75,7 @@ void Level::draw(RenderWindow &window) {
     // Dibuja enemigos
     for (auto &e : enemies) {
         window.draw(e.getSprite());
-        window.draw(e.getEnemyHitbox());
+//        window.draw(e.getEnemyHitbox());
         for (auto &enemyBullet : e.enemyBullets) {
             window.draw(enemyBullet.sprite);
         }
