@@ -99,7 +99,6 @@ void Boss::update(Player &player) {
     updateMovement();
     updateShooting(player);
     updateAnimations();
-    std::cout << "Puede disparar: " << canAttack << "\n";
 }
 
 void Boss::updateMovement(){
@@ -118,15 +117,10 @@ void Boss::updateMovement(){
                 break;
             case 3:
                 move(-2, 0);
-                animState = BOSS_ANIMATION_STATES::MOVING;
                 break;
             case 4:
                 move(2, 0);
-                animState = BOSS_ANIMATION_STATES::MOVING;
                 break;
-//            case 5:
-//                attack();
-//                break;
             default:
                 animState = BOSS_ANIMATION_STATES::IDLE1;
                 break;
@@ -139,7 +133,10 @@ void Boss::updateShooting(Player &player) {
     bossDir = player.getMiddlePoint();
     bossDirNormalized = bossDir / static_cast<float>(sqrt(pow(bossDir.x, 2) + pow(bossDir.y, 2)));
 
-    if (bossShootingTimer.getElapsedTime().asSeconds() >= 2.f) {
+    if (bossShootingTimer.getElapsedTime().asSeconds() >= 3.f) {
+        cannotMove = true;
+        if (animState != BOSS_ANIMATION_STATES::SHOOTING)
+            currentFrame.left = 0;
         animState = BOSS_ANIMATION_STATES::SHOOTING;
     }
 }
@@ -147,8 +144,9 @@ void Boss::updateShooting(Player &player) {
 void Boss::updateAnimations() {
     IntRect tempFrame;
     // Animacion IDLE
-    if (animState == BOSS_ANIMATION_STATES::MOVING || animState == BOSS_ANIMATION_STATES::IDLE1) {
+    if (animState == BOSS_ANIMATION_STATES::IDLE1) {
         moving = false;
+        invincible = false;
         // Cuando pasa medio segundo, ahi recien que empieze a animar
         if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
             // Hacemos que vuelva arriba, debido a nuestro boss sheet
@@ -240,8 +238,8 @@ void Boss::updateAnimations() {
             // Cuando llega al final de la sheet vuelve al estado inactivo
             if (currentFrame.left >= 760.f) {
                 cannotMove = false;
-                currentFrame.left = 0.f;
                 attack();
+                currentFrame.left = 0.f;
                 animState = BOSS_ANIMATION_STATES::IDLE1;
                 bossShootingTimer.restart();
             }

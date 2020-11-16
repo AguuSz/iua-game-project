@@ -26,7 +26,7 @@ Engine::Engine() {
 
     view.reset(FloatRect(300, 300, (resolution.x / 16) * 14, (resolution.y / 9) * 10));
 
-    shootingDelay = 0.1f;
+    shootingDelay = 0.3f;
     shootingTimer.restart();
 
     player.setPosition(1, 500);

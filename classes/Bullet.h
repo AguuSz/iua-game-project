@@ -16,13 +16,13 @@ public:
     Vector2f currVelocity;
     float maxSpeed;
 
-    Bullet() : currVelocity(0.f, 0.f), maxSpeed(20.f) {
+    Bullet() : currVelocity(0.f, 0.f), maxSpeed(15.f) {
         if(!texture.loadFromFile("../assets/Bullet.png"))
             std::cout << "Error al cargar la textura de la bala";
         sprite.setTexture(texture);
     }
 
-    Bullet(float scaleFactor) : currVelocity(0.f, 0.f), maxSpeed(5.f) {
+    Bullet(float scaleFactor) : currVelocity(0.f, 0.f), maxSpeed(7.f) {
         if(!texture.loadFromFile("../assets/enemies/Boss/bossBullet.png"))
             std::cout << "Error al cargar la textura de la bala";
         sprite.setTexture(texture);

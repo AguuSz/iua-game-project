@@ -42,7 +42,7 @@ private:
 
     //Ataque
     Clock bossShootingTimer;
-    Bullet boss1 = 5;
+    Bullet boss1 = 7;
     Vector2f bossDir;
     Vector2f bossDirNormalized;
 
