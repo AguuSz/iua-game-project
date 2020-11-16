@@ -30,6 +30,14 @@ public:
         sprite.setScale(scaleFactor, scaleFactor);
     }
 
+    Bullet(bool belongsToEnemy, float scaleFactor) : currVelocity(0.f, 0.f), maxSpeed(7.f) {
+        if(!texture.loadFromFile("../assets/enemies/Flying eye/projectile_sprite.png"))
+            std::cout << "Error al cargar la textura de la bala";
+        sprite.setTexture(texture);
+        sprite.setTextureRect(IntRect(157, 13, 21, 19));
+        sprite.setScale(scaleFactor, scaleFactor);
+    }
+
     void impact() {
         // Hacer la animacion, y que al final se destruya el objeto.
     }

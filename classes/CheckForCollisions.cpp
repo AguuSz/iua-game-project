@@ -55,6 +55,18 @@ void Engine::checkForCollisions() {
                     break;
                 }
             }
+
+            // Checkea si alguna bala disparada por el enemigo impacta con el player
+            for (int j = 0; j < e.enemyBullets.size(); j++) {
+                if (e.enemyBullets[j].sprite.getGlobalBounds().intersects(player.getSprite().getGlobalBounds())) {
+                    // Impacta con el player
+                    e.enemyBullets.erase(e.enemyBullets.begin() + j);
+                    if (!player.isPlayerInvincible()) {
+                        player.damage();
+                        break;
+                    }
+                }
+            }
         }
         if (bullets[i].sprite.getGlobalBounds().intersects(level.boss->getSprite().getGlobalBounds())) {
             if (!level.boss->isInvincible()) {

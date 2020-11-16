@@ -189,7 +189,7 @@ RectangleShape Enemy::getEnemyHitbox() {
 void Enemy::distanceAttack(){
     //Ataque enemy
     enemy1.sprite.setPosition(getMiddlePoint());
-    enemy1.currVelocity = enemyDirNormalized * (enemy1.maxSpeed + 10);
+    enemy1.currVelocity = enemyDirNormalized * enemy1.maxSpeed;
     enemyBullets.emplace_back(enemy1);
 };
 

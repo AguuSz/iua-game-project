@@ -52,7 +52,7 @@ public:
 
     //Ataque
     Clock enemyShootingTimer;
-    Bullet enemy1 = 7;
+    Bullet enemy1 = {true, 2};
     Vector2f enemyDir;
     Vector2f enemyDirNormalized;
 

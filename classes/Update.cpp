@@ -21,6 +21,13 @@ void Engine::update() {
     for (size_t i = 0; i < level.boss->bossBullets.size(); i++) {
         level.boss->bossBullets[i].sprite.move(level.boss->bossBullets[i].currVelocity);
     }
+
+    for (auto &enemy : level.enemies) {
+        for (auto & enemyBullet : enemy.enemyBullets) {
+            enemyBullet.sprite.move(enemyBullet.currVelocity);
+        }
+    }
+
 }
 
 void Engine::updateMousePosition() {
