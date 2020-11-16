@@ -7,7 +7,7 @@
 
 using namespace sf;
 
-enum PLAYER_ANIMATION_STATES {IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING};
+enum PLAYER_ANIMATION_STATES {IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING, DAMAGED};
 #pragma once
 
 class Player {
@@ -58,6 +58,7 @@ public:
     const Vector2f getMiddlePoint() const;
     const FloatRect getGlobalBounds() const;
     Sprite getHearthSprite();
+    bool isPlayerInvincible();
 
     // Modificadores
     void setPosition(const float x, const float y);
@@ -73,6 +74,8 @@ public:
     void updatePhysics();
     void updateMovement();
     void updateAnimations();
+    void updateHp();
+    void damage();
     void setPlayerLookingRight(bool lookRight);
 
     // Dev

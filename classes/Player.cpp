@@ -200,10 +200,27 @@ void Player::update() {
     updateAnimations();
     updatePhysics();
     updateMiddlePoint();
+    updateHp();
+}
+
+void Player::damage() {
+    animState = PLAYER_ANIMATION_STATES::DAMAGED;
+    currentHp -= 2;
+}
+
+void Player::updateHp() {
+    if (currentHp <= 0) {
+        // El player muere
+        std::cout << "El player ha muerto.\n";
+    }
 }
 
 const FloatRect Player::getGlobalBounds() const {
     return sprite.getGlobalBounds();
+}
+
+bool Player::isPlayerInvincible() {
+    return isInvincible;
 }
 
 void Player::resetVelocityY() {

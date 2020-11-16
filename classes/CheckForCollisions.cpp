@@ -31,6 +31,18 @@ void Engine::checkForCollisions() {
         }
     }
 
+    for (size_t i = 0; i < level.boss->bossBullets.size(); i++) {
+        // loopea las balas del jefe, y comprobamos si alguna impacta con el jugador
+        if (level.boss->bossBullets[i].sprite.getGlobalBounds().intersects(player.getSprite().getGlobalBounds())) {
+            // Si impacta con el player
+            level.boss->bossBullets.erase(level.boss->bossBullets.begin() + i);
+            if (!player.isPlayerInvincible()) {
+                player.damage();
+                break;
+            }
+        }
+    }
+
     // Bala impactando al enemigo
     for (size_t i = 0; i < bullets.size(); i++) {
         // Checkea si impacta con el goblin
