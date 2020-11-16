@@ -78,7 +78,7 @@ void Level::draw(RenderWindow &window) {
         window.draw(e.getEnemyHitbox());
     }
 
-//    window.draw(boss->getSprite());
+    window.draw(boss->getSprite());
 }
 
 void Level::update(Player &player) {
@@ -106,13 +106,13 @@ void Level::update(Player &player) {
         }
     }
 
-//    if (player.getPosition().x < boss->getPosition().x) {
-//        boss->setBossLookingRight(true);
-//    } else {
-//        boss->setBossLookingRight(false);
-//    }
-//
-//    boss->update(player);
+    if (player.getPosition().x < boss->getPosition().x) {
+        boss->setBossLookingRight(true);
+    } else {
+        boss->setBossLookingRight(false);
+    }
+
+    boss->update(player);
 }
 
 void Level::spawnEnemies() {

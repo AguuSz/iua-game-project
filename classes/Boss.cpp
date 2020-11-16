@@ -269,7 +269,7 @@ void Boss::updateAnimations() {
 void Boss::attack(){
     //Ataque boss
     boss1.sprite.setPosition(getMiddlePoint());
-    boss1.currVelocity = bossDirNormalized * boss1.maxSpeed;
+    boss1.currVelocity = bossDirNormalized * (boss1.maxSpeed + 10);
     bossBullets.emplace_back(boss1);
 };
 
