@@ -259,7 +259,7 @@ void Enemy::updateMovement() {
 }
 
 void Enemy::updateShooting(Player &player) {
-    enemyDir = player.getMiddlePoint();
+    enemyDir = player.getMiddlePoint() - getMiddlePoint();
     enemyDirNormalized = enemyDir / static_cast<float>(sqrt(pow(enemyDir.x, 2) + pow(enemyDir.y, 2)));
 
     if (enemyShootingTimer.getElapsedTime().asSeconds() >= 5.f) {

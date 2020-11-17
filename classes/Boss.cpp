@@ -130,7 +130,7 @@ void Boss::updateMovement(){
 }
 
 void Boss::updateShooting(Player &player) {
-    bossDir = player.getMiddlePoint();
+    bossDir = player.getMiddlePoint() - getMiddlePoint();
     bossDirNormalized = bossDir / static_cast<float>(sqrt(pow(bossDir.x, 2) + pow(bossDir.y, 2)));
 
     if (bossShootingTimer.getElapsedTime().asSeconds() >= 3.f) {
