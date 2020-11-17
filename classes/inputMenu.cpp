@@ -21,21 +21,21 @@ void Engine::inputMenu(Event& event) {
                 if (gameState == 1) {
                     gameState = 2;
                     menuIsOpen = false;
-                    std::cout << "GameState: " << gameState << std::endl;
+
 
                 }
             }
             if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(sf::Keyboard::Down)) {
                 if (Engine::index < 3) {
                     Engine::index++;
-                    std::cout << "Index: " << index << std::endl;
+
                 }
             }
 
             if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(sf::Keyboard::Up)) {
                 if (Engine::index > 0) {
                     Engine::index--;
-                    std::cout << "Index: " << index << std::endl;
+
                 }
             }
             if(Keyboard::isKeyPressed(Keyboard::Enter)){

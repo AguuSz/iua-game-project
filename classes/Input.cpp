@@ -14,8 +14,7 @@ void Engine::input(Event& event) {
         if (gameState == 2) {
             gameState = 1;
             menuIsOpen = true;
-            std::cout << "GameState: " << gameState << std::endl;
-            std::cout << "IsOpen: " << menuIsOpen << std::endl;
+            
         }
     }
 
