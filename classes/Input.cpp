@@ -10,7 +10,7 @@ void Engine::input(Event& event) {
     if (event.type == sf::Event::Closed) {
         window.close();
     }
-    if (Keyboard::isKeyPressed(Keyboard::P)) {
+    if (Keyboard::isKeyPressed(Keyboard::Escape)) {
         if (gameState == 2) {
             gameState = 1;
             menuIsOpen = true;

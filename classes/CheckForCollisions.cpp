@@ -5,6 +5,7 @@
 #include "Engine.h"
 
 void Engine::checkForCollisions() {
+    // ----------------------------- Seccion Jugador -----------------------------
     // Colision al tocar la parte de abajo
     if (player.getGlobalBounds().top + player.getGlobalBounds().height >= window.getSize().y - 25) {
         player.resetVelocityY();
@@ -26,9 +27,9 @@ void Engine::checkForCollisions() {
         }
 
         // Colision al tocar la parte izquierda
-        if (player.getGlobalBounds().left < (1360 * level.getInstance() - 1360)) {
-            if (player.getPosition().x < (1360 * level.getInstance() - 1360)) {
-                player.setPosition(1360 * level.getInstance() - 1360, player.getPosition().y);
+        if (player.getGlobalBounds().left < 0) {
+            if (player.getPosition().x < 0) {
+                player.setPosition(0, player.getPosition().y);
             } else {
                 player.setPosition(0, player.getPosition().y);
             }
@@ -41,8 +42,8 @@ void Engine::checkForCollisions() {
         }
 
         // Colision al tocar la parte izquierda
-        if (player.getGlobalBounds().left < (1360 * (level.getInstance() - 1))) {
-            player.setPosition(1360 * (level.getInstance() - 1), player.getPosition().y);
+        if (player.getGlobalBounds().left < 0) {
+            player.setPosition(0, player.getPosition().y);
         }
     }
 
@@ -65,11 +66,12 @@ void Engine::checkForCollisions() {
 
     // Bala impactando al enemigo
     for (size_t i = 0; i < bullets.size(); i++) {
+        bool deleteBullet = false;
         // Checkea si impacta con el goblin
         for (auto &e: level.enemies) {
             if (bullets[i].sprite.getGlobalBounds().intersects(e.getSprite().getGlobalBounds())) {
                 // Impacto con el enemigo
-                bullets.erase(bullets.begin() + i);
+                deleteBullet = true;
                 if (!e.isInvincible) {
                     e.damage();
                     break;
@@ -80,13 +82,13 @@ void Engine::checkForCollisions() {
         // Checkea si impacta con el boss
         if (bullets[i].sprite.getGlobalBounds().intersects(level.boss->getSprite().getGlobalBounds())) {
             if (!level.boss->isInvincible()) {
-                bullets.erase(bullets.begin() + i);
+                deleteBullet = true;
                 level.boss->damage();
             }
         }
 
         // Si las balas del player se salen de la pantalla, que las borre
-        if (isOutOfScreen(bullets[i].sprite.getGlobalBounds(), window, level)) {
+        if (deleteBullet || isOutOfScreen(bullets[i].sprite.getGlobalBounds(), window, level)) {
             bullets.erase(bullets.begin() + i);
         }
 
