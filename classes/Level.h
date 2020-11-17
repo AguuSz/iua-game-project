@@ -13,6 +13,7 @@ private:
     Sprite bkgSprite;
     Texture bkgTexture;
     int instance;
+    bool spawnBoss;
 
     bool levelFinished;
 
@@ -50,5 +51,5 @@ public:
 
     void setInitialValues();
 
-    void spawnEnemies();
+    void spawnEnemies(int goblins, int mushrooms, int flyingEyes);
 };

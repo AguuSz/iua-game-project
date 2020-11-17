@@ -39,10 +39,10 @@ Level::Level() {
 
 // Seccion valores iniciales
 void Level::setInitialValues() {
-    int scale = 1;
     setBackground("../assets/FondoCompleto1.png");
-    setBackgroundScale(scale);
-    spawnEnemies();
+    setBackgroundScale(1);
+    spawnEnemies(3, 2, 1);
+    spawnBoss = false;
 }
 
 void Level::setBackground(String directory) {
@@ -81,7 +81,7 @@ void Level::draw(RenderWindow &window) {
         }
     }
 
-    if (!boss->isBossDead())
+    if (!boss->isBossDead() && spawnBoss)
         window.draw(boss->getSprite());
 }
 
@@ -110,7 +110,7 @@ void Level::update(Player &player) {
         }
     }
 //
-    if (!boss->isBossDead()) {
+    if (!boss->isBossDead() && spawnBoss) {
         if (player.getPosition().x < boss->getPosition().x) {
             boss->setBossLookingRight(true);
         } else {
@@ -121,19 +121,19 @@ void Level::update(Player &player) {
     }
 }
 
-void Level::spawnEnemies() {
-    int totalGoblins = 1;
-    int totalMushrooms = 1;
-    int totalFlyingEye = 3;
+void Level::spawnEnemies(int goblins, int mushrooms, int flyingEyes) {
+    int totalGoblins = goblins;
+    int totalMushrooms = mushrooms;
+    int totalFlyingEye = flyingEyes;
 
-//    for (int i = 0; i < totalGoblins; i++) {
-//        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(250 + 110 * i, 1500), false);
-//    }
-//
-//    for (int i = 0; i < totalMushrooms; i++) {
-//        enemies.emplace_back("../assets/enemies/Mushroom/mushroomSheet.png", Vector2f(250 + 110 * i, 1500), false);
-//    }
-//
+    for (int i = 0; i < totalGoblins; i++) {
+        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(250 + 110 * i, 1500), false);
+    }
+
+    for (int i = 0; i < totalMushrooms; i++) {
+        enemies.emplace_back("../assets/enemies/Mushroom/mushroomSheet.png", Vector2f(250 + 110 * i, 1500), false);
+    }
+
     for (int i = 0; i < totalFlyingEye; i++) {
         enemies.emplace_back("../assets/enemies/Flying Eye/flyingEyeSheet.png", Vector2f(250 + 110 * i, 270), true);
     }
@@ -144,7 +144,7 @@ void Level::spawnEnemies() {
 }
 
 void Level::setInstance(int instance) {
-    Level::instance = instance;
+    this->instance = instance;
 }
 
 int Level::getInstance(){
