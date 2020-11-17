@@ -1,7 +1,6 @@
 
 #include "classes/Engine.h"
 #include <time.h>
-#include <ctime>
 
 int main() {
     srand(time(NULL));

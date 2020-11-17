@@ -3,6 +3,7 @@
 //
 #include "Enemy.h"
 #include <list>
+#include <queue>
 #include "Boss.h"
 #include "Player.h"
 
@@ -26,6 +27,9 @@ public:
     // Seccion enemigos
     std::list<Enemy> enemies;
     Boss *boss = new Boss;
+
+    bool newInstanceAllowed;
+    std::queue<int> instances;
 
     // Constructor
     Level();

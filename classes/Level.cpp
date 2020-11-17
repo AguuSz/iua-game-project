@@ -3,9 +3,9 @@
 //
 
 #include "Level.h"
-#include "Player.h"
 #include <fstream>
 #include <iostream>
+#include <time.h>
 
 Level::Level() {
     setInitialValues();
@@ -43,6 +43,10 @@ void Level::setInitialValues() {
     setBackgroundScale(1);
     spawnEnemies(3, 2, 1);
     spawnBoss = false;
+    // Inserta la instancia 1
+    newInstanceAllowed = false;
+    instances.push(1);
+    srand(time(NULL));
 }
 
 void Level::setBackground(String directory) {
@@ -86,6 +90,7 @@ void Level::draw(RenderWindow &window) {
 }
 
 void Level::update(Player &player) {
+
     // Actualizan los enemigos
     for (auto e = enemies.begin(); e != enemies.end();) {
 
@@ -109,8 +114,20 @@ void Level::update(Player &player) {
             ++e;
         }
     }
-//
-    if (!boss->isBossDead() && spawnBoss) {
+
+    if (enemies.empty() && !newInstanceAllowed) {
+        // Mataron a todos los enemigos, por lo que pasamos de instancia
+        instances.push(instances.back() + 1);
+        newInstanceAllowed = true;
+    }
+
+    if (instance == instances.back() && newInstanceAllowed) {
+        // Significa que ya entro a otra instancia
+        spawnEnemies(2, 2, 3);
+        newInstanceAllowed = false;
+    }
+
+    if (spawnBoss && !boss->isBossDead()) {
         if (player.getPosition().x < boss->getPosition().x) {
             boss->setBossLookingRight(true);
         } else {
@@ -126,16 +143,21 @@ void Level::spawnEnemies(int goblins, int mushrooms, int flyingEyes) {
     int totalMushrooms = mushrooms;
     int totalFlyingEye = flyingEyes;
 
+    int x;
+
     for (int i = 0; i < totalGoblins; i++) {
-        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(250 + 110 * i, 1500), false);
+        x = 1360 * (instance - 1) + rand() % 700;
+        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(x - 200 * i, 1450), false);
     }
 
     for (int i = 0; i < totalMushrooms; i++) {
-        enemies.emplace_back("../assets/enemies/Mushroom/mushroomSheet.png", Vector2f(250 + 110 * i, 1500), false);
+        x = 1360 * (instance - 1) + rand() % 700;
+        enemies.emplace_back("../assets/enemies/Mushroom/mushroomSheet.png", Vector2f(x - 200 * i, 1450), false);
     }
 
     for (int i = 0; i < totalFlyingEye; i++) {
-        enemies.emplace_back("../assets/enemies/Flying Eye/flyingEyeSheet.png", Vector2f(250 + 110 * i, 270), true);
+        x = 1360 * (instance - 1) + rand() % 700;
+        enemies.emplace_back("../assets/enemies/Flying Eye/flyingEyeSheet.png", Vector2f(x - 300 * i, 200), true);
     }
 
     for(auto &e : enemies) {
