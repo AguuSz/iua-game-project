@@ -6,7 +6,7 @@
 #include <iostream>
 
 Enemy::Enemy() {
-    maxHp = 10;
+    maxHp = 2;
     currentHp = maxHp;
     isMoving = false;
     isInvincible = false;

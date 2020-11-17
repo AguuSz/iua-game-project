@@ -39,9 +39,9 @@ Level::Level() {
 
 // Seccion valores iniciales
 void Level::setInitialValues() {
-    setBackground("../assets/FondoCompleto1.png");
+    setBackground("../assets/FondoCompleto2.png");
     setBackgroundScale(1);
-    spawnEnemies(3, 2, 1);
+    spawnEnemies(3, 3, 2);
     spawnBoss = false;
     // Inserta la instancia 1
     newInstanceAllowed = false;
@@ -123,7 +123,7 @@ void Level::update(Player &player) {
 
     if (instance == instances.back() && newInstanceAllowed) {
         // Significa que ya entro a otra instancia
-        spawnEnemies(2, 2, 3);
+        spawnEnemies(3, 3, 2);
         newInstanceAllowed = false;
     }
 
@@ -147,21 +147,17 @@ void Level::spawnEnemies(int goblins, int mushrooms, int flyingEyes) {
 
     for (int i = 0; i < totalGoblins; i++) {
         x = 1360 * (instance - 1) + rand() % 700;
-        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(x - 200 * i, 1450), false);
+        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(x - 200 * i, 661), false);
     }
 
     for (int i = 0; i < totalMushrooms; i++) {
         x = 1360 * (instance - 1) + rand() % 700;
-        enemies.emplace_back("../assets/enemies/Mushroom/mushroomSheet.png", Vector2f(x - 200 * i, 1450), false);
+        enemies.emplace_back("../assets/enemies/Mushroom/mushroomSheet.png", Vector2f(x - 200 * i, 661), false);
     }
 
     for (int i = 0; i < totalFlyingEye; i++) {
         x = 1360 * (instance - 1) + rand() % 700;
         enemies.emplace_back("../assets/enemies/Flying Eye/flyingEyeSheet.png", Vector2f(x - 300 * i, 200), true);
-    }
-
-    for(auto &e : enemies) {
-        e.setScaleFactor(2);
     }
 }
 
