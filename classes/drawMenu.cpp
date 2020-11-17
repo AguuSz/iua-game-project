@@ -12,7 +12,7 @@ void Engine::drawMenu() {
     menuSprite.setTexture(menuTexture);
     menuSprite.setPosition(player.getPosition().x-250,200);
     window.draw(menuSprite);
-    selectedOption.setOutlineColor(Color::Blue);
+    selectedOption.setOutlineColor(Color(63, 47, 39, 255));
     selectedOption.setOutlineThickness(3);
     selectedOption.setFillColor(Color::Transparent);
     switch(index){
