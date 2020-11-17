@@ -81,7 +81,8 @@ void Level::draw(RenderWindow &window) {
         }
     }
 
-//    window.draw(boss->getSprite());
+    if (!boss->isBossDead())
+        window.draw(boss->getSprite());
 }
 
 void Level::update(Player &player) {
@@ -109,20 +110,21 @@ void Level::update(Player &player) {
         }
     }
 //
-//    if (player.getPosition().x < boss->getPosition().x) {
-//        boss->setBossLookingRight(true);
-//    } else {
-//        boss->setBossLookingRight(false);
-//    }
-//
-//    boss->update(player);
-//
+    if (!boss->isBossDead()) {
+        if (player.getPosition().x < boss->getPosition().x) {
+            boss->setBossLookingRight(true);
+        } else {
+            boss->setBossLookingRight(false);
+        }
+
+        boss->update(player);
+    }
 }
 
 void Level::spawnEnemies() {
     int totalGoblins = 1;
     int totalMushrooms = 1;
-    int totalFlyingEye = 10;
+    int totalFlyingEye = 3;
 
 //    for (int i = 0; i < totalGoblins; i++) {
 //        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(250 + 110 * i, 1500), false);

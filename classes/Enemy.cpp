@@ -68,6 +68,7 @@ void Enemy::updateAnimations() {
             currentFrame.top = 60.f;
             currentFrame.left += 150.f;
             attacked = false;
+            isInvincible = false;
 
             if (currentFrame.left >= 540.f)
                 currentFrame.left = 55.f;
@@ -85,6 +86,7 @@ void Enemy::updateAnimations() {
             currentFrame.top = 210.f; // 60 + 150 * linea en la que esta (en este caso 1)
             currentFrame.left += 150.f;
             attacked = false;
+            isInvincible = false;
 
             // Cuando llega al final de la sheet vuelve al estado inactivo
             if (currentFrame.left >= 1080.f) {
@@ -120,6 +122,7 @@ void Enemy::updateAnimations() {
         if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
             currentFrame.top = 510.f; // 60 + 150 * linea en la que esta (en este caso 4)
             currentFrame.left += 150.f;
+            isInvincible = false;
 
             if (doesFly) {
                 if (currentFrame.left >= 805.f) {
