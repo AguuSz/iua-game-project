@@ -235,7 +235,7 @@ void Player::damage() {
 void Player::updateHp() {
     if (currentHp <= 0) {
         // El player muere
-        std::cout << "El player ha muerto.\n";
+        //std::cout << "El player ha muerto.\n";
     }
 }
 

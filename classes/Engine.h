@@ -17,6 +17,8 @@ private:
     // Ventana del juego
     RenderWindow window;
 
+    // Estado de juego
+    int gameState;
     // Vista del jugador
     View view;
 
@@ -43,6 +45,21 @@ private:
     Sprite mouseSprite;
     Texture mouseTexture;
 
+    // Menu
+    int index;
+    bool menuIsOpen;
+    Texture menuTexture;
+    Sprite menuSprite;
+    RectangleShape selectedOption;
+    void inputMenu(Event& event);
+    void openMenu();
+    void MoveUp();
+    void MoveDown();
+    void selectOption();
+    void drawMenu();
+    void menu();
+
+
     // Funciones para el funcionamiento
     void input(Event& event);
     void updateMousePosition();
@@ -57,6 +74,10 @@ private:
 public:
     Engine();
 
+    //Menu
+    void setMenuIsOpen(bool menuIsOpen);
+
     // Inicia el juego llamando a todas las funciones privadas
     void start();
+
 };

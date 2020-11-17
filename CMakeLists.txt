@@ -27,6 +27,8 @@ add_executable(iuaProject
         classes/Engine.cpp
         classes/Player.cpp
         classes/Input.cpp
+        classes/inputMenu.cpp
+        classes/drawMenu.cpp
         classes/Update.cpp
         classes/Draw.cpp
         classes/Habilidad.cpp

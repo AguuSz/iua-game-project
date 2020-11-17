@@ -3,6 +3,7 @@
 //
 
 #include "Engine.h"
+#include <fstream>
 using namespace sf;
 
 Engine::Engine() {
@@ -33,16 +34,36 @@ Engine::Engine() {
 }
 
 void Engine::start() {
+    Event event;
+    bool bandera = false;
     while(window.isOpen()) {
-        Event event;
-        input(event);
-        update();
-        checkForCollisions();
-        draw();
-        while(window.pollEvent(event)){
-            if (event.type == Event::Closed)
-                window.close();
+
+    if(!bandera){
+        index = 0;
+        bandera = true;
+    }
+
+        switch(gameState){
+            case 1:
+                inputMenu(event);
+                drawMenu();
+                break;
+            case 2:
+
+                input(event);
+                update();
+                checkForCollisions();
+                draw();
+                while(window.pollEvent(event)){
+                    if (event.type == Event::Closed)
+                        window.close();
+                }
+                break;
+            default:
+                gameState = 2;
+                break;
         }
+
     }
 }
 
@@ -64,3 +85,30 @@ void Engine::setMouseSprite() {
 Sprite Engine::drawMouse() {
     return mouseSprite;
 }
+
+// Menu
+
+void Engine::menu() {
+    if(Engine::menuIsOpen){
+        switch(index){
+            case 0:
+                std::cout << "Continue" << std::endl;
+                gameState = 2;
+                break;
+            case 1:
+                std::cout << "Save" << std::endl;
+                
+                break;
+            case 2:
+                std::cout << "Opciones" << std::endl;
+                break;
+            case 3:
+                std::cout << "Quit" << std::endl;
+                window.close();
+
+
+        }
+
+    }
+}
+

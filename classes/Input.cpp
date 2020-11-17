@@ -2,13 +2,24 @@
 // Created by Agus on 28/8/2020.
 //
 #include "Engine.h"
+#include <iostream>
 
 void Engine::input(Event& event) {
 
     // Aca se manejan las teclas que sean aparte del jugador
-    if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+    if (event.type == sf::Event::Closed) {
         window.close();
     }
+    if (Keyboard::isKeyPressed(Keyboard::P)) {
+        if (gameState == 2) {
+            gameState = 1;
+            menuIsOpen = true;
+            std::cout << "GameState: " << gameState << std::endl;
+            std::cout << "IsOpen: " << menuIsOpen << std::endl;
+        }
+    }
+
+
 
     // Disparo
     if (Mouse::isButtonPressed(Mouse::Left)) {
