@@ -60,24 +60,9 @@ void Engine::checkForCollisions() {
                     break;
                 }
             }
-
-            // Checkea si alguna bala disparada por el enemigo impacta con el player
-            for (int j = 0; j < e.enemyBullets.size(); j++) {
-                if (e.enemyBullets[j].sprite.getGlobalBounds().intersects(player.getSprite().getGlobalBounds())) {
-                    // Impacta con el player
-                    e.enemyBullets.erase(e.enemyBullets.begin() + j);
-                    if (!player.isPlayerInvincible()) {
-                        player.damage();
-                        break;
-                    }
-                }
-
-                // Si las balas del enemigo se salen de la pantalla, que las borre
-                if (isOutOfScreen(e.enemyBullets[j].sprite.getGlobalBounds(), window, level)) {
-                    e.enemyBullets.erase(e.enemyBullets.begin() + i );
-                }
-            }
         }
+
+        // Checkea si impacta con el boss
         if (bullets[i].sprite.getGlobalBounds().intersects(level.boss->getSprite().getGlobalBounds())) {
             if (!level.boss->isInvincible()) {
                 bullets.erase(bullets.begin() + i);
@@ -95,7 +80,7 @@ void Engine::checkForCollisions() {
     for (auto &e: level.enemies) {
         if (player.getGlobalBounds().intersects(e.getSprite().getGlobalBounds())) {
             // Si el player choca con alguno de los enemigos
-            if (!e.isAttacking) {
+            if (!e.isAttacking && !e.doesFly) {
                 e.meleeAttack();
             }
 
@@ -123,6 +108,23 @@ void Engine::checkForCollisions() {
         // El enemigo se choco con el piso de la pantalla o instancia
         if (e.getSprite().getGlobalBounds().top + e.getSprite().getGlobalBounds().height >= window.getSize().y - 15) {
             e.setPosition(e.getSprite().getGlobalBounds().left, window.getSize().y - 15 - e.getSprite().getGlobalBounds().height);
+        }
+
+        // Checkea si alguna bala disparada por el enemigo impacta con el player
+        for (int j = 0; j < e.enemyBullets.size(); j++) {
+            if (e.enemyBullets[j].sprite.getGlobalBounds().intersects(player.getSprite().getGlobalBounds())) {
+                // Impacta con el player
+                e.enemyBullets.erase(e.enemyBullets.begin() + j);
+                if (!player.isPlayerInvincible()) {
+                    player.damage();
+                    break;
+                }
+            }
+
+            // Si las balas del enemigo se salen de la pantalla, que las borre
+            if (isOutOfScreen(e.enemyBullets[j].sprite.getGlobalBounds(), window, level)) {
+                e.enemyBullets.erase(e.enemyBullets.begin() + j );
+            }
         }
     }
 

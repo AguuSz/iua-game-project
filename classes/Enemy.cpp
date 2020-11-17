@@ -53,10 +53,12 @@ void Enemy::update(Player &player) {
 }
 
 void Enemy::meleeAttack() {
-    isAttacking = true;
-    cannotMove = true;
-    currentFrame.left = 55.f;
-    animState = ENEMY_ANIMATION_STATES::ATTACKING;
+    if (doesFly) {
+        isAttacking = true;
+        cannotMove = true;
+        currentFrame.left = 55.f;
+        animState = ENEMY_ANIMATION_STATES::ATTACKING;
+    }
 }
 
 void Enemy::updateAnimations() {
