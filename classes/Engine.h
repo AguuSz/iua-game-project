@@ -51,8 +51,13 @@ private:
     // Menu
     int index;
     bool menuIsOpen;
+    Texture mainMenuTexture;
     Texture menuTexture;
+    Texture optionsMenuTexture;
     Sprite menuSprite;
+    Sprite mainMenuSprite;
+    Sprite optionsMenuSprite;
+
     RectangleShape selectedOption;
 
     void inputMenu(Event& event);
@@ -61,7 +66,9 @@ private:
     void MoveDown();
     void selectOption();
     void drawMenu();
+    void drawMainMenu();
     void menu();
+    void mainMenu();
 
 
     // Funciones para el funcionamiento
