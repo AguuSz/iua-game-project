@@ -31,12 +31,13 @@ void Engine::update() {
     if (level.getInstance() == 6 && level.doPlayBossMusic()) {
         // Llego a la instancia donde spawnea el boss
         std::cout << "Hit\n";
-        if (!backgroundMusic.openFromFile("../assets/sounds/bossMusic.ogg")) {
-            std::cout << "ERROR::BACKGROUND_MUSIC no se ha podido cargar el archivo";
+        if (!bossMusic.openFromFile("../assets/sounds/bossMusic.ogg")) {
+            std::cout << "ERROR::BOSS_MUSIC no se ha podido cargar el archivo";
         }
-        backgroundMusic.setVolume(10);
-        backgroundMusic.setLoop(true);
-        backgroundMusic.play();
+        backgroundMusic.stop();
+        bossMusic.setVolume(5);
+        bossMusic.setLoop(true);
+        bossMusic.play();
         level.setPlayBossMusic(false);
     }
 

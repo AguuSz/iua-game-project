@@ -53,6 +53,7 @@ void Engine::checkForCollisions() {
             // Si impacta con el player
             level.boss->bossBullets.erase(level.boss->bossBullets.begin() + i);
             if (!player.isPlayerInvincible()) {
+                player.takeDamage.play();
                 player.damage();
                 break;
             }
