@@ -67,6 +67,7 @@ void Enemy::meleeAttack() {
 
 void Enemy::initSounds() {
     //Muerte
+    effectsVolume = 30;
     if(!enemyDiesBuffer.loadFromFile("../assets/sounds/enemyDies.ogg")){
         std::cout<<"ERROR::ENEMY_DIES: No se ha podido cargar el audio de muerte del enemigo";
     }
@@ -92,6 +93,13 @@ void Enemy::initSounds() {
     }
     enemyDistanceAttack.setBuffer(enemyDistanceAttackBuffer);
     enemyDistanceAttack.setVolume(15);
+}
+
+void Enemy::updateSounds(int effectsVolume){
+    enemyDies.setVolume(effectsVolume);
+    enemyTakeDamage.setVolume(effectsVolume);
+    enemyMeleeAttack.setVolume(effectsVolume);
+    enemyDistanceAttack.setVolume(effectsVolume/2);
 }
 
 void Enemy::updateAnimations() {
@@ -341,5 +349,6 @@ Vector2f Enemy::getPosition() {
 bool Enemy::dead() {
     return isDead;
 }
+
 
 

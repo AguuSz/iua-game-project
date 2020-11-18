@@ -25,6 +25,9 @@ public:
     bool isInvincible;
     bool isDead;
 
+    float effectsVolume;
+
+
     // Animaciones
     Clock animationTimer;
     short animState;
@@ -73,6 +76,7 @@ public:
     void initVariables();
     void initAnimations();
     void initSounds();
+    void updateSounds(int effectsVolume);
 
 
     // Actualizaciones por frame

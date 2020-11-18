@@ -11,14 +11,13 @@
 
 void Engine::inputMenu(Event& event) {
 
-    while(window.pollEvent(event)) {
+    while (window.pollEvent(event)) {
 
-        if(event.type == sf::Event::Closed) {
+        if (event.type == sf::Event::Closed) {
             window.close();
-        }
-        else if(event.type == sf::Event::KeyPressed){
-            if(Keyboard::isKeyPressed(Keyboard::Escape)) {
-                switch(gameState) {
+        } else if (event.type == sf::Event::KeyPressed) {
+            if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+                switch (gameState) {
                     case 0:
                         window.close();
                         break;
@@ -33,25 +32,24 @@ void Engine::inputMenu(Event& event) {
                 }
             }
             if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-                switch(gameState){
+                switch (gameState) {
                     case 0:
                     case 1:
-                        if(Engine::index < 3) {
+                        if (Engine::index < 3) {
                             Engine::index++;
                         }
                         break;
                     case 3:
-                        if(Engine::optionsMenuIndex < 2){
+                        if (Engine::optionsMenuIndex < 2) {
                             Engine::optionsMenuIndex++;
                         }
-
 
 
                 }
             }
 
             if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                switch(gameState){
+                switch (gameState) {
                     case 0:
                     case 1:
                         if (Engine::index > 0) {
@@ -59,13 +57,13 @@ void Engine::inputMenu(Event& event) {
                         }
                         break;
                     case 3:
-                        if(Engine::optionsMenuIndex > 0){
+                        if (Engine::optionsMenuIndex > 0) {
                             Engine::optionsMenuIndex--;
                         }
                 }
             }
-            if(Keyboard::isKeyPressed(Keyboard::Enter)){
-                switch(gameState){
+            if (Keyboard::isKeyPressed(Keyboard::Enter)) {
+                switch (gameState) {
                     case 0:
                         mainMenu();
                         break;
@@ -78,22 +76,47 @@ void Engine::inputMenu(Event& event) {
                 }
             }
             if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-                switch(gameState){
+                switch (gameState) {
                     case 3:
-                        if(Engine::backgroundMusic.getVolume() > 10){
-                            Engine::backgroundMusic.setVolume(Engine::backgroundMusic.getVolume()-1);
+                        switch (optionsMenuIndex) {
+                            case 0:
+                                if (Engine::backgroundMusic.getVolume() > 1) {
+                                    Engine::backgroundMusic.setVolume(Engine::backgroundMusic.getVolume() - 1);
+                                    break;
+                                    case 1:
+                                        if (level.enemies.front().effectsVolume > 1) {
+                                            int actualVolume = level.enemies.front().effectsVolume;
+                                            for(auto &e:level.enemies){
+                                                e.updateSounds(actualVolume-1);;
+                                            };
+                                        }
+
+                                }
+
                         }
                 }
             }
             if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-                switch(gameState){
+                switch (gameState) {
                     case 3:
-                        if(Engine::backgroundMusic.getVolume() < 100){
-                            Engine::backgroundMusic.setVolume(Engine::backgroundMusic.getVolume()+1);
+                        switch (optionsMenuIndex) {
+                            case 0:
+                                if (Engine::backgroundMusic.getVolume() < 100) {
+                                    Engine::backgroundMusic.setVolume(Engine::backgroundMusic.getVolume() + 1);
+                                    break;
+                                }
+                            case 1:
+                                if (level.enemies.front().effectsVolume < 100) {
+                                    for(auto &e:level.enemies){
+                                        int actualVolume = level.enemies.front().effectsVolume;
+                                        e.updateSounds(actualVolume+1);
+                                    };
+                                }
+                                break;
                         }
                 }
-            }
 
+            }
         }
     }
 }

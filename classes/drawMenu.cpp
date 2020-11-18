@@ -4,6 +4,8 @@
 #include "Engine.h"
 #include <iostream>
 #include <string>
+#include "Enemy.h"
+
 void Engine::drawMenu() {
 
     switch(gameState) {
@@ -87,14 +89,29 @@ void Engine::drawMenu() {
             sf::Text volMusica, volEfectos;
             std::string vol_Musica, vol_Efectos;
             int volM = round(backgroundMusic.getVolume());
-            int volE;
+            int volE = level.enemies.front().effectsVolume;
+
+
             vol_Musica = std::to_string(volM);
+            vol_Efectos = std::to_string(volE);
+
+            volEfectos.setString(vol_Efectos);
             volMusica.setString(vol_Musica);
+
             volMusica.setFont(fuente);
+            volEfectos.setFont(fuente);
+
             volMusica.setPosition(670, 330);
+            volEfectos.setPosition(670, 435);
+
             volMusica.setCharacterSize(40);
+            volEfectos.setCharacterSize(40);
+
             volMusica.setColor(Color());
+            volEfectos.setColor(Color());
             window.draw(volMusica);
+            window.draw(volEfectos);
+
 
 
 
