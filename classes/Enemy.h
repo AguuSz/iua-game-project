@@ -56,12 +56,23 @@ public:
     Vector2f enemyDir;
     Vector2f enemyDirNormalized;
 
+    //Sonidos
+    SoundBuffer enemyDiesBuffer;
+    Sound enemyDies;
+    SoundBuffer enemyTakeDamageBuffer;
+    Sound enemyTakeDamage;
+    SoundBuffer enemyMeleeAttackBuffer;
+    Sound enemyMeleeAttack;
+    SoundBuffer enemyDistanceAttackBuffer;
+    Sound enemyDistanceAttack;
+
     // Dev
     RectangleShape box;
 
     // Nucleo
     void initVariables();
     void initAnimations();
+    void initSounds();
 
 
     // Actualizaciones por frame

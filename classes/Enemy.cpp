@@ -6,6 +6,9 @@
 #include <iostream>
 
 Enemy::Enemy() {
+
+    initSounds();
+
     maxHp = 2;
     currentHp = maxHp;
     isMoving = false;
@@ -53,12 +56,42 @@ void Enemy::update(Player &player) {
 }
 
 void Enemy::meleeAttack() {
-    if (doesFly) {
+    if (!doesFly) {
         isAttacking = true;
         cannotMove = true;
         currentFrame.left = 55.f;
+        enemyMeleeAttack.play();
         animState = ENEMY_ANIMATION_STATES::ATTACKING;
     }
+}
+
+void Enemy::initSounds() {
+    //Muerte
+    if(!enemyDiesBuffer.loadFromFile("../assets/sounds/enemyDies.ogg")){
+        std::cout<<"ERROR::ENEMY_DIES: No se ha podido cargar el audio de muerte del enemigo";
+    }
+    enemyDies.setBuffer(enemyDiesBuffer);
+    enemyDies.setVolume(30);
+    //Cuando reciben danio
+    if(!enemyTakeDamageBuffer.loadFromFile("../assets/sounds/enemyTakeDamage.ogg")){
+        std::cout<<"ERROR::ENEMY_TAKE_DAMAGE: No se ha podido cargar el audio de danio del enemigo";
+    }
+    enemyTakeDamage.setBuffer(enemyTakeDamageBuffer);
+    enemyTakeDamage.setVolume(30);
+    enemyTakeDamage.setPitch(1);
+    //Ataque del enemigo melee
+    if(!enemyMeleeAttackBuffer.loadFromFile("../assets/sounds/enemyMeleeAttack.ogg")){
+        std::cout<<"ERROR::ENEMY_MELEE_ATTACK: No se ha podido cargar el audio de ataque melee del enemigo";
+    }
+    enemyMeleeAttack.setBuffer(enemyMeleeAttackBuffer);
+    enemyMeleeAttack.setVolume(30);
+    enemyMeleeAttack.setPitch(3);
+    //Ataque del enemigo a distancia (el que vuela)
+    if(!enemyDistanceAttackBuffer.loadFromFile("../assets/sounds/enemyDistanceAttack.ogg")){
+        std::cout<<"ERROR::ENEMY_DISTANCE_ATTACK: No se ha podido cargar el audio de ataque a distancia del enemigo";
+    }
+    enemyDistanceAttack.setBuffer(enemyDistanceAttackBuffer);
+    enemyDistanceAttack.setVolume(15);
 }
 
 void Enemy::updateAnimations() {
@@ -203,6 +236,7 @@ RectangleShape Enemy::getEnemyHitbox() {
 
 void Enemy::distanceAttack(){
     //Ataque enemy
+    enemyDistanceAttack.play();
     enemy1.sprite.setPosition(getMiddlePoint());
     enemy1.currVelocity = enemyDirNormalized * enemy1.maxSpeed;
     enemyBullets.emplace_back(enemy1);
@@ -278,12 +312,14 @@ void Enemy::damage() {
     isInvincible = true;
     cannotMove = true;
     currentFrame.left = 55.f;
+    enemyTakeDamage.play();
     animState = ENEMY_ANIMATION_STATES::TOOKDAMAGE;
 
     // Luego de 5 balas, el enemigo muere
-    currentHp -= 2;
+    currentHp -= 1;
     if (currentHp <= 0) {
         // Muere
+        enemyDies.play();
         animState = ENEMY_ANIMATION_STATES::DEATH;
     }
 }

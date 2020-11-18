@@ -11,6 +11,7 @@ Boss::Boss() {
     initTexture();
     initSprite();
     initAnimations();
+    initSounds();
     //initPhysics();
     bossShootingTimer.restart();
 
@@ -58,6 +59,29 @@ void Boss::initSprite() {
 
 void Boss::initAnimations() {
     animationTimer.restart();
+}
+
+void Boss::initSounds() {
+
+    //Ataque boss
+    if(!bossAttackBuffer.loadFromFile("../assets/sounds/bossAttack.ogg")){
+        std::cout<<"ERROR::BOSS_SHOOT: No se ha podido cargar el audio de disparo del boss";
+    }
+    bossAttack.setBuffer(bossAttackBuffer);
+    bossAttack.setVolume(15);
+    //Boss dies
+    if(!bossDiesBuffer.loadFromFile("../assets/sounds/bossDies.ogg")){
+        std::cout<<"ERROR::BOSS_DIES: No se ha podido cargar el audio de muerte del boss";
+    }
+    bossDies.setBuffer(bossDiesBuffer);
+    bossDies.setVolume(30);
+    //Cuando el boss recibe danio
+    if(!bossTakeDamageBuffer.loadFromFile("../assets/sounds/bossTakeDamage.ogg")){
+        std::cout<<"ERROR::BOSS_DIES: No se ha podido cargar el audio de muerte del boss";
+    }
+    bossTakeDamage.setBuffer(bossTakeDamageBuffer);
+    bossTakeDamage.setVolume(30);
+
 }
 
 Sprite Boss::getSprite() {
@@ -268,6 +292,7 @@ void Boss::updateAnimations() {
 
 void Boss::attack(){
     //Ataque boss
+    bossAttack.play();
     boss1.sprite.setPosition(getMiddlePoint());
     boss1.currVelocity = bossDirNormalized * (boss1.maxSpeed + 10);
     bossBullets.emplace_back(boss1);
@@ -280,6 +305,7 @@ void Boss::move(const float dir_x, const float dir_y) {
 }
 
 void Boss::damage() {
+    bossTakeDamage.play();
     invincible = true;
     cannotMove = true;
     currentFrame.left = 0;
@@ -289,6 +315,7 @@ void Boss::damage() {
     currentHp -= 2;
     if (currentHp <= 0) {
         // Muere
+        bossDies.play();
         this->position.y += 2;
         animState = BOSS_ANIMATION_STATES::DEAD;
     }

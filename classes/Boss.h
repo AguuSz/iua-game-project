@@ -51,8 +51,18 @@ private:
     void initSprite();
     void initTexture();
     void initAnimations();
+    void initSounds();
 
 public:
+
+    //Sonidos
+    SoundBuffer bossAttackBuffer;
+    Sound bossAttack;
+    SoundBuffer bossDiesBuffer;
+    Sound bossDies;
+    SoundBuffer bossTakeDamageBuffer;
+    Sound bossTakeDamage;
+
     // Constructor
     std::vector<Bullet> bossBullets;
     Boss();
