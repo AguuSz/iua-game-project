@@ -21,8 +21,8 @@ void Engine::inputMenu(Event& event) {
                 if (gameState == 1) {
                     gameState = 2;
                     menuIsOpen = false;
-
-
+                } else if(gameState == 0){
+                    window.close();
                 }
             }
             if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(sf::Keyboard::Down)) {
@@ -39,7 +39,12 @@ void Engine::inputMenu(Event& event) {
                 }
             }
             if(Keyboard::isKeyPressed(Keyboard::Enter)){
-                menu();
+                if(gameState == 1){
+                    menu();
+                } else if(gameState == 0){
+                    mainMenu();
+
+                }
             }
         }
     }

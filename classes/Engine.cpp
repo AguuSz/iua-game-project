@@ -39,6 +39,7 @@ void Engine::start() {
 
     Event event;
     bool bandera = false;
+    menuIsOpen = true;
 
     //Musica de fondo
     if(!level.doPlayBossMusic()) {
@@ -59,6 +60,11 @@ void Engine::start() {
     }
 
         switch(gameState){
+            case 0:
+                inputMenu(event);
+                drawMenu();
+                break;
+
             case 1:
                 inputMenu(event);
                 drawMenu();
@@ -74,8 +80,18 @@ void Engine::start() {
                         window.close();
                 }
                 break;
+        case 3:
+            std::cout << "Opciones" << std::endl;
+            break;
+        case 4:
+            std::cout << "Nueva partida" << std::endl;
+            break;
+        case 5:
+            std::cout << "Guardar" << std::endl;
+            break;
+
             default:
-                gameState = 2;
+                gameState = 0;
                 break;
         }
 
@@ -107,18 +123,35 @@ void Engine::menu() {
     if(Engine::menuIsOpen){
         switch(index){
             case 0:
-                std::cout << "Continue" << std::endl;
                 gameState = 2;
                 break;
             case 1:
-                std::cout << "Save" << std::endl;
-                
+                gameState = 5;
                 break;
             case 2:
-                std::cout << "Opciones" << std::endl;
+                gameState = 3;
                 break;
             case 3:
-                std::cout << "Quit" << std::endl;
+                window.close();
+                break;
+        }
+
+    }
+}
+
+void Engine::mainMenu() {
+    if(Engine::menuIsOpen){
+        switch(index){
+            case 0:
+                gameState = 2;
+                break;
+            case 1:
+                gameState = 4;
+                break;
+            case 2:
+                gameState = 3;
+                break;
+            case 3:
                 window.close();
 
 
@@ -126,4 +159,3 @@ void Engine::menu() {
 
     }
 }
-
