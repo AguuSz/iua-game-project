@@ -1,14 +1,12 @@
-//
-// Created by Agus on 15/11/2020.
-//
-
-#ifndef IUAPROJECT_HEARTH_H
-#define IUAPROJECT_HEARTH_H
+#ifndef IUAPROJECT_HEART_H
+#define IUAPROJECT_HEART_H
 
 #include <SFML/Graphics.hpp>
+#include <stack>
+
 using namespace sf;
 
-class Hearth {
+class Heart {
 private:
     Sprite sprite;
     Texture texture;
@@ -18,13 +16,15 @@ private:
 
 public:
 
-    Hearth();
+    Heart();
 
     int getCurrentHP();
     bool isVisible();
 
     Sprite getSprite();
+
+    void generarPila();
 };
 
 
-#endif //IUAPROJECT_HEARTH_H
+#endif //IUAPROJECT_HEART_H

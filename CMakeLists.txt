@@ -35,7 +35,7 @@ add_executable(iuaProject
         classes/Boss.cpp
         classes/CheckForCollisions.cpp
         classes/Enemy.cpp
-        classes/Level.cpp classes/Hearth.cpp classes/Hearth.h)
+        classes/Level.cpp classes/Heart.cpp classes/Heart.h)
 
 target_link_libraries(iuaProject sfml-system sfml-window sfml-graphics sfml-audio)
 

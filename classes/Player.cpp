@@ -23,6 +23,9 @@ void Player::initVariables() {
     currentHp = 10;
     isInvincible = false;
     didPlayerDie = false;
+    for(int i = 0; i < 5; i++){
+        hp.push(heart);
+    }
 
     scaleFactor = 2.5;
     animState = IDLE;
@@ -266,13 +269,18 @@ void Player::damage() {
 }
 
 void Player::updateHp() {
+
+    //if (currentHp / 2 != hp.size() && !hp.empty()) {
+     //   hp.pop();
+    //}
+
     if (currentHp <= 0) {
         // El player muere
         if(!didPlayerDie){
             playerDies.play();
             didPlayerDie = true;
         }
-        //std::cout << "El player ha muerto.\n";
+        //std::cout 0<< "El player ha muerto.\n";
     }
 }
 

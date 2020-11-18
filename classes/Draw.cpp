@@ -15,6 +15,12 @@ void Engine::draw() {
     level.draw(window);
     window.draw(player.getSprite());
 
+    while (!player.hp.empty()) {
+        window.draw(player.hp.top().getSprite());
+        std::cout << "Vida del player: " << player.hp.size() << std::endl;
+        player.hp.pop();
+    }
+
     // Dibuja las balas que haya en el array bullets
     for (auto & bullet : bullets) {
         window.draw(bullet.sprite);
