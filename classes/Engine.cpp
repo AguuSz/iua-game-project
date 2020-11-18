@@ -46,7 +46,7 @@ void Engine::start() {
     if(!music.openFromFile("../assets/sounds/backgroundMusic.ogg")){
         std::cout << "ERROR::BACKGROUND_MUSIC no se ha podido cargar el archivo";
     }
-    music.setVolume(30);
+    music.setVolume(15);
     music.setLoop(true);
     music.play();
 
