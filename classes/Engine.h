@@ -50,6 +50,7 @@ private:
 
     // Menu
     int index;
+    int optionsMenuIndex;
     bool menuIsOpen;
     Texture mainMenuTexture;
     Texture menuTexture;
@@ -61,14 +62,13 @@ private:
     RectangleShape selectedOption;
 
     void inputMenu(Event& event);
-    void openMenu();
     void MoveUp();
     void MoveDown();
     void selectOption();
     void drawMenu();
-    void drawMainMenu();
     void menu();
     void mainMenu();
+    void optionsMenu();
 
 
     // Funciones para el funcionamiento
@@ -85,8 +85,6 @@ private:
 public:
     Engine();
 
-    //Menu
-    void setMenuIsOpen(bool menuIsOpen);
 
     // Inicia el juego llamando a todas las funciones privadas
     void start();

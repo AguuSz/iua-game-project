@@ -3,11 +3,12 @@
 //
 #include "Engine.h"
 #include <iostream>
+#include <string>
 void Engine::drawMenu() {
 
     switch(gameState) {
         case 0:
-
+            //Menu principal
             mainMenuTexture.loadFromFile("../assets/MenuPrincipal.jpg");
             if (!mainMenuTexture.loadFromFile("../assets/MenuPrincipal.jpg"))
                 std::cout << "ERROR::MENU:: No se ha podido cargar la textura del menu principal" << std::endl;
@@ -39,9 +40,10 @@ void Engine::drawMenu() {
             window.display();
             break;
         case 1:
+            // Menu ingame
             menuTexture.loadFromFile("../assets/Menu1.jpg");
             if (!menuTexture.loadFromFile("../assets/Menu1.jpg"))
-                std::cout << "ERROR::MENU:: No se ha podido cargar la textura del menu" << std::endl;
+                std::cout << "ERROR::MENU:: No se ha podido cargar la textura del menu ingame" << std::endl;
             menuSprite.setTexture(menuTexture);
             menuSprite.setPosition(player.getPosition().x - 250, 200);
             window.draw(menuSprite);
@@ -70,31 +72,50 @@ void Engine::drawMenu() {
             window.display();
             break;
         case 3:
-            optionsMenuTexture.loadFromFile("../assets/Menu1.jpg");
-            if (!optionsMenuTexture.loadFromFile("../assets/Menu1.jpg"))
-                std::cout << "ERROR::MENU:: No se ha podido cargar la textura del menu" << std::endl;
+            // Menu opciones
+            window.clear();
+            optionsMenuTexture.loadFromFile("../assets/menuOpciones.jpg");
+            if (!optionsMenuTexture.loadFromFile("../assets/menuOpciones.jpg"))
+                std::cout << "ERROR::MENU:: No se ha podido cargar la textura del menu de opciones" << std::endl;
             optionsMenuSprite.setTexture(optionsMenuTexture);
-            optionsMenuSprite.setPosition(player.getPosition().x - 250, 200);
             window.draw(optionsMenuSprite);
+
+            sf::Font fuente;
+            if (!fuente.loadFromFile("../assets/SourceSerifPro-Bold.ttf")) {
+                std::cout << "ERROR::DRAWMENU_FONT no se ha podido cargar la fuente del menu.";
+            }
+            sf::Text volMusica, volEfectos;
+            std::string vol_Musica, vol_Efectos;
+            int volM = round(backgroundMusic.getVolume());
+            int volE;
+            vol_Musica = std::to_string(volM);
+            volMusica.setString(vol_Musica);
+            volMusica.setFont(fuente);
+            volMusica.setPosition(670, 330);
+            volMusica.setCharacterSize(40);
+            volMusica.setColor(Color());
+            window.draw(volMusica);
+
+
+
+
             selectedOption.setOutlineColor(Color(63, 47, 39, 255));
             selectedOption.setOutlineThickness(3);
             selectedOption.setFillColor(Color::Transparent);
-            switch (index) {
+            switch (optionsMenuIndex) {
                 case 0:
-                    selectedOption.setSize(Vector2f(291, 50));
-                    selectedOption.setPosition(player.getPosition().x - 60, 267);
+                    selectedOption.setSize(Vector2f(80, 40));
+                    selectedOption.setPosition(650, 335);
                     break;
                 case 1:
-                    selectedOption.setSize(Vector2f(253, 53));
-                    selectedOption.setPosition(player.getPosition().x - 38, 321);
+                    selectedOption.setSize(Vector2f(80, 40));
+                    selectedOption.setPosition(650, 440);
                     break;
                 case 2:
-                    selectedOption.setSize(Vector2f(253, 48));
-                    selectedOption.setPosition(player.getPosition().x - 38, 380);
+                    selectedOption.setSize(Vector2f(200, 55));
+                    selectedOption.setPosition(585, 545);
                     break;
-                case 3:
-                    selectedOption.setSize(Vector2f(147, 48));
-                    selectedOption.setPosition(player.getPosition().x + 11, 437);
+
 
             }
             window.draw(selectedOption);

@@ -56,21 +56,24 @@ void Engine::start() {
 
     if(!bandera){
         index = 0;
+        optionsMenuIndex = 0;
         bandera = true;
     }
 
         switch(gameState){
             case 0:
+                // Estado del menu Principal
                 inputMenu(event);
                 drawMenu();
                 break;
 
             case 1:
+                // Estado del menu ingame
                 inputMenu(event);
                 drawMenu();
                 break;
             case 2:
-
+                //Estado ingame
                 input(event);
                 update();
                 checkForCollisions();
@@ -80,15 +83,19 @@ void Engine::start() {
                         window.close();
                 }
                 break;
-        case 3:
-            std::cout << "Opciones" << std::endl;
-            break;
-        case 4:
-            std::cout << "Nueva partida" << std::endl;
-            break;
-        case 5:
-            std::cout << "Guardar" << std::endl;
-            break;
+            case 3:
+                // Estado menu de opciones
+                drawMenu();
+                inputMenu(event);
+                break;
+            case 4:
+                // Estado Nueva partida
+                std::cout << "Nueva partida" << std::endl;
+                break;
+            case 5:
+                // Estado menu de guardado
+                std::cout << "Guardar" << std::endl;
+                break;
 
             default:
                 gameState = 0;
@@ -118,7 +125,7 @@ Sprite Engine::drawMouse() {
 }
 
 // Menu
-
+// Funcion menu ingame
 void Engine::menu() {
     if(Engine::menuIsOpen){
         switch(index){
@@ -138,7 +145,7 @@ void Engine::menu() {
 
     }
 }
-
+// Funcion menu principal
 void Engine::mainMenu() {
     if(Engine::menuIsOpen){
         switch(index){
@@ -155,6 +162,14 @@ void Engine::mainMenu() {
                 window.close();
 
 
+        }
+
+    }
+}
+void Engine::optionsMenu() {
+    if(Engine::menuIsOpen){
+        if(index == 2){
+            gameState = 0;
         }
 
     }

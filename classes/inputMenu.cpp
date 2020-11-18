@@ -18,34 +18,82 @@ void Engine::inputMenu(Event& event) {
         }
         else if(event.type == sf::Event::KeyPressed){
             if(Keyboard::isKeyPressed(Keyboard::Escape)) {
-                if (gameState == 1) {
-                    gameState = 2;
-                    menuIsOpen = false;
-                } else if(gameState == 0){
-                    window.close();
+                switch(gameState) {
+                    case 0:
+                        window.close();
+                        break;
+                    case 1:
+                        gameState = 2;
+                        menuIsOpen = false;
+                        break;
+                    case 3:
+                        gameState = 0;
+                        break;
+
                 }
             }
             if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-                if (Engine::index < 3) {
-                    Engine::index++;
+                switch(gameState){
+                    case 0:
+                    case 1:
+                        if(Engine::index < 3) {
+                            Engine::index++;
+                        }
+                        break;
+                    case 3:
+                        if(Engine::optionsMenuIndex < 2){
+                            Engine::optionsMenuIndex++;
+                        }
+
+
 
                 }
             }
 
             if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                if (Engine::index > 0) {
-                    Engine::index--;
-
+                switch(gameState){
+                    case 0:
+                    case 1:
+                        if (Engine::index > 0) {
+                            Engine::index--;
+                        }
+                        break;
+                    case 3:
+                        if(Engine::optionsMenuIndex > 0){
+                            Engine::optionsMenuIndex--;
+                        }
                 }
             }
             if(Keyboard::isKeyPressed(Keyboard::Enter)){
-                if(gameState == 1){
-                    menu();
-                } else if(gameState == 0){
-                    mainMenu();
+                switch(gameState){
+                    case 0:
+                        mainMenu();
+                        break;
+                    case 1:
+                        menu();
+                        break;
+                    case 3:
+                        optionsMenu();
 
                 }
             }
+            if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+                switch(gameState){
+                    case 3:
+                        if(Engine::backgroundMusic.getVolume() > 10){
+                            Engine::backgroundMusic.setVolume(Engine::backgroundMusic.getVolume()-1);
+                        }
+                }
+            }
+            if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+                switch(gameState){
+                    case 3:
+                        if(Engine::backgroundMusic.getVolume() < 100){
+                            Engine::backgroundMusic.setVolume(Engine::backgroundMusic.getVolume()+1);
+                        }
+                }
+            }
+
         }
     }
 }
