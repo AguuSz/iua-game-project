@@ -22,6 +22,7 @@ void Player::initVariables() {
     maxHp = 10;
     currentHp = 10;
     isInvincible = false;
+    didPlayerDie = false;
 
     scaleFactor = 2.5;
     animState = IDLE;
@@ -267,7 +268,10 @@ void Player::damage() {
 void Player::updateHp() {
     if (currentHp <= 0) {
         // El player muere
-        playerDies.play();
+        if(!didPlayerDie){
+            playerDies.play();
+            didPlayerDie = true;
+        }
         //std::cout << "El player ha muerto.\n";
     }
 }

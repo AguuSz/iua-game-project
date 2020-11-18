@@ -51,6 +51,7 @@ private:
 public:
 
     bool ignoreMouseDirection;
+    bool didPlayerDie;
 
     //Sonidos
     SoundBuffer shootBuffer;
