@@ -37,7 +37,7 @@ add_executable(iuaProject
         classes/Enemy.cpp
         classes/Level.cpp classes/Hearth.cpp classes/Hearth.h)
 
-target_link_libraries(iuaProject sfml-system sfml-window sfml-graphics)
+target_link_libraries(iuaProject sfml-system sfml-window sfml-graphics sfml-audio)
 
 # Copy assets to Build directory
 add_custom_command(
