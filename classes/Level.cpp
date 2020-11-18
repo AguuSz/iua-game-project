@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include <time.h>
+#include <SFML/Audio.hpp>
 
 Level::Level() {
     setInitialValues();
@@ -43,6 +44,7 @@ void Level::setInitialValues() {
     setBackgroundScale(1);
     spawnEnemies(3, 3, 2);
     spawnBoss = false;
+    playBossMusic = false;
     // Inserta la instancia 1
     newInstanceAllowed = false;
     instances.push(1);
@@ -123,6 +125,13 @@ void Level::update(Player &player) {
 
     if (instance == instances.back() && newInstanceAllowed) {
         // Significa que ya entro a otra instancia
+        if(instance == 5){
+            spawnBoss = true;
+            playBossMusic = true;
+        }else{
+            playBossMusic = false;
+            spawnBoss = false;
+        }
         spawnEnemies(3, 3, 2);
         newInstanceAllowed = false;
     }
@@ -159,6 +168,10 @@ void Level::spawnEnemies(int goblins, int mushrooms, int flyingEyes) {
         x = 1360 * (instance - 1) + rand() % 700;
         enemies.emplace_back("../assets/enemies/Flying Eye/flyingEyeSheet.png", Vector2f(x - 300 * i, 200), true);
     }
+}
+
+bool Level::doPlayBossMusic() {
+    return playBossMusic;
 }
 
 void Level::setInstance(int instance) {

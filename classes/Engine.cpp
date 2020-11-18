@@ -4,7 +4,6 @@
 
 #include "Engine.h"
 #include <fstream>
-#include <SFML/Audio.hpp>
 
 using namespace sf;
 
@@ -42,13 +41,15 @@ void Engine::start() {
     bool bandera = false;
 
     //Musica de fondo
-    sf::Music music;
-    if(!music.openFromFile("../assets/sounds/backgroundMusic.ogg")){
-        std::cout << "ERROR::BACKGROUND_MUSIC no se ha podido cargar el archivo";
+    if(!level.doPlayBossMusic()) {
+        if (!backgroundMusic.openFromFile("../assets/sounds/backgroundMusic.ogg")) {
+            std::cout << "ERROR::BACKGROUND_MUSIC no se ha podido cargar el archivo";
+        }
+        backgroundMusic.setVolume(15);
+        backgroundMusic.setLoop(true);
+        backgroundMusic.play();
     }
-    music.setVolume(15);
-    music.setLoop(true);
-    music.play();
+
 
     while(window.isOpen()) {
 

@@ -15,6 +15,7 @@ private:
     Texture bkgTexture;
     int instance;
     bool spawnBoss;
+    bool playBossMusic;
 
     bool levelFinished;
 
@@ -31,6 +32,7 @@ public:
     bool newInstanceAllowed;
     std::queue<int> instances;
 
+
     // Constructor
     Level();
 
@@ -45,6 +47,7 @@ public:
 
     void setBackground(String directory);
     void setDmgMultiplier(float dmgMultiplier);
+    bool doPlayBossMusic();
     void endLevel();
 
 

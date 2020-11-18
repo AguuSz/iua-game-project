@@ -3,6 +3,7 @@
 //
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <math.h>
 #include "Player.h"
 #include "Enemy.h"
@@ -27,6 +28,8 @@ private:
 
     // Nivel
     Level level;
+    Music backgroundMusic;
+    Music bossMusic;
 
     // Bala
     Bullet b1;
