@@ -175,12 +175,13 @@ void Engine::checkForCollisions() {
 }
 
 bool Engine::isOutOfScreen(Rect<float> element, Window &screen, Level &level) {
-    if (element.left <= (1360 * level.getInstance() - 1360)) {
+    if (element.left <= 0) {
         return true;
     }
 
     // El jefe se choco con la parte derecha de la pantalla o instancia
     if (element.left + element.width >= 1360 * level.getInstance()) {
+        std::cout << "Pantalla: " << window.getSize().x << "\n";
         return true;
     }
 

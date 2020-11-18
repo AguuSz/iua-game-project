@@ -125,15 +125,14 @@ void Level::update(Player &player) {
 
     if (instance == instances.back() && newInstanceAllowed) {
         // Significa que ya entro a otra instancia
-        if(instance == 5){
+        if(instance == 6){
             spawnBoss = true;
             playBossMusic = true;
+            newInstanceAllowed = false;
         }else{
-            playBossMusic = false;
-            spawnBoss = false;
+            spawnEnemies(3, 3, 2);
+            newInstanceAllowed = false;
         }
-        spawnEnemies(3, 3, 2);
-        newInstanceAllowed = false;
     }
 
     if (spawnBoss && !boss->isBossDead()) {
@@ -172,6 +171,10 @@ void Level::spawnEnemies(int goblins, int mushrooms, int flyingEyes) {
 
 bool Level::doPlayBossMusic() {
     return playBossMusic;
+}
+
+void Level::setPlayBossMusic(bool c) {
+    playBossMusic = c;
 }
 
 void Level::setInstance(int instance) {

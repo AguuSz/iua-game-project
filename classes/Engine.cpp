@@ -28,7 +28,7 @@ Engine::Engine() {
 
     view.reset(FloatRect(300, 300, (resolution.x / 16) * 14, (resolution.y / 9) * 10));
 
-    shootingDelay = 0.3f;
+    shootingDelay = 0.2f;
     shootingTimer.restart();
 
     player.setPosition(1, 500);
@@ -45,7 +45,7 @@ void Engine::start() {
         if (!backgroundMusic.openFromFile("../assets/sounds/backgroundMusic.ogg")) {
             std::cout << "ERROR::BACKGROUND_MUSIC no se ha podido cargar el archivo";
         }
-        backgroundMusic.setVolume(15);
+        backgroundMusic.setVolume(10);
         backgroundMusic.setLoop(true);
         backgroundMusic.play();
     }

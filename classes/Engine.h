@@ -54,6 +54,7 @@ private:
     Texture menuTexture;
     Sprite menuSprite;
     RectangleShape selectedOption;
+
     void inputMenu(Event& event);
     void openMenu();
     void MoveUp();
