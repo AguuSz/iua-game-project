@@ -134,6 +134,7 @@ void Engine::checkForCollisions() {
         for (int j = 0; j < e.enemyBullets.size(); j++) {
             if (e.enemyBullets[j].sprite.getGlobalBounds().intersects(player.getSprite().getGlobalBounds())) {
                 // Impacta con el player
+                player.takeDamage.play();
                 e.enemyBullets.erase(e.enemyBullets.begin() + j);
                 if (!player.isPlayerInvincible()) {
                     player.damage();

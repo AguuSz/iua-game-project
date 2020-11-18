@@ -3,6 +3,7 @@
 //
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Hearth.h"
 
 using namespace sf;
@@ -45,10 +46,21 @@ private:
     void initSprite();
     void initAnimations();
     void initPhysics();
+    void initSounds();
 
 public:
 
     bool ignoreMouseDirection;
+
+    //Sonidos
+    SoundBuffer shootBuffer;
+    Sound shoot;
+    SoundBuffer takeDamageBuffer;
+    Sound takeDamage;
+    SoundBuffer jumpBuffer;
+    Sound jumpSound;
+    SoundBuffer playerDiesBuffer;
+    Sound playerDies;
 
     // Constructor
     Player();

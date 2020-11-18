@@ -12,6 +12,7 @@ Player::Player() {
     initSprite();
     initAnimations();
     initPhysics();
+    initSounds();
 }
 
 // Declaracion de funciones
@@ -62,6 +63,36 @@ void Player::initPhysics() {
 
 }
 
+void Player::initSounds(){
+
+    //Disparo
+    if(!shootBuffer.loadFromFile("../assets/sounds/playerShoot.ogg")){
+        std::cout<<"ERROR::PLAYER_SHOOT: No se ha podido cargar el audio de disparo del jugador";
+    }
+    shoot.setBuffer(shootBuffer);
+    shoot.setVolume(30);
+    shoot.setPitch(2);
+    //Cuando recibe danio
+    if(!takeDamageBuffer.loadFromFile("../assets/sounds/takeDamage.ogg")){
+        std::cout<<"ERROR::PLAYER_TAKE_DAMAGE: No se ha podido cargar el audio de danio del jugador";
+    }
+    takeDamage.setBuffer(takeDamageBuffer);
+    takeDamage.setVolume(30);
+    //Salto
+    if(!jumpBuffer.loadFromFile("../assets/sounds/jump.ogg")){
+        std::cout<<"ERROR::PLAYER_JUMP: No se ha podido cargar el audio de salto del jugador";
+    }
+    jumpSound.setBuffer(jumpBuffer);
+    jumpSound.setVolume(30);
+    jumpSound.setPitch(2);
+    //Muerte
+    if(!playerDiesBuffer.loadFromFile("../assets/sounds/playerDies.ogg")){
+        std::cout<<"ERROR::PLAYER_DIES: No se ha podido cargar el audio de la muerte del jugador";
+    }
+    playerDies.setBuffer(playerDiesBuffer);
+    playerDies.setVolume(30);
+}
+
 Sprite Player::getSprite() {
     return sprite;
 }
@@ -72,6 +103,7 @@ void Player::move(const float dir_x) {
 }
 
 void Player::jump() {
+    jumpSound.play();
     isJumping = true;
     speed.y = -30.f;
 }
@@ -235,6 +267,7 @@ void Player::damage() {
 void Player::updateHp() {
     if (currentHp <= 0) {
         // El player muere
+        playerDies.play();
         //std::cout << "El player ha muerto.\n";
     }
 }

@@ -23,6 +23,9 @@ void Engine::input(Event& event) {
     // Disparo
     if (Mouse::isButtonPressed(Mouse::Left)) {
         if (shootingTimer.getElapsedTime().asSeconds() >= shootingDelay) {
+            //sonido
+            player.shoot.play();
+            //
             b1.sprite.setPosition(player.getMiddlePoint().x, player.getMiddlePoint().y - 15);
             b1.currVelocity = aimDirNormalized * b1.maxSpeed;
 
