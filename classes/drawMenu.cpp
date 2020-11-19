@@ -4,17 +4,50 @@
 #include "Engine.h"
 #include <iostream>
 #include <string>
-#include "Enemy.h"
+
 
 void Engine::drawMenu() {
+
+    sf::Font fuente;
+    if (!fuente.loadFromFile("../assets/SourceSerifPro-Bold.ttf")) {
+        std::cout << "ERROR::DRAWMENU_FONT no se ha podido cargar la fuente del menu.";
+    }
+    sf::Text volMusica, volEfectos;
+    std::string vol_Musica, vol_Efectos;
+    int volM = round(backgroundMusic.getVolume());
+    int volE = level.enemies.front().effectsVolume;
+
+
+    vol_Musica = std::to_string(volM);
+    vol_Efectos = std::to_string(volE);
+
+    volEfectos.setString(vol_Efectos);
+    volMusica.setString(vol_Musica);
+
+    volMusica.setFont(fuente);
+    volEfectos.setFont(fuente);
+    volMusica.setCharacterSize(40);
+    volEfectos.setCharacterSize(40);
+
+    volMusica.setColor(Color());
+    volEfectos.setColor(Color());
+    optionsMenuTexture.loadFromFile("../assets/menuOpciones.jpg");
+    if (!optionsMenuTexture.loadFromFile("../assets/menuOpciones.jpg"))
+        std::cout << "ERROR::MENU:: No se ha podido cargar la textura del menu de opciones" << std::endl;
+    optionsMenuSprite.setTexture(optionsMenuTexture);
+
+
+
 
     switch(gameState) {
         case 0:
             //Menu principal
+            window.clear();
             mainMenuTexture.loadFromFile("../assets/MenuPrincipal.jpg");
             if (!mainMenuTexture.loadFromFile("../assets/MenuPrincipal.jpg"))
                 std::cout << "ERROR::MENU:: No se ha podido cargar la textura del menu principal" << std::endl;
             mainMenuSprite.setTexture(mainMenuTexture);
+            mainMenuSprite.setPosition((level.getInstance()-1)*1360, 0);
 
             window.draw(mainMenuSprite);
             selectedOption.setOutlineColor(Color(63, 47, 39, 255));
@@ -23,19 +56,19 @@ void Engine::drawMenu() {
             switch (index) {
                 case 0:
                     selectedOption.setSize(Vector2f(359, 61));
-                    selectedOption.setPosition(507, 247);
+                    selectedOption.setPosition((level.getInstance()-1)*1360+507, 247);
                     break;
                 case 1:
                     selectedOption.setSize(Vector2f(458, 62));
-                    selectedOption.setPosition(453, 303);
+                    selectedOption.setPosition((level.getInstance()-1)*1360+453, 303);
                     break;
                 case 2:
                     selectedOption.setSize(Vector2f(291, 61));
-                    selectedOption.setPosition(531, 373);
+                    selectedOption.setPosition((level.getInstance()-1)*1360+531, 373);
                     break;
                 case 3:
                     selectedOption.setSize(Vector2f(185, 62));
-                    selectedOption.setPosition(583, 427);
+                    selectedOption.setPosition((level.getInstance()-1)*1360+583, 427);
                     break;
             }
             window.draw(selectedOption);
@@ -73,48 +106,50 @@ void Engine::drawMenu() {
             window.draw(selectedOption);
             window.display();
             break;
+        case 6:
+            // Menu opciones
+            window.clear();
+            optionsMenuSprite.setPosition((level.getInstance()-1)*1360, 0);
+            window.draw(optionsMenuSprite);
+
+            volMusica.setPosition((level.getInstance()-1)*1360+670, 330);
+            volEfectos.setPosition((level.getInstance()-1)*1360+670, 435);
+
+            window.draw(volMusica);
+            window.draw(volEfectos);
+
+            selectedOption.setOutlineColor(Color(63, 47, 39, 255));
+            selectedOption.setOutlineThickness(3);
+            selectedOption.setFillColor(Color::Transparent);
+            switch (optionsMenuIndex) {
+                case 0:
+                    selectedOption.setSize(Vector2f(80, 40));
+                    selectedOption.setPosition((level.getInstance()-1)*1360+650, 335);
+                    break;
+                case 1:
+                    selectedOption.setSize(Vector2f(80, 40));
+                    selectedOption.setPosition((level.getInstance()-1)*1360+650, 440);
+                    break;
+                case 2:
+                    selectedOption.setSize(Vector2f(200, 55));
+                    selectedOption.setPosition((level.getInstance()-1)*1360+585, 545);
+                    break;
+
+
+            }
+            window.draw(selectedOption);
+            window.display();
+            break;
         case 3:
             // Menu opciones
             window.clear();
-            optionsMenuTexture.loadFromFile("../assets/menuOpciones.jpg");
-            if (!optionsMenuTexture.loadFromFile("../assets/menuOpciones.jpg"))
-                std::cout << "ERROR::MENU:: No se ha podido cargar la textura del menu de opciones" << std::endl;
-            optionsMenuSprite.setTexture(optionsMenuTexture);
             window.draw(optionsMenuSprite);
-
-            sf::Font fuente;
-            if (!fuente.loadFromFile("../assets/SourceSerifPro-Bold.ttf")) {
-                std::cout << "ERROR::DRAWMENU_FONT no se ha podido cargar la fuente del menu.";
-            }
-            sf::Text volMusica, volEfectos;
-            std::string vol_Musica, vol_Efectos;
-            int volM = round(backgroundMusic.getVolume());
-            int volE = level.enemies.front().effectsVolume;
-
-
-            vol_Musica = std::to_string(volM);
-            vol_Efectos = std::to_string(volE);
-
-            volEfectos.setString(vol_Efectos);
-            volMusica.setString(vol_Musica);
-
-            volMusica.setFont(fuente);
-            volEfectos.setFont(fuente);
 
             volMusica.setPosition(670, 330);
             volEfectos.setPosition(670, 435);
 
-            volMusica.setCharacterSize(40);
-            volEfectos.setCharacterSize(40);
-
-            volMusica.setColor(Color());
-            volEfectos.setColor(Color());
             window.draw(volMusica);
             window.draw(volEfectos);
-
-
-
-
 
             selectedOption.setOutlineColor(Color(63, 47, 39, 255));
             selectedOption.setOutlineThickness(3);

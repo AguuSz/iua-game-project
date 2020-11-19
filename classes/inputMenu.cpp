@@ -26,6 +26,7 @@ void Engine::inputMenu(Event& event) {
                         menuIsOpen = false;
                         break;
                     case 3:
+                    case 6:
                         gameState = 0;
                         break;
 
@@ -40,6 +41,7 @@ void Engine::inputMenu(Event& event) {
                         }
                         break;
                     case 3:
+                    case 6:
                         if (Engine::optionsMenuIndex < 2) {
                             Engine::optionsMenuIndex++;
                         }
@@ -57,6 +59,7 @@ void Engine::inputMenu(Event& event) {
                         }
                         break;
                     case 3:
+                    case 6:
                         if (Engine::optionsMenuIndex > 0) {
                             Engine::optionsMenuIndex--;
                         }
@@ -71,13 +74,16 @@ void Engine::inputMenu(Event& event) {
                         menu();
                         break;
                     case 3:
+                    case 6:
                         optionsMenu();
+                        break;
 
                 }
             }
             if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(sf::Keyboard::Left)) {
                 switch (gameState) {
                     case 3:
+                    case 6:
                         switch (optionsMenuIndex) {
                             case 0:
                                 if (Engine::backgroundMusic.getVolume() > 1) {
@@ -99,6 +105,7 @@ void Engine::inputMenu(Event& event) {
             if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(sf::Keyboard::Right)) {
                 switch (gameState) {
                     case 3:
+                    case 6:
                         switch (optionsMenuIndex) {
                             case 0:
                                 if (Engine::backgroundMusic.getVolume() < 100) {

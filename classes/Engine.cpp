@@ -91,12 +91,17 @@ void Engine::start() {
                 break;
             case 4:
                 // Estado Nueva partida
-                std::cout << "Nueva partida" << std::endl;
+                gameState = 2;
                 break;
             case 5:
                 // Estado menu de guardado
-                std::cout << "Guardar" << std::endl;
+                save();
                 break;
+            case 6:
+                drawMenu();
+                inputMenu(event);
+                break;
+
 
             default:
                 gameState = 0;
@@ -137,7 +142,7 @@ void Engine::menu() {
                 gameState = 5;
                 break;
             case 2:
-                gameState = 3;
+                gameState = 6;
                 break;
             case 3:
                 window.close();
@@ -151,6 +156,7 @@ void Engine::mainMenu() {
     if(Engine::menuIsOpen){
         switch(index){
             case 0:
+                continueGame();
                 gameState = 2;
                 break;
             case 1:
@@ -174,4 +180,19 @@ void Engine::optionsMenu() {
         }
 
     }
+}
+void Engine::save() {
+    int tmp = level.getInstance();
+    std::ofstream ofs;
+    ofs.open("GameSave.txt");
+    ofs << tmp;
+    ofs.close();
+}
+void Engine::continueGame() {
+    std::ifstream ifs;
+    ifs.open("GameSave.txt");
+    int tmp;
+    ifs >> tmp;
+    level.setInstance(tmp);
+    player.setPosition(1360*(tmp-1), 0);
 }
