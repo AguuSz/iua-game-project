@@ -15,6 +15,16 @@ void Engine::draw() {
     level.draw(window);
     window.draw(player.getSprite());
 
+    for (int i = 0; i < player.hp.size(); i++) {
+        Sprite hpSprite = player.hp.top().getSprite();
+        hpSprite.setPosition(player.getPosition().x - 540 + (i * 55), hpSprite.getPosition().y + 5);
+        window.draw(hpSprite);
+    }
+
+    //Texto muerte
+    if(player.didPlayerDie){
+        window.draw(player.deadText);
+    }
     // Dibuja las balas que haya en el array bullets
     for (auto & bullet : bullets) {
         window.draw(bullet.sprite);

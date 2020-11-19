@@ -22,7 +22,7 @@ public:
         sprite.setTexture(texture);
     }
 
-    Bullet(float scaleFactor) : currVelocity(0.f, 0.f), maxSpeed(7.f) {
+    Bullet(float scaleFactor) : currVelocity(0.f, 0.f), maxSpeed(6.f) {
         if(!texture.loadFromFile("../assets/enemies/Boss/bossBullet.png"))
             std::cout << "Error al cargar la textura de la bala";
         sprite.setTexture(texture);

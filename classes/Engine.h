@@ -9,6 +9,7 @@
 #include "Enemy.h"
 #include "Level.h"
 #include "Bullet.h"
+#include "Boss.h"
 #include <vector>
 
 using namespace sf;
@@ -30,6 +31,8 @@ private:
     Level level;
     Music backgroundMusic;
     Music bossMusic;
+    Music winningMusic;
+    Boss boss;
 
     // Bala
     Bullet b1;

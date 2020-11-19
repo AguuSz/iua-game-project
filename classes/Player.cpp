@@ -23,6 +23,9 @@ void Player::initVariables() {
     currentHp = 10;
     isInvincible = false;
     didPlayerDie = false;
+    for(int i = 0; i < 5; i++){
+        hp.push(heart);
+    }
 
     scaleFactor = 2.5;
     animState = IDLE;
@@ -157,96 +160,94 @@ void Player::updateMovement() {
 
 void Player::updateAnimations() {
     // Animacion IDLE
-    if (animState == PLAYER_ANIMATION_STATES::IDLE) {
-        // Cuando pasa medio segundo, ahi recien que empieze a animar
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
-            // Hacemos que vuelva arriba, debido a nuestro jake sheet
-            currentFrame.top = 0;
-            currentFrame.left += 40.f;
+    switch(animState) {
+        case (PLAYER_ANIMATION_STATES::IDLE):
+            if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
+                // Hacemos que vuelva arriba, debido a nuestro jake sheet
+                currentFrame.top = 0;
+                currentFrame.left += 40.f;
 
-            if (currentFrame.left >= 160.f)
-                currentFrame.left = 0;
+                if (currentFrame.left >= 160.f)
+                    currentFrame.left = 0;
 
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
-            animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
+                // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+                animationTimer.restart();
+                sprite.setTextureRect(currentFrame);
 
-            ignoreMouseDirection = false;
-        }
-    }
-    // Animacion hacia la derecha
-    else if (animState == PLAYER_ANIMATION_STATES::MOVING_RIGHT) {
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
-            // Hacemos que se posicione en la 2da fila de nuestro sheet
-            currentFrame.top = 50.f;
-            currentFrame.left += 40.f;
-
-            if (currentFrame.left >= 360.f)
-                currentFrame.left = 0;
-
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
-            animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
-
-            ignoreMouseDirection = true;
-            setPlayerLookingRight(true);
-        }
-    }
-
-    else if (animState == PLAYER_ANIMATION_STATES::MOVING_LEFT) {
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
-            // Hacemos que se posicione en la 2da fila de nuestro sheet
-            currentFrame.top = 50.f;
-            currentFrame.left += 40.f;
-
-            if (currentFrame.left >= 360.f)
-                currentFrame.left = 0;
-
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
-            animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
-
-            ignoreMouseDirection = true;
-            setPlayerLookingRight(false);
-        }
-    }
-
-    else if(animState == PLAYER_ANIMATION_STATES::FALLING) {
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
-            // Hacemos que se posicione en la 2da fila de nuestro sheet
-            currentFrame.top = 200.f;
-            currentFrame.left += 40.f;
-
-            if (currentFrame.left >= 40.f)
-                currentFrame.left = 0;
-
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
-            animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
-        }
-
-    }
-    else if (animState == PLAYER_ANIMATION_STATES::DAMAGED) {
-        // Cuando pasa medio segundo, ahi recien que empieze a animar
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.2f) {
-            // Hacemos que vuelva arriba, debido a nuestro jake sheet
-            currentFrame.top = 300.f;
-            currentFrame.left += 40.f;
-
-            if (currentFrame.left >= 80.f) {
-                currentFrame.left = 0;
-                isInvincible = false;
+                ignoreMouseDirection = false;
             }
+            break;
 
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+        case (PLAYER_ANIMATION_STATES::MOVING_RIGHT):
+            if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
+                // Hacemos que se posicione en la 2da fila de nuestro sheet
+                currentFrame.top = 50.f;
+                currentFrame.left += 40.f;
+
+                if (currentFrame.left >= 360.f)
+                    currentFrame.left = 0;
+
+                // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+                animationTimer.restart();
+                sprite.setTextureRect(currentFrame);
+
+                ignoreMouseDirection = true;
+                setPlayerLookingRight(true);
+            }
+            break;
+        case (PLAYER_ANIMATION_STATES::MOVING_LEFT):
+            if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
+                // Hacemos que se posicione en la 2da fila de nuestro sheet
+                currentFrame.top = 50.f;
+                currentFrame.left += 40.f;
+
+                if (currentFrame.left >= 360.f)
+                    currentFrame.left = 0;
+
+                // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+                animationTimer.restart();
+                sprite.setTextureRect(currentFrame);
+
+                ignoreMouseDirection = true;
+                setPlayerLookingRight(false);
+            }
+            break;
+        case (PLAYER_ANIMATION_STATES::FALLING):
+            if (animationTimer.getElapsedTime().asSeconds() >= 0.07f) {
+                // Hacemos que se posicione en la 2da fila de nuestro sheet
+                currentFrame.top = 200.f;
+                currentFrame.left += 40.f;
+
+                if (currentFrame.left >= 40.f)
+                    currentFrame.left = 0;
+
+                // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+                animationTimer.restart();
+                sprite.setTextureRect(currentFrame);
+            }
+            break;
+        case (PLAYER_ANIMATION_STATES::DAMAGED):
+            if (animationTimer.getElapsedTime().asSeconds() >= 0.2f) {
+                // Hacemos que vuelva arriba, debido a nuestro jake sheet
+                currentFrame.top = 300.f;
+                currentFrame.left += 40.f;
+
+                if (currentFrame.left >= 80.f) {
+                    currentFrame.left = 0;
+                    isInvincible = false;
+                }
+
+                // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+                animationTimer.restart();
+                sprite.setTextureRect(currentFrame);
+
+                ignoreMouseDirection = false;
+            }
+            break;
+        default:
             animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
-
-            ignoreMouseDirection = false;
-        }
+            break;
     }
-    else
-        animationTimer.restart();
 }
 
 // Funcion que va a ser llamada para updatear los valores
@@ -266,13 +267,28 @@ void Player::damage() {
 }
 
 void Player::updateHp() {
+
+
+    if (currentHp / 2 != hp.size() && !hp.empty()) {
+        hp.pop();
+    }
+
     if (currentHp <= 0) {
         // El player muere
         if(!didPlayerDie){
             playerDies.play();
             didPlayerDie = true;
+            //Texto muerte
+            if(!deadFont.loadFromFile("../assets/fonts/font8bit.ttf")){
+                std::cout << "ERROR_8-BIT FONT: NO SE PUDO CARGAR LA FUENTE";
+            }
+            deadText.setFont(deadFont);
+            deadText.setCharacterSize(54);
+            deadText.setColor(Color::Red);
+            deadText.setStyle(Text::Bold);
+            deadText.setPosition(getPosition().x - 300, getPosition().y - 300);
+            deadText.setString("Has muerto...");
         }
-        //std::cout << "El player ha muerto.\n";
     }
 }
 

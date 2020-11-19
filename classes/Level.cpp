@@ -135,6 +135,11 @@ void Level::update(Player &player) {
         }
     }
 
+    if(boss->isBossDead()){
+        playBossMusic = false;
+        endLevel();
+    }
+
     if (spawnBoss && !boss->isBossDead()) {
         if (player.getPosition().x < boss->getPosition().x) {
             boss->setBossLookingRight(true);
@@ -155,22 +160,26 @@ void Level::spawnEnemies(int goblins, int mushrooms, int flyingEyes) {
 
     for (int i = 0; i < totalGoblins; i++) {
         x = 1360 * (instance - 1) + rand() % 700;
-        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(x - 200 * i, 661), false);
+        enemies.emplace_back("../assets/enemies/Goblin/goblinSheet.png", Vector2f(x, 661), false);
     }
 
     for (int i = 0; i < totalMushrooms; i++) {
         x = 1360 * (instance - 1) + rand() % 700;
-        enemies.emplace_back("../assets/enemies/Mushroom/mushroomSheet.png", Vector2f(x - 200 * i, 661), false);
+        enemies.emplace_back("../assets/enemies/Mushroom/mushroomSheet.png", Vector2f(x, 661), false);
     }
 
     for (int i = 0; i < totalFlyingEye; i++) {
         x = 1360 * (instance - 1) + rand() % 700;
-        enemies.emplace_back("../assets/enemies/Flying Eye/flyingEyeSheet.png", Vector2f(x - 300 * i, 200), true);
+        enemies.emplace_back("../assets/enemies/Flying Eye/flyingEyeSheet.png", Vector2f(x , 200), true);
     }
 }
 
 bool Level::doPlayBossMusic() {
     return playBossMusic;
+}
+
+bool Level::doPlayWinningMusic() {
+    return levelFinished;
 }
 
 void Level::setPlayBossMusic(bool c) {

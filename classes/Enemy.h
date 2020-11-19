@@ -72,6 +72,8 @@ public:
     // Dev
     RectangleShape box;
 
+    Player player;
+
     // Nucleo
     void initVariables();
     void initAnimations();

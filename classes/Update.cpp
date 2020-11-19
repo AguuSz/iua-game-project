@@ -5,8 +5,12 @@
 using namespace sf;
 
 void Engine::update() {
-    player.update();
-    level.update(player);
+
+    if(!player.didPlayerDie) {
+        player.update();
+        level.update(player);
+
+    }
     updateMousePosition();
     mouseHitbox.setPosition(worldPos.x - 25, worldPos.y - 20);
 
@@ -30,7 +34,6 @@ void Engine::update() {
 
     if (level.getInstance() == 6 && level.doPlayBossMusic()) {
         // Llego a la instancia donde spawnea el boss
-        std::cout << "Hit\n";
         if (!bossMusic.openFromFile("../assets/sounds/bossMusic.ogg")) {
             std::cout << "ERROR::BOSS_MUSIC no se ha podido cargar el archivo";
         }
@@ -39,8 +42,16 @@ void Engine::update() {
         bossMusic.setLoop(true);
         bossMusic.play();
         level.setPlayBossMusic(false);
-    }
+    }else if (level.doPlayWinningMusic()) {
+        bossMusic.stop();
+        if (!winningMusic.openFromFile("../assets/sounds/winningMusic.ogg")) {
+            std::cout << "ERROR::WINNING_MUSIC no se ha podido cargar el archivo";
+        }
+        winningMusic.setVolume(10);
+        winningMusic.setLoop(true);
+        winningMusic.play();
 
+    }
 }
 
 void Engine::updateMousePosition() {

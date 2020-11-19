@@ -4,7 +4,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "Hearth.h"
+#include "Heart.h"
+#include <stack>
 
 using namespace sf;
 
@@ -34,11 +35,14 @@ private:
     float gravity;
     bool isJumping;
 
+    Heart heart;
+
     // Extras
     Vector2f middlePoint;
 
     // Dev
     RectangleShape box;
+
 
     // Nucleo
     void initVariables();
@@ -62,6 +66,10 @@ public:
     Sound jumpSound;
     SoundBuffer playerDiesBuffer;
     Sound playerDies;
+
+    //Texto muerte
+    Font deadFont;
+    Text deadText;
 
     // Constructor
     Player();
@@ -95,4 +103,7 @@ public:
     RectangleShape playerBox();
 
     Vector2f getPosition();
+
+    //Heart
+    std::stack<Heart>hp;
 };
