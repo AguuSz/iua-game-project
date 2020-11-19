@@ -6,7 +6,8 @@ using namespace sf;
 
 void Engine::update() {
 
-    if (boss.isDead) {
+    if (level.boss->isDead && !playWinningMusic) {
+        playWinningMusic = true;
         if (!winningMusic.openFromFile("../assets/sounds/winningMusic.ogg")) {
             std::cout << "ERROR::WINNING_MUSIC no se ha podido cargar el archivo";
         }

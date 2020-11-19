@@ -134,7 +134,7 @@ void Level::update(Player &player) {
             playBossMusic = true;
             newInstanceAllowed = false;
         }else{
-            spawnEnemies(0, 1, 0);
+            spawnEnemies(3, 3, 2);
             newInstanceAllowed = false;
         }
     }
@@ -148,7 +148,6 @@ void Level::update(Player &player) {
 
         boss->update(player);
     } else if(spawnBoss && boss->isBossDead()) {
-
         endLevel();
     }
 }

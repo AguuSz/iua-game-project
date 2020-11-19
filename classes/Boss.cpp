@@ -288,7 +288,6 @@ void Boss::updateAnimations() {
                     isDead = true;
                 }
 
-                std::cout << "CurrentFrame: " << currentFrame.left << "\n";
                 // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
                 animationTimer.restart();
                 sprite.setTextureRect(currentFrame);
