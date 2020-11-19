@@ -281,7 +281,6 @@ void Boss::updateAnimations() {
 
                 // Cuando llega al final de la sheet vuelve al estado inactivo
                 if (currentFrame.left >= 720.f) {
-                    isDead = true;
                 }
 
                 // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
@@ -319,6 +318,7 @@ void Boss::damage() {
     currentHp -= 2;
     if (currentHp <= 0) {
         // Muere
+        isDead = true;
         bossDies.play();
         this->position.y += 2;
         animState = BOSS_ANIMATION_STATES::DEAD;

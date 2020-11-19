@@ -135,6 +135,11 @@ void Level::update(Player &player) {
         }
     }
 
+    if(boss->isBossDead()){
+        playBossMusic = false;
+        endLevel();
+    }
+
     if (spawnBoss && !boss->isBossDead()) {
         if (player.getPosition().x < boss->getPosition().x) {
             boss->setBossLookingRight(true);
@@ -171,6 +176,10 @@ void Level::spawnEnemies(int goblins, int mushrooms, int flyingEyes) {
 
 bool Level::doPlayBossMusic() {
     return playBossMusic;
+}
+
+bool Level::doPlayWinningMusic() {
+    return levelFinished;
 }
 
 void Level::setPlayBossMusic(bool c) {

@@ -51,7 +51,6 @@ void Engine::start() {
         backgroundMusic.play();
     }
 
-
     while(window.isOpen()) {
 
     if(!bandera){

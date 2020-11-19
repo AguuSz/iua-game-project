@@ -286,7 +286,7 @@ void Player::updateHp() {
             deadText.setCharacterSize(54);
             deadText.setColor(Color::Red);
             deadText.setStyle(Text::Bold);
-            deadText.setPosition(getPosition().x, getPosition().y - 100);
+            deadText.setPosition(getPosition().x - 300, getPosition().y - 300);
             deadText.setString("Has muerto...");
         }
     }

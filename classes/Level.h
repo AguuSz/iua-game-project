@@ -48,6 +48,7 @@ public:
     void setBackground(String directory);
     void setDmgMultiplier(float dmgMultiplier);
     bool doPlayBossMusic();
+    bool doPlayWinningMusic();
     void setPlayBossMusic(bool c);
     void endLevel();
 

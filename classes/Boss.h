@@ -67,6 +67,7 @@ public:
     std::vector<Bullet> bossBullets;
     Boss();
 
+
     // Mandar el sprite a cualquier funcion que lo llame
     Sprite getSprite();
     Vector2f getPosition();
