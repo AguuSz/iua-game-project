@@ -30,6 +30,7 @@ void Boss::initVariables(){
     cannotMove = false;
     speed = 1;
     canAttack = true;
+    isDying = false;
 
     scaleFactor = 4;
     animState = BOSS_ANIMATION_STATES::IDLE1;
@@ -120,9 +121,11 @@ void Boss::setPosition(int x, int y) {
 }
 
 void Boss::update(Player &player) {
-    updateMovement();
-    updateShooting(player);
-    updateAnimations();
+    if (!isDead) {
+        updateMovement();
+        updateShooting(player);
+        updateAnimations();
+    }
 }
 
 void Boss::updateMovement(){
@@ -157,7 +160,7 @@ void Boss::updateShooting(Player &player) {
     bossDir = player.getMiddlePoint() - getMiddlePoint();
     bossDirNormalized = bossDir / static_cast<float>(sqrt(pow(bossDir.x, 2) + pow(bossDir.y, 2)));
 
-    if (bossShootingTimer.getElapsedTime().asSeconds() >= 3.f && !isBossDead()) {
+    if (bossShootingTimer.getElapsedTime().asSeconds() >= 3.f && !isDying) {
         cannotMove = true;
         if (animState != BOSS_ANIMATION_STATES::SHOOTING)
             currentFrame.left = 0;
@@ -278,9 +281,11 @@ void Boss::updateAnimations() {
             if (animationTimer.getElapsedTime().asSeconds() >= 0.25f) {
                 currentFrame.top = 321.f; // 60 + 150 * linea en la que esta (en este caso 4)
                 currentFrame.left += 80.f;
+                isDying = true;
 
                 // Cuando llega al final de la sheet vuelve al estado inactivo
                 if (currentFrame.left >= 720.f) {
+                    isDead = true;
                 }
 
                 // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
@@ -318,9 +323,9 @@ void Boss::damage() {
     currentHp -= 2;
     if (currentHp <= 0) {
         // Muere
-        isDead = true;
         bossDies.play();
         this->position.y += 2;
+        currentFrame.left = 0;
         animState = BOSS_ANIMATION_STATES::DEAD;
     }
 }

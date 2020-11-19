@@ -68,6 +68,10 @@ void Level::endLevel() {
     levelFinished = true;
 }
 
+bool Level::didLevelFinish() {
+    return levelFinished;
+}
+
 // Seccion game-loop
 void Level::draw(RenderWindow &window) {
     // Dibuja el fondo
@@ -135,11 +139,6 @@ void Level::update(Player &player) {
         }
     }
 
-    if(boss->isBossDead()){
-        playBossMusic = false;
-        endLevel();
-    }
-
     if (spawnBoss && !boss->isBossDead()) {
         if (player.getPosition().x < boss->getPosition().x) {
             boss->setBossLookingRight(true);
@@ -148,6 +147,8 @@ void Level::update(Player &player) {
         }
 
         boss->update(player);
+    } else if(spawnBoss && boss->isBossDead()) {
+        endLevel();
     }
 }
 

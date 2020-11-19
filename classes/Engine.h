@@ -32,7 +32,7 @@ private:
     Music backgroundMusic;
     Music bossMusic;
     Music winningMusic;
-    Boss boss;
+    bool playWinningMusic;
 
     // Bala
     Bullet b1;

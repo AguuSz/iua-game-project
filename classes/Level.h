@@ -40,6 +40,7 @@ public:
 
     void setInstance(int instance);
     int getInstance();
+    bool didLevelFinish();
 
     /// Funciones para el motor
     void draw(RenderWindow &window);

@@ -31,6 +31,8 @@ Engine::Engine() {
     shootingDelay = 0.2f;
     shootingTimer.restart();
 
+    playWinningMusic = false;
+
     player.setPosition(1, 500);
 
 }

@@ -18,7 +18,6 @@ private:
     int currentHp;
     int maxHp;
     bool invincible;
-    bool isDead;
 
     // Animaciones
     Clock animationTimer;
@@ -27,6 +26,7 @@ private:
     float scaleFactor;
     bool isGoing;
     bool cannotMove;
+    bool isDying;
 
     // Texturas
     Sprite sprite;
@@ -75,6 +75,7 @@ public:
     bool isInvincible();
     bool isMoving();
     Vector2<float> getMiddlePoint();
+    bool isDead;
 
     //Modificadores
     void setPosition(int x, int y);
