@@ -22,7 +22,7 @@ Boss::Boss() {
 void Boss::initVariables(){
     //vida
     maxHp = 100;
-    currentHp = 20;
+    currentHp = 40;
     invincible = false;
     moving = false;
     isGoing = true;
