@@ -42,7 +42,7 @@ Level::Level() {
 void Level::setInitialValues() {
     setBackground("../assets/FondoCompleto2.png");
     setBackgroundScale(1);
-    spawnEnemies(3, 3, 2);
+    spawnEnemies(3, 4, 4);
     spawnBoss = false;
     playBossMusic = false;
     // Inserta la instancia 1

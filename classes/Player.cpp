@@ -260,10 +260,10 @@ void Player::update() {
 }
 
 void Player::damage() {
+    currentHp -= 2;
+    isInvincible = true;
     animState = PLAYER_ANIMATION_STATES::DAMAGED;
     currentFrame.left = 0;
-    isInvincible = true;
-    currentHp -= 2;
 }
 
 void Player::updateHp() {

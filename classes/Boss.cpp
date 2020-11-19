@@ -132,7 +132,7 @@ void Boss::updateMovement(){
 
     if(timeout-- <= 0) {
         direction = rand() % 6 + 1;
-        timeout = rand() % 100;
+        timeout = rand() % 50;
     }
     if (!cannotMove) {
         switch (direction) {

@@ -86,6 +86,11 @@ private:
     Sprite drawMouse();
 
 public:
+
+    Font winningFont;
+    Text winningText;
+    Text winningText2;
+
     Engine();
 
 

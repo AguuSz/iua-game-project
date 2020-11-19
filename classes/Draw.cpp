@@ -7,34 +7,40 @@ void Engine::draw() {
     // Limpia la pantalla
     window.clear();
 
-    // Vista que sigue al jugador
-    view.setCenter(player.getMiddlePoint().x, window.getSize().y / 2 +40);
-    window.setView(view);
+    if(!level.boss->isDead){
+        //Texto muerte
+        if(player.didPlayerDie){
+            window.draw(player.deadText);
+        }
+        // Vista que sigue al jugador
+        view.setCenter(player.getMiddlePoint().x, window.getSize().y / 2 +40);
+        window.setView(view);
 
-    // Dibuja el fondo
-    level.draw(window);
-    window.draw(player.getSprite());
+        // Dibuja el fondo
+        level.draw(window);
+        window.draw(player.getSprite());
 
-    for (int i = 0; i < player.hp.size(); i++) {
-        Sprite hpSprite = player.hp.top().getSprite();
-        hpSprite.setPosition(player.getPosition().x - 540 + (i * 55), hpSprite.getPosition().y + 5);
-        window.draw(hpSprite);
+        for (int i = 0; i < player.hp.size(); i++) {
+            Sprite hpSprite = player.hp.top().getSprite();
+            hpSprite.setPosition(player.getPosition().x - 540 + (i * 55), hpSprite.getPosition().y + 5);
+            window.draw(hpSprite);
+
+        }
+        // Dibuja las balas que haya en el array bullets
+        for (auto & bullet : bullets) {
+            window.draw(bullet.sprite);
+        }
+        for (auto & bossBullet : level.boss->bossBullets) {
+            window.draw(bossBullet.sprite);
+        }
+
+        // Dibujando la textura del mouse
+        window.draw(drawMouse());
+    }else{
+        window.draw(winningText);
+        window.draw(winningText2);
     }
 
-    //Texto muerte
-    if(player.didPlayerDie){
-        window.draw(player.deadText);
-    }
-    // Dibuja las balas que haya en el array bullets
-    for (auto & bullet : bullets) {
-        window.draw(bullet.sprite);
-    }
-    for (auto & bossBullet : level.boss->bossBullets) {
-        window.draw(bossBullet.sprite);
-    }
-
-    // Dibujando la textura del mouse
-    window.draw(drawMouse());
 
     // Mostrar lo que hemos dibujado
     window.display();
