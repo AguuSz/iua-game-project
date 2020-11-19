@@ -103,114 +103,116 @@ void Enemy::updateSounds(int effectsVolume){
 }
 
 void Enemy::updateAnimations() {
-    if (animState == ENEMY_ANIMATION_STATES::INACTIVE) {
-        // Animacion IDLE (35x36)
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.2f) {
-            currentFrame.top = 60.f;
-            currentFrame.left += 150.f;
-            attacked = false;
-            isInvincible = false;
-
-            if (currentFrame.left >= 540.f)
-                currentFrame.left = 55.f;
-
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
-            animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
-
-            // Una vez termine de correr, que vuelva a tener en cuenta la posicion del jugador
-            ignorePlayerPosition = false;
-        }
-    }
-    else if (animState == ENEMY_ANIMATION_STATES::RUNNING) {
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
-            currentFrame.top = 210.f; // 60 + 150 * linea en la que esta (en este caso 1)
-            currentFrame.left += 150.f;
-            attacked = false;
-            isInvincible = false;
-
-            // Cuando llega al final de la sheet vuelve al estado inactivo
-            if (currentFrame.left >= 1080.f) {
-                currentFrame.left = 55.f;
-            }
-
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
-            animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
-        }
-    }
-    else if (animState == ENEMY_ANIMATION_STATES::TOOKDAMAGE) {
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
-            currentFrame.top = 360.f; // 60 + 150 * linea en la que esta (en este caso 2)
-            currentFrame.left += 150.f;
-            attacked = false;
-
-            // Cuando llega al final de la sheet vuelve al estado inactivo
-            if (currentFrame.left >= 540.f) {
+    switch(animState) {
+        case (ENEMY_ANIMATION_STATES::INACTIVE):
+            if (animationTimer.getElapsedTime().asSeconds() >= 0.2f) {
+                currentFrame.top = 60.f;
+                currentFrame.left += 150.f;
+                attacked = false;
                 isInvincible = false;
-                cannotMove = false;
-                attacked = true;
-                currentFrame.left = 55.f;
-                animState = ENEMY_ANIMATION_STATES::INACTIVE;
-            }
 
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
-            animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
-        }
-    }
-    else if (animState == ENEMY_ANIMATION_STATES::ATTACKING) {
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
-            currentFrame.top = 510.f; // 60 + 150 * linea en la que esta (en este caso 4)
-            currentFrame.left += 150.f;
-            isInvincible = false;
-
-            if (doesFly) {
-                if (currentFrame.left >= 805.f) {
-                    cannotMove = false;
-                    isAttacking = false;
-                    attacked = true;
+                if (currentFrame.left >= 540.f)
                     currentFrame.left = 55.f;
-                    animState = ENEMY_ANIMATION_STATES::INACTIVE;
-                    distanceAttack();
-                    enemyShootingTimer.restart();
-                }
-            } else {
+
+                // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+                animationTimer.restart();
+                sprite.setTextureRect(currentFrame);
+
+                // Una vez termine de correr, que vuelva a tener en cuenta la posicion del jugador
+                ignorePlayerPosition = false;
+            }
+            break;
+        case (ENEMY_ANIMATION_STATES::RUNNING):
+            if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
+                currentFrame.top = 210.f; // 60 + 150 * linea en la que esta (en este caso 1)
+                currentFrame.left += 150.f;
+                attacked = false;
+                isInvincible = false;
+
+                // Cuando llega al final de la sheet vuelve al estado inactivo
                 if (currentFrame.left >= 1080.f) {
+                    currentFrame.left = 55.f;
+                }
+
+                // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+                animationTimer.restart();
+                sprite.setTextureRect(currentFrame);
+            }
+            break;
+        case (ENEMY_ANIMATION_STATES::TOOKDAMAGE):
+            if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
+                currentFrame.top = 360.f; // 60 + 150 * linea en la que esta (en este caso 2)
+                currentFrame.left += 150.f;
+                attacked = false;
+
+                // Cuando llega al final de la sheet vuelve al estado inactivo
+                if (currentFrame.left >= 540.f) {
+                    isInvincible = false;
                     cannotMove = false;
-                    isAttacking = false;
                     attacked = true;
                     currentFrame.left = 55.f;
                     animState = ENEMY_ANIMATION_STATES::INACTIVE;
-                    enemyShootingTimer.restart();
                 }
+
+                // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+                animationTimer.restart();
+                sprite.setTextureRect(currentFrame);
             }
-
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
-            animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
-        }
-    }
-    else if (animState == ENEMY_ANIMATION_STATES::DEATH) {
-        if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
-            currentFrame.top = 660.f; // 60 + 150 * linea en la que esta (en este caso 4)
-            currentFrame.left += 150.f;
-            attacked = false;
-
-            // Cuando llega al final de la sheet vuelve al estado inactivo
-            if (currentFrame.left >= 540.f) {
+            break;
+        case (ENEMY_ANIMATION_STATES::ATTACKING):
+            if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
+                currentFrame.top = 510.f; // 60 + 150 * linea en la que esta (en este caso 4)
+                currentFrame.left += 150.f;
                 isInvincible = false;
-                isDead = true;
+
+                if (doesFly) {
+                    if (currentFrame.left >= 805.f) {
+                        cannotMove = false;
+                        isAttacking = false;
+                        attacked = true;
+                        currentFrame.left = 55.f;
+                        animState = ENEMY_ANIMATION_STATES::INACTIVE;
+                        distanceAttack();
+                        enemyShootingTimer.restart();
+                    }
+                } else {
+                    if (currentFrame.left >= 1080.f) {
+                        cannotMove = false;
+                        isAttacking = false;
+                        attacked = true;
+                        currentFrame.left = 55.f;
+                        animState = ENEMY_ANIMATION_STATES::INACTIVE;
+                        enemyShootingTimer.restart();
+                    }
+                }
+
+                // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+                animationTimer.restart();
+                sprite.setTextureRect(currentFrame);
             }
+            break;
+        case (ENEMY_ANIMATION_STATES::DEATH):
+            if (animationTimer.getElapsedTime().asSeconds() >= 0.15f) {
+                currentFrame.top = 660.f; // 60 + 150 * linea en la que esta (en este caso 4)
+                currentFrame.left += 150.f;
+                attacked = false;
 
-            // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
-            animationTimer.restart();
-            sprite.setTextureRect(currentFrame);
-        }
+                // Cuando llega al final de la sheet vuelve al estado inactivo
+                if (currentFrame.left >= 540.f) {
+                    isInvincible = false;
+                    isDead = true;
+                }
+
+                // Una vez haya puedo un nuevo frame, que reinicie el timer para esperar otros 0.5s
+                animationTimer.restart();
+                sprite.setTextureRect(currentFrame);
+            }
+            break;
+        default:
+            sprite.setScale(-scaleFactor, scaleFactor);
+            sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
+            break;
     }
-
-    sprite.setScale(-scaleFactor, scaleFactor);
-    sprite.setOrigin(sprite.getGlobalBounds().width / scaleFactor, 0.f);
 }
 
 Sprite Enemy::getSprite() const {

@@ -104,6 +104,6 @@ public:
 
     Vector2f getPosition();
 
-//Heart
-std::stack<Heart>hp;
+    //Heart
+    std::stack<Heart>hp;
 };

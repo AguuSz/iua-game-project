@@ -15,10 +15,10 @@ void Engine::draw() {
     level.draw(window);
     window.draw(player.getSprite());
 
-    while (!player.hp.empty()) {
-        window.draw(player.hp.top().getSprite());
-        std::cout << "Vida del player: " << player.hp.size() << std::endl;
-        player.hp.pop();
+    for (int i = 0; i < player.hp.size(); i++) {
+        Sprite hpSprite = player.hp.top().getSprite();
+        hpSprite.setPosition(player.getPosition().x - 540 + (i * 55), hpSprite.getPosition().y + 5);
+        window.draw(hpSprite);
     }
 
     //Texto muerte
