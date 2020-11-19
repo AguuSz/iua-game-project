@@ -96,6 +96,11 @@ void Engine::start() {
                 // Estado menu de guardado
                 std::cout << "Guardar" << std::endl;
                 break;
+            case 6:
+                drawMenu();
+                inputMenu(event);
+                break;
+
 
             default:
                 gameState = 0;
@@ -136,7 +141,7 @@ void Engine::menu() {
                 gameState = 5;
                 break;
             case 2:
-                gameState = 3;
+                gameState = 6;
                 break;
             case 3:
                 window.close();
