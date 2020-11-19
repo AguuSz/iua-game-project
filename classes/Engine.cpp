@@ -96,6 +96,7 @@ void Engine::start() {
             case 5:
                 // Estado menu de guardado
                 save();
+                gameState = 1;
                 break;
             case 6:
                 drawMenu();
