@@ -268,9 +268,9 @@ void Player::damage() {
 
 void Player::updateHp() {
 
-    //if (currentHp / 2 != hp.size() && !hp.empty()) {
-     //   hp.pop();
-    //}
+    if (currentHp / 2 != hp.size() && !hp.empty()) {
+        hp.pop();
+    }
 
     if (currentHp <= 0) {
         // El player muere
