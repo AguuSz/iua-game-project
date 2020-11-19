@@ -43,6 +43,7 @@ private:
     // Dev
     RectangleShape box;
 
+
     // Nucleo
     void initVariables();
     void initTexture();
@@ -65,6 +66,10 @@ public:
     Sound jumpSound;
     SoundBuffer playerDiesBuffer;
     Sound playerDies;
+
+    //Texto muerte
+    Font deadFont;
+    Text deadText;
 
     // Constructor
     Player();

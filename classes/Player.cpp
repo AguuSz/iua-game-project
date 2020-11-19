@@ -270,17 +270,22 @@ void Player::damage() {
 
 void Player::updateHp() {
 
-    //if (currentHp / 2 != hp.size() && !hp.empty()) {
-     //   hp.pop();
-    //}
-
     if (currentHp <= 0) {
         // El player muere
         if(!didPlayerDie){
             playerDies.play();
             didPlayerDie = true;
+            //Texto muerte
+            if(!deadFont.loadFromFile("../assets/fonts/font8bit.ttf")){
+                std::cout << "ERROR_8-BIT FONT: NO SE PUDO CARGAR LA FUENTE";
+            }
+            deadText.setFont(deadFont);
+            deadText.setCharacterSize(54);
+            deadText.setColor(Color::Red);
+            deadText.setStyle(Text::Bold);
+            deadText.setPosition(getPosition().x, getPosition().y - 100);
+            deadText.setString("Has muerto...");
         }
-        //std::cout 0<< "El player ha muerto.\n";
     }
 }
 

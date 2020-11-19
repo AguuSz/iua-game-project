@@ -21,6 +21,10 @@ void Engine::draw() {
         player.hp.pop();
     }
 
+    //Texto muerte
+    if(player.didPlayerDie){
+        window.draw(player.deadText);
+    }
     // Dibuja las balas que haya en el array bullets
     for (auto & bullet : bullets) {
         window.draw(bullet.sprite);

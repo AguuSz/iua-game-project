@@ -262,22 +262,22 @@ void Enemy::move(const float dir_x, const float dir_y) {
 void Enemy::updateMovement() {
     if(timeout-- <= 0) {
         direction = rand() % 6 + 1;
-        timeout = rand() % 120;
+        timeout = rand() % 20;
     }
     if (!cannotMove) {
         if (doesFly) {
             switch (direction) {
                 case 1:
-                    move(0, 2);
+                    move(0, 5);
                     break;
                 case 2:
-                    move(0, -2);
+                    move(0, -5);
                     break;
                 case 3:
-                    move(-2, 0);
+                    move(-5, 0);
                     break;
                 case 4:
-                    move(2, 0);
+                    move(5, 0);
                     break;
                 default:
                     animState = ENEMY_ANIMATION_STATES::INACTIVE;
@@ -288,12 +288,12 @@ void Enemy::updateMovement() {
                 case 1:
                     ignorePlayerPosition = true;
                     setEnemyLookingRight(false);
-                    move(-2, 0);
+                    move(-4, 0);
                     break;
                 case 2:
                     ignorePlayerPosition = true;
                     setEnemyLookingRight(true);
-                    move(2, 0);
+                    move(4, 0);
                     break;
                 default:
                     animState = ENEMY_ANIMATION_STATES::INACTIVE;

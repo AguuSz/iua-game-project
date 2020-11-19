@@ -31,7 +31,6 @@ add_executable(iuaProject
         classes/drawMenu.cpp
         classes/Update.cpp
         classes/Draw.cpp
-        classes/Habilidad.cpp
         classes/Boss.cpp
         classes/CheckForCollisions.cpp
         classes/Enemy.cpp
