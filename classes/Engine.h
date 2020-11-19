@@ -72,6 +72,8 @@ private:
     void menu();
     void mainMenu();
     void optionsMenu();
+    void save();
+    void continueGame();
 
 
     // Funciones para el funcionamiento
