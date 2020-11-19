@@ -6,10 +6,19 @@ using namespace sf;
 
 void Engine::update() {
 
+    if (boss.isDead) {
+        if (!winningMusic.openFromFile("../assets/sounds/winningMusic.ogg")) {
+            std::cout << "ERROR::WINNING_MUSIC no se ha podido cargar el archivo";
+        }
+        bossMusic.stop();
+        winningMusic.setVolume(10);
+        winningMusic.setLoop(false);
+        winningMusic.play();
+    }
+
     if(!player.didPlayerDie) {
         player.update();
         level.update(player);
-
     }
     updateMousePosition();
     mouseHitbox.setPosition(worldPos.x - 25, worldPos.y - 20);
@@ -42,15 +51,6 @@ void Engine::update() {
         bossMusic.setLoop(true);
         bossMusic.play();
         level.setPlayBossMusic(false);
-    }else if (level.doPlayWinningMusic()) {
-        bossMusic.stop();
-        if (!winningMusic.openFromFile("../assets/sounds/winningMusic.ogg")) {
-            std::cout << "ERROR::WINNING_MUSIC no se ha podido cargar el archivo";
-        }
-        winningMusic.setVolume(10);
-        winningMusic.setLoop(true);
-        winningMusic.play();
-
     }
 }
 
