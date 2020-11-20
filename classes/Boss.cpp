@@ -132,21 +132,21 @@ void Boss::updateMovement(){
 
     if(timeout-- <= 0) {
         direction = rand() % 6 + 1;
-        timeout = rand() % 50;
+        timeout = rand() % 10;
     }
     if (!cannotMove) {
         switch (direction) {
             case 1:
-                move(0, 2);
+                move(0, 5);
                 break;
             case 2:
-                move(0, -2);
+                move(0, -5);
                 break;
             case 3:
-                move(-2, 0);
+                move(-5, 0);
                 break;
             case 4:
-                move(2, 0);
+                move(5, 0);
                 break;
             default:
                 animState = BOSS_ANIMATION_STATES::IDLE1;

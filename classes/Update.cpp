@@ -24,14 +24,7 @@ void Engine::update() {
         winningText.setStyle(Text::Bold);
         winningText.setColor(Color::Green);
         winningText.setPosition(player.getPosition().x - 300, player.getPosition().y - 350);
-        winningText.setString("Felicitaciones!");
-        winningText2.setFont(winningFont);
-        winningText2.setCharacterSize(54);
-        winningText2.setStyle(Text::Bold);
-        winningText2.setColor(Color::Green);
-        winningText2.setPosition(player.getPosition().x - 200, player.getPosition().y - 250);
-        winningText2.setString("Has ganado!");
-
+        winningText.setString("Felicitaciones!\n  Has ganado!");
 
     }
         if (!player.didPlayerDie) {

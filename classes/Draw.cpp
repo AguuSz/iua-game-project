@@ -36,7 +36,6 @@ void Engine::draw() {
         window.draw(drawMouse());
     }else{
         window.draw(winningText);
-        window.draw(winningText2);
     }
 
     if(player.didPlayerDie){

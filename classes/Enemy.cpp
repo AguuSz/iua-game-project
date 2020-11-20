@@ -264,7 +264,7 @@ void Enemy::move(const float dir_x, const float dir_y) {
 void Enemy::updateMovement() {
     if(timeout-- <= 0) {
         direction = rand() % 6 + 1;
-        timeout = rand() % 20;
+        timeout = rand() % 10;
     }
     if (!cannotMove) {
         if (doesFly) {
