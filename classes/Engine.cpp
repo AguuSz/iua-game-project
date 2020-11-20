@@ -190,10 +190,17 @@ void Engine::save() {
     ofs.close();
 }
 void Engine::continueGame() {
+
     std::ifstream ifs;
     ifs.open("GameSave.txt");
     int tmp;
     ifs >> tmp;
-    level.setInstance(tmp);
-    player.setPosition(1360*(tmp-1), 0);
+    if(tmp < 7 && tmp > 1) {
+        level.setInstance(tmp);
+    } else {
+        level.setInstance(1);
+
+    }
+    player.setPosition(1360 * (level.getInstance()-1), 0);
+
 }
