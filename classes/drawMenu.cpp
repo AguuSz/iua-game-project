@@ -14,8 +14,8 @@ void Engine::drawMenu() {
     }
     sf::Text volMusica, volEfectos;
     std::string vol_Musica, vol_Efectos;
-    int volM = round(backgroundMusic.getVolume());
-    int volE = level.enemies.front().effectsVolume;
+    volM = round(backgroundMusic.getVolume());
+    
 
 
     vol_Musica = std::to_string(volM);

@@ -90,10 +90,9 @@ void Engine::inputMenu(Event& event) {
                                     Engine::backgroundMusic.setVolume(Engine::backgroundMusic.getVolume() - 1);
                                     break;
                                     case 1:
-                                        if (level.enemies.front().effectsVolume > 1) {
-                                            int actualVolume = level.enemies.front().effectsVolume;
-                                            for(auto &e:level.enemies){
-                                                e.updateSounds(actualVolume-1);;
+                                        if ( Engine::volE > 1) {
+                                            Engine::volE--;
+                                        }
                                             };
                                         }
 
@@ -113,17 +112,14 @@ void Engine::inputMenu(Event& event) {
                                     break;
                                 }
                             case 1:
-                                if (level.enemies.front().effectsVolume < 100) {
-                                    for(auto &e:level.enemies){
-                                        int actualVolume = level.enemies.front().effectsVolume;
-                                        e.updateSounds(actualVolume+1);
-                                    };
+                                if ( Engine::volE < 100) {
+                                    Engine::volE++;
                                 }
                                 break;
                         }
                 }
 
             }
-        }
-    }
+
+
 }
