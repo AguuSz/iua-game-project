@@ -8,10 +8,8 @@ void Engine::draw() {
     window.clear();
 
     if(!level.boss->isDead){
+
         //Texto muerte
-        if(player.didPlayerDie){
-            window.draw(player.deadText);
-        }
         // Vista que sigue al jugador
         view.setCenter(player.getMiddlePoint().x, window.getSize().y / 2 +40);
         window.setView(view);
@@ -41,7 +39,10 @@ void Engine::draw() {
         window.draw(winningText2);
     }
 
-
+    if(player.didPlayerDie){
+        window.clear();
+        window.draw(player.deadText);
+    }
     // Mostrar lo que hemos dibujado
     window.display();
 }
