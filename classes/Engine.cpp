@@ -42,6 +42,7 @@ void Engine::start() {
     Event event;
     bool bandera = false;
     menuIsOpen = true;
+    volE = 30;
 
     //Musica de fondo
     if(!level.doPlayBossMusic()) {

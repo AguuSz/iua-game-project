@@ -55,6 +55,8 @@ private:
     int index;
     int optionsMenuIndex;
     bool menuIsOpen;
+    int volE;
+    int volM;
     Texture mainMenuTexture;
     Texture menuTexture;
     Texture optionsMenuTexture;
