@@ -132,9 +132,10 @@ void Level::update(Player &player) {
         if(instance == 6){
             spawnBoss = true;
             playBossMusic = true;
+            spawnEnemies(3, 4, 3);
             newInstanceAllowed = false;
         }else{
-            spawnEnemies(3, 3, 2);
+            spawnEnemies(3, 4, 4);
             newInstanceAllowed = false;
         }
     }
