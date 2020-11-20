@@ -40,6 +40,7 @@ void Engine::draw() {
     }
 
     if(player.didPlayerDie){
+        window.clear();
         window.draw(player.deadText);
     }
     // Mostrar lo que hemos dibujado
